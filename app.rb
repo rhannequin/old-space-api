@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+require 'haml'
 require 'json'
 require 'open-uri'
 require 'nokogiri'
@@ -12,14 +13,14 @@ configure :development do
 end
 
 ## logger
-def logger
-  @logger ||= Logger.new(STDOUT)
+def log(arg, method = "info")
+  logger.send(method, arg)
 end
 
 class SpaceApi < Sinatra::Application
 
   get '/' do
-    "Hello"
+    haml :index, :locals => {:title => "Space API"}
   end
 
 end
