@@ -4,8 +4,6 @@ require 'sinatra/reloader'
 
 require 'haml'
 require 'json'
-require 'open-uri'
-require 'nokogiri'
 
 configure :development do
   set :logging, true
@@ -13,13 +11,8 @@ configure :development do
 end
 
 # Logger
-def log(arg, method = "info")
+def log(arg, method = 'info')
   logger.send(method, arg)
-end
-
-def parse_html_file(url)
-  file = open(url)
-  Nokogiri::HTML(file.read.gsub("&nbsp;", ' '))
 end
 
 class SpaceApi < Sinatra::Application
@@ -57,6 +50,12 @@ class SpaceApi < Sinatra::Application
     sun = Sun.new
     sun.add_params(new_params) if new_params.any?
     json_response 200, { :data => sun.parse }
+  end
+
+  get '/api/planets/mercury' do
+    require './models/Mercury'
+    mercury = Mercury.new
+    json_response 200, { :data => mercury.parse }
   end
 
 end

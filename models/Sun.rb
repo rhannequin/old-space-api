@@ -3,11 +3,11 @@ Kernel::require_relative 'Parent'
 class Sun < Parent
 
   def initialize
-    @url = 'http://www.heavens-above.com/sun.aspx'
+    @urls = ['http://www.heavens-above.com/sun.aspx']
   end
 
   def parse
-    document = load
+    document = load.first
     hash = Hash.new
     tables = document.css('table.standardTable')
 

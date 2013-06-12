@@ -1,8 +1,15 @@
+require 'open-uri'
+require 'nokogiri'
+
 class Parent
   attr_accessor :url
   def load
-    file = open(@url)
-    Nokogiri::HTML(file.read.gsub("&nbsp;", ' '))
+    documents = []
+    @urls.each do |url|
+      file = open(url)
+      documents << Nokogiri::HTML(file.read.gsub("&nbsp;", ' '))
+    end
+    documents
   end
 
   def to_label(str)
