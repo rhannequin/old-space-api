@@ -1,22 +1,29 @@
 body {
   font-family: 'Stalinist One', cursive;
   background-image: url(../images/mw.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   color: #FFF;
 }
 
 .main {
-  width: 500px;
-  height: 300px;
+  width: 50%;
+  height: 50%;
   text-align: center;
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-left: -250px;
-  margin-top: -150px;
+  margin-left: -25%;
+  margin-top: -10%;
 }
 
 .main h1 {
-  font-size: 3em;
+  font-size: 300%;
 }
 
 .main a:link, .main a:visited {
@@ -26,4 +33,10 @@ body {
 
 .main a:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    margin-top: -20%;
+  }
 }
