@@ -71,6 +71,8 @@ class Planet < Parent
         else
           value = create_two_dates value
         end
+      when :range, :brightness, :altitude, :azimuth
+        value = value.to_f
       end
       hash[label] = value if inject
     end
@@ -108,9 +110,13 @@ class Planet < Parent
 
   def create_two_dates(v)
     split = v.split('-')
-    first_date = Date.new split[0].to_i, str_to_num(split[1]), split[2][0, 2].to_i
-    second_date = Date.new split[2][2, 6].to_i, str_to_num(split[3]), split[4].to_i
-    return "#{first_date}/#{second_date}"
+    first_date = date_to_str Date.new(split[0].to_i, str_to_num(split[1]), split[2][0, 2].to_i)
+    second_date = date_to_str Date.new(split[2][2, 6].to_i, str_to_num(split[3]), split[4].to_i)
+    return "#{first_date} / #{second_date}"
+  end
+
+  def date_to_str(date)
+    date.strftime('%Y-%m-%d')
   end
 
 end
