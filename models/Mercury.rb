@@ -3,7 +3,10 @@ Kernel::require_relative 'Planet'
 class Mercury < Planet
 
   def initialize
-    @urls = ['http://www.heavens-above.com/planets.aspx']
+    @urls = [
+      'http://www.heavens-above.com/planets.aspx',
+      'http://heavens-above.com/planetsummary.aspx'
+    ]
     @planet_name = 'mercury'
     @static_values = {
       :semimajor_axis              => 57.91 * (10 ** 6),
@@ -29,7 +32,8 @@ class Mercury < Planet
 
   def parse
     documents = load
-    return @static_values.merge parse_planets(documents.first)
+    return @static_values.merge(parse_planets(documents.first))
+                         .merge(parse_planet(load.last))
   end
 
 end
