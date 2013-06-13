@@ -41,7 +41,7 @@ class SpaceApi < Sinatra::Application
   end
 
   get '/' do
-    haml :index, :locals => {:title => 'Space API'}
+    haml :index, :locals => {:title => 'Space API', :name => 'home'}
   end
 
   get '/api/sun' do
@@ -56,6 +56,10 @@ class SpaceApi < Sinatra::Application
     require './models/Mercury'
     mercury = Mercury.new
     json_response 200, { :data => mercury.parse }
+  end
+
+  not_found do
+    haml :not_found, :locals => {:title => "You're lost in outer space...", :name => 'not-found'}
   end
 
 end
