@@ -79,39 +79,11 @@ class Planet < Parent
     hash
   end
 
-  def str_to_num(str)
-    case str
-    when 'Jan'
-      return 1
-    when 'Feb'
-      return 2
-    when 'Mar'
-      return 3
-    when 'Apr'
-      return 4
-    when 'May'
-      return 5
-    when 'Jun'
-      return 6
-    when 'Jul'
-      return 7
-    when 'Aug'
-      return 8
-    when 'Sep'
-      return 9
-    when 'Oct'
-      return 10
-    when 'Nov'
-      return 11
-    when 'Dec'
-      return 12
-    end
-  end
-
   def create_two_dates(v)
+    date_names = Hash[Date::ABBR_MONTHNAMES.map.with_index.to_a]
     split = v.split('-')
-    first_date = Date.new(split[0].to_i, str_to_num(split[1]), split[2][0, 2].to_i).to_s
-    second_date = Date.new(split[2][2, 6].to_i, str_to_num(split[3]), split[4].to_i).to_s
+    first_date = "#{split[0]}-#{sprintf('%02d', date_names[split[1]])}-#{split[2][0, 2]}"
+    second_date = "#{split[2][2, 6]}-#{sprintf('%02d', date_names[split[3]])}-#{split[4]}"
     return "#{first_date} / #{second_date}"
   end
 
