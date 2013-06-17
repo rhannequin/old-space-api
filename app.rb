@@ -1,4 +1,3 @@
-# encoding: UTF-8
 $stdout.sync = true
 require 'sinatra'
 require 'sinatra/reloader'

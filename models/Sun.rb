@@ -20,8 +20,8 @@ class Sun < Parent
 
       hash[label] = {
         :time     => content[1].content.strip,
-        :altitude => content[2].content.strip,
-        :azimuth  => content[3].content.strip
+        :altitude => content[2].content.strip.to_f,
+        :azimuth  => content[3].content.strip.to_f
       }
     end
 
