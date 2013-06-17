@@ -58,6 +58,18 @@ class SpaceApi < Sinatra::Application
     json_response 200, { :data => mercury.parse }
   end
 
+  get '/api/planets/venus' do
+    require './models/Venus'
+    venus = Venus.new
+    json_response 200, { :data => venus.parse }
+  end
+
+  get '/api/planets/earth' do
+    require './models/Earth'
+    earth = Earth.new
+    json_response 200, { :data => earth.parse }
+  end
+
   not_found do
     haml :not_found, :locals => {:title => "You're lost in outer space...", :name => 'not-found'}
   end

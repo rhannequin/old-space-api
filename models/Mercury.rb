@@ -26,7 +26,16 @@ class Mercury < Planet
       :longitude_of_perihelion     => 77.45645,
       :mean_longitude              => 252.25084,
       :discoverer                  => 'Unknown',
-      :Date_of_discovery           => 'Classical'
+      :Date_of_discovery           => 'Classical',
+      :mass                        => 3.302 * (10 ** 23),
+      :equatorial_radius           => 2439.7,
+      :polar_radius                => 2439.7,
+      :mean_density                => 5427,
+      :equatorial_surface_gravity  => 3.70,
+      :escape_velocity             => 4.3,
+      :blackbody_temp              => 442.5,
+      :solar_intensity             => 9127,
+      :natural_satellites          => 0
     }
   end
 
