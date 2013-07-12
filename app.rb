@@ -7,7 +7,11 @@ require 'json'
 
 configure :development do
   set :logging, true
+  set :api_url, 'http://localhost:5000/api'
   register Sinatra::Reloader
+end
+configure :production do
+  set :api_url, 'https://space-api.herokuapp.com/api'
 end
 
 # Logger
@@ -37,6 +41,11 @@ class SpaceApi < Sinatra::Application
     end
     def prettify?
       not(!params[:pretty].nil? && params[:pretty] == 'false')
+    end
+    def get_api_url(resource = nil)
+      url = settings.api_url
+      url += resource unless resource.nil?
+      url
     end
   end
 
@@ -76,7 +85,11 @@ class SpaceApi < Sinatra::Application
   end
 
   get '/docs/sun' do
-    haml :'docs/sun', :locals => {:title => 'Sun', :name => 'docs-sun'}, :layout => :'docs/layout'
+    haml :'docs/sun', :layout => :'docs/layout', :locals => {
+      :title => 'Sun',
+      :name => 'docs-sun',
+      :sun_api_url => get_api_url('/sun')
+    }
   end
 
   not_found do

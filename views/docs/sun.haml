@@ -6,7 +6,7 @@
   %p
     %span.label.label-info
       GET
-    %a{:href => '/api/sun'} https://space-api.herokuapp.com/api/sun
+    %a{:href => sun_api_url}= sun_api_url
 
   %h3 Attributes
 
@@ -177,7 +177,7 @@
     %code
       = preserve do
         :escaped
-          # $ curl https://space-api.herokuapp.com/api/sun
+          # $ curl #{sun_api_url}
           {
             "data": {
               "astronomical_twilight_begins": {
