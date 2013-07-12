@@ -70,6 +70,15 @@ class SpaceApi < Sinatra::Application
     json_response 200, { :data => earth.parse }
   end
 
+  # Docs
+  get '/docs' do
+    haml :'docs/index', :locals => {:title => 'Docs', :name => 'docs'}, :layout => :'docs/layout'
+  end
+
+  get '/docs/sun' do
+    haml :'docs/sun', :locals => {:title => 'Sun', :name => 'docs-sun'}, :layout => :'docs/layout'
+  end
+
   not_found do
     haml :not_found, :locals => {:title => "You're lost in outer space...", :name => 'not-found'}
   end

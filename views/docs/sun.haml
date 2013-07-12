@@ -1,0 +1,246 @@
+.main
+  %h1= title
+
+  %h2 Methods
+
+  %p
+    %span.label.label-info
+      GET
+    %a{:href => '/api/sun'} https://space-api.herokuapp.com/api/sun
+
+  %h3 Attributes
+
+  .attribute
+    %h4
+      Astronomical twilight begins
+      %code Object
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Astronomical twilight ends <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Nautical twilight begins <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Nautical twilight ends <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Civil twilight begins <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Civil twilight ends <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Sunrise <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Maximum altitude <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Sunset <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Minimum altitude <code>Object</code>
+    .attribute
+      %h4 Time <code>String</code>
+      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
+      %h4 Altitude <code>Float</code>
+      %p <strong>Unit:</strong> degree
+      %h4 Azimuth <code>Float</code>
+      %p <strong>Unit:</strong> degree
+
+  .attribute
+    %h4
+      Spring equinox
+      %code String
+
+  .attribute
+    %h4
+      Summer solstice
+      %code String
+
+  .attribute
+    %h4
+      Autumn equinox
+      %code String
+
+  .attribute
+    %h4
+      Winter solstice
+      %code String
+
+  .attribute
+    %h4
+      Altitude
+      %code Float
+
+  .attribute
+    %h4
+      Azimuth
+      %code Float
+
+  .attribute
+    %h4
+      Right ascension
+      %code String
+
+  .attribute
+    %h4
+      Declination
+      %code String
+
+  .attribute
+    %h4
+      Range
+      %code Float
+
+  .attribute
+    %h4
+      Constellation
+      %code String
+
+  %h3 JSON result
+
+  %pre.code.prettyprint
+    %code
+      = preserve do
+        :escaped
+          # $ curl https://space-api.herokuapp.com/api/sun
+          {
+            "data": {
+              "astronomical_twilight_begins": {
+                "time": "04:48",
+                "altitude": -18,
+                "azimuth": 67
+              },
+              "nautical_twilight_begins": {
+                "time": "05:14",
+                "altitude": -12,
+                "azimuth": 68
+              },
+              "civil_twilight_begins": {
+                "time": "05:40",
+                "altitude": -6,
+                "azimuth": 68
+              },
+              "sunrise": {
+                "time": "06:02",
+                "altitude": -0.8,
+                "azimuth": 68
+              },
+              "maximum_altitude": {
+                "time": "12:06",
+                "altitude": 68.1,
+                "azimuth": 360
+              },
+              "sunset": {
+                "time": "18:09",
+                "altitude": -0.8,
+                "azimuth": 292
+              },
+              "civil_twilight_ends": {
+                "time": "18:32",
+                "altitude": -6,
+                "azimuth": 292
+              },
+              "nautical_twilight_ends": {
+                "time": "18:58",
+                "altitude": -12,
+                "azimuth": 292
+              },
+              "astronomical_twilight_ends": {
+                "time": "19:24",
+                "altitude": -18,
+                "azimuth": 293
+              },
+              "minimum_altitude": {
+                "time": "23:59",
+                "altitude": -68.1,
+                "azimuth": 356
+              },
+              "spring_equinox": "2013-03-20T11:01:00+00:00",
+              "summer_solstice": "2013-06-21T05:04:00+00:00",
+              "autumn_equinox": "2013-09-22T20:44:00+00:00",
+              "winter_solstice": "2013-12-21T17:11:00+00:00",
+              "altitude": -53.2,
+              "azimuth": 308.4,
+              "right_ascension": "7h 29m 33s",
+              "declination": "21° 50' 28\"",
+              "range": 1.0165499,
+              "constellation": "Gemini"
+            },
+            "code": 200
+
+        }

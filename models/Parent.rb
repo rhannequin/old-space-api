@@ -17,6 +17,6 @@ class Parent
   end
 
   def add_params(params)
-    @url = @url + '?' + params.map{ |k, v| "#{k}=#{v}" }.join('&')
+    @urls.map! { |url| url + '?' + params.map{ |k, v| "#{k}=#{v}" }.join('&') }
   end
 end

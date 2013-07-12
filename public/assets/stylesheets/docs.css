@@ -1,0 +1,7 @@
+.attribute h4 {
+  cursor: pointer;
+}
+.attribute .attribute {
+  display: none;
+  padding-left: 30px;
+}
