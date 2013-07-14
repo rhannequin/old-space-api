@@ -1,7 +1,7 @@
 !!! 5
 %head
   %meta{:charset => 'utf-8'}
-  %title=title
+  %title #{settings.api_name} / Docs / #{title}
   %link{:rel => 'stylesheet', :href => '/assets/stylesheets/flat/bootstrap/css/bootstrap.css'}
   %link{:rel => 'stylesheet', :href => '/assets/stylesheets/flat/bootstrap/css/bootstrap-responsive.css'}
   %link{:rel => 'stylesheet', :href => '/assets/stylesheets/flat/css/flat-ui.css'}
@@ -11,7 +11,7 @@
     .navbar
       .navbar-inner
         %a{:class => 'brand', :href => '/docs'}
-          Space API / Docs
+          #{settings.api_name} / Docs
         %ul.nav
           %li{:class => ('active' if request.path_info == '/docs')}
             %a{:href => '/docs'} Home
@@ -44,7 +44,7 @@
     = yield
   %footer
     %p
-      Space API #{Time.new.year} - Design by
+      #{settings.api_name} #{Time.new.year} - Design by
       %a{:href => 'http://shmidt.in'} Sergey Shmidt
       with
       %a{:href => 'http://designmodo.github.io/Flat-UI'} Flat UI Kit

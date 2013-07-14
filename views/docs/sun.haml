@@ -106,31 +106,7 @@
 
   %h3 Attributes
 
-  - attributes.each do |attribute|
-    .attribute
-      .row-fluid
-        .span11
-          %h4
-            = attribute[:title]
-            %code= attribute[:type]
-          - unless attribute[:unit].nil?
-            %p
-              %strong Unit:
-              = attribute[:unit]
-        - unless attribute[:attributes].nil?
-          .span1
-            %button.btn.btn-primary.pull-right
-              %i.icon-chevron-right.icon-white
-      - unless attribute[:attributes].nil?
-        - attribute[:attributes].each do |attr|
-          .attribute
-            %h4
-              = attr[:title]
-              %code= attr[:type]
-            - unless attr[:unit].nil?
-              %p
-                %strong Unit:
-                = attr[:unit]
+  = haml :'docs/_attributes', :locals => { :attributes => attributes }
 
 
   %h3 JSON result

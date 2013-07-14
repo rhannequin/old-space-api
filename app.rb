@@ -8,6 +8,7 @@ require 'json'
 configure :development do
   set :logging, true
   set :api_url, 'http://localhost:5000/api'
+  set :api_name, 'Space API'
   register Sinatra::Reloader
 end
 configure :production do
@@ -42,15 +43,10 @@ class SpaceApi < Sinatra::Application
     def prettify?
       not(!params[:pretty].nil? && params[:pretty] == 'false')
     end
-    def get_api_url(resource = nil)
-      url = settings.api_url
-      url += resource unless resource.nil?
-      url
-    end
   end
 
   get '/' do
-    haml :index, :locals => {:title => 'Space API', :name => 'home'}
+    haml :index, :locals => {:title => settings.api_name, :name => 'home'}
   end
 
   get '/api/sun' do
@@ -81,14 +77,14 @@ class SpaceApi < Sinatra::Application
 
   # Docs
   get '/docs' do
-    haml :'docs/index', :locals => {:title => 'Docs', :name => 'docs'}, :layout => :'docs/layout'
+    haml :'docs/index', :locals => {:title => 'Home', :name => 'docs'}, :layout => :'docs/layout'
   end
 
   get '/docs/sun' do
     haml :'docs/sun', :layout => :'docs/layout', :locals => {
       :title => 'Sun',
       :name => 'docs-sun',
-      :sun_api_url => get_api_url('/sun')
+      :sun_api_url => "#{settings.api_url}/sun"
     }
   end
 
