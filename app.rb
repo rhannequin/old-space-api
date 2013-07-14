@@ -5,10 +5,12 @@ require 'sinatra/reloader'
 require 'haml'
 require 'json'
 
+configure do
+  set :api_name, 'Space API'
+end
 configure :development do
   set :logging, true
   set :api_url, 'http://localhost:5000/api'
-  set :api_name, 'Space API'
   register Sinatra::Reloader
 end
 configure :production do
