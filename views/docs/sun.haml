@@ -1,3 +1,99 @@
+- attributes = [
+-   {
+-      :title => 'Astronomical twilight begins', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Astronomical twilight end', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Nautical twilight begins', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Nautical twilight ends', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Civil twilight begins', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Civil twilight ends', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Maximum altitude', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Minimum altitude', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Sunrise', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Sunset', :type  => 'Object', :attributes => [
+-        {
+-          :title => 'Time',     :type => 'String', :unit => 'time (<em>hours:minutes</em>)' }, {
+-          :title => 'Altitude', :type => 'Float',  :unit => 'degree' }, {
+-          :title => 'Azimuth',  :type => 'Float',  :unit => 'degree' }
+-      ]
+-   }, {
+-      :title => 'Range', :type  => 'Float', :unit => 'Astronomical Unit'
+-   }, {
+-      :title => 'Spring equinox', :type  => 'String', :unit => 'DateTime'
+-   }, {
+-      :title => 'Summer solstice', :type  => 'String', :unit => 'DateTime'
+-   }, {
+-      :title => 'Autumn equinox', :type  => 'String', :unit => 'DateTime'
+-   }, {
+-      :title => 'Winter solstice', :type  => 'String', :unit => 'DateTime'
+-   }, {
+-      :title => 'Altitude', :type  => 'Float', :unit => 'degree'
+-   }, {
+-      :title => 'Azimuth', :type  => 'Float', :unit => 'degree'
+-   }, {
+-      :title => 'Right ascension', :type  => 'String', :unit => 'hours (h) minutes (m) seconds (s)'
+-   }, {
+-      :title => 'Declination', :type  => 'String', :unit => 'degrees (°) minutes (′) seconds (′′)'
+-   }, {
+-      :title => 'Constellation', :type  => 'String'
+-   }
+- ]
+
+
+
 .main
   %h1= title
 
@@ -10,166 +106,32 @@
 
   %h3 Attributes
 
-  .attribute
-    %h4
-      Astronomical twilight begins
-      %code Object
+  - attributes.each do |attribute|
     .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
+      .row-fluid
+        .span11
+          %h4
+            = attribute[:title]
+            %code= attribute[:type]
+          - unless attribute[:unit].nil?
+            %p
+              %strong Unit:
+              = attribute[:unit]
+        - unless attribute[:attributes].nil?
+          .span1
+            %button.btn.btn-primary.pull-right
+              %i.icon-chevron-right.icon-white
+      - unless attribute[:attributes].nil?
+        - attribute[:attributes].each do |attr|
+          .attribute
+            %h4
+              = attr[:title]
+              %code= attr[:type]
+            - unless attr[:unit].nil?
+              %p
+                %strong Unit:
+                = attr[:unit]
 
-  .attribute
-    %h4
-      Astronomical twilight ends <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Nautical twilight begins <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Nautical twilight ends <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Civil twilight begins <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Civil twilight ends <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Sunrise <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Maximum altitude <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Sunset <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Minimum altitude <code>Object</code>
-    .attribute
-      %h4 Time <code>String</code>
-      %p <strong>Unit:</strong> time (<em>hours:minutes</em>)
-      %h4 Altitude <code>Float</code>
-      %p <strong>Unit:</strong> degree
-      %h4 Azimuth <code>Float</code>
-      %p <strong>Unit:</strong> degree
-
-  .attribute
-    %h4
-      Spring equinox
-      %code String
-
-  .attribute
-    %h4
-      Summer solstice
-      %code String
-
-  .attribute
-    %h4
-      Autumn equinox
-      %code String
-
-  .attribute
-    %h4
-      Winter solstice
-      %code String
-
-  .attribute
-    %h4
-      Altitude
-      %code Float
-
-  .attribute
-    %h4
-      Azimuth
-      %code Float
-
-  .attribute
-    %h4
-      Right ascension
-      %code String
-
-  .attribute
-    %h4
-      Declination
-      %code String
-
-  .attribute
-    %h4
-      Range
-      %code Float
-
-  .attribute
-    %h4
-      Constellation
-      %code String
 
   %h3 JSON result
 

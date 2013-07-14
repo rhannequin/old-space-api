@@ -1,7 +1,41 @@
+.attribute {
+  border-radius: 6px;
+  margin-bottom: 10px;
+  padding: 3px 5px;
+  background-color: #34495E;
+  color: #fff;
+}
+
 .attribute h4 {
   cursor: pointer;
+  width: 90%;
 }
+
+.attribute h4, .attribute p {
+  margin: 3px;
+}
+
+.attribute code {
+  margin-left: 10px;
+}
+
+.attribute button {
+  margin-top: 1px;
+  padding: 3px 5px;
+}
+
 .attribute .attribute {
   display: none;
-  padding-left: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+  padding: 2px 5px;
+  background-color: #1ABC9C;
+}
+
+.attribute .attribute h4 {
+  cursor: default;
+}
+
+.attribute .attribute h4, .attribute .attribute p {
+  margin: 0;
 }
