@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .attribute {
   border-radius: 6px;
   margin-bottom: 10px;
@@ -38,4 +43,12 @@
 
 .attribute .attribute h4, .attribute .attribute p {
   margin: 0;
+}
+
+footer {
+  padding: 5px;
+}
+
+footer p {
+  margin-bottom: 0;
 }

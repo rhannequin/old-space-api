@@ -44,10 +44,18 @@
     = yield
   %footer
     %p
-      #{settings.api_name} #{Time.new.year} - Design by
-      %a{:href => 'http://shmidt.in'} Sergey Shmidt
-      with
-      %a{:href => 'http://designmodo.github.io/Flat-UI'} Flat UI Kit
+      %a{:href => '/'} #{settings.api_name}
+      #{Time.new.year}
+      %br
+      Created and maintained by
+      %a{:href => 'http://www.rhannequin.com'} @rhannequin
+      \:
+      %a{:href => 'https://github.com/rhannequin'} Github
+      \-
+      %a{:href => 'https://twitter.com/rhannequin'} Twitter
+      %br
+      Docs design from
+      %a{:href => 'http://designmodo.github.io/Flat-UI'} Sergey Shmidt's work
   %script{:src => '/assets/stylesheets/flat/js/jquery-1.8.3.min.js'}
   %script{:src => '/assets/stylesheets/flat/js/jquery-ui-1.10.3.custom.min.js'}
   %script{:src => '/assets/stylesheets/flat/js/jquery.ui.touch-punch.min.js'}
