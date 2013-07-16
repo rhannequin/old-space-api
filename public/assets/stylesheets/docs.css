@@ -3,6 +3,22 @@ html, body {
   padding: 0;
 }
 
+ul.timezones {
+  margin-top: 0;
+  width: auto;
+  background-color: #1ABC9C;
+  color: #2c3e50;
+}
+
+ul.timezones li {
+  border-top: 1px solid #2c3e50;
+  padding: 0 3px;
+}
+
+ul.timezones li:first-child {
+  border: none
+}
+
 .attribute {
   border-radius: 6px;
   margin-bottom: 10px;
@@ -13,7 +29,6 @@ html, body {
 
 .attribute h4 {
   cursor: pointer;
-  width: 90%;
 }
 
 .attribute h4, .attribute p {

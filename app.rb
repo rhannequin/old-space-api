@@ -53,7 +53,7 @@ class SpaceApi < Sinatra::Application
 
   get '/api/sun' do
     require './models/Sun'
-    new_params = accept_params params, :lat, :lng, :loc, :alt, :tz
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     sun = Sun.new
     sun.add_params(new_params) if new_params.any?
     json_response 200, { :data => sun.parse }
