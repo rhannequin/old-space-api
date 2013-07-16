@@ -7,6 +7,7 @@ require 'json'
 
 configure do
   set :api_name, 'Space API'
+  set :repo_url, 'https://github.com/rhannequin/space-api'
 end
 configure :development do
   set :logging, true
@@ -88,6 +89,34 @@ class SpaceApi < Sinatra::Application
       :name => 'docs-sun',
       :sun_api_url => "#{settings.api_url}/sun"
     }
+  end
+
+  get '/docs/planets/mercury' do
+    haml :'docs/planets/mercury', :layout => :'docs/layout', :locals => {
+      :title => 'Mercury',
+      :name => 'docs-mercury',
+      :mercury_api_url => "#{settings.api_url}/mercury"
+    }
+  end
+
+  get '/docs/planets/venus' do
+    haml :'docs/planets/venus', :layout => :'docs/layout', :locals => {
+      :title => 'Venus',
+      :name => 'docs-venus',
+      :venus_api_url => "#{settings.api_url}/venus"
+    }
+  end
+
+  get '/docs/planets/earth' do
+    haml :'docs/planets/earth', :layout => :'docs/layout', :locals => {
+      :title => 'Earth',
+      :name => 'docs-earth',
+      :earth_api_url => "#{settings.api_url}/earth"
+    }
+  end
+
+  get '/docs/about' do
+    haml :'docs/about', :locals => {:title => 'About', :name => 'docs-about'}, :layout => :'docs/layout'
   end
 
   not_found do

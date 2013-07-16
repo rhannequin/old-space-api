@@ -28,18 +28,20 @@
                 %a{:href => '/docs/planets/venus'} Venus
               %li{:class => ('active' if request.path_info == '/docs/planets/earth')}
                 %a{:href => '/docs/planets/earth'} Earth
-              %li{:class => ('active' if request.path_info == '/docs/planets/mars')}
-                %a{:href => '/docs/planets/mars'} Mars
-              %li{:class => ('active' if request.path_info == '/docs/planets/jupiter')}
-                %a{:href => '/docs/planets/jupiter'} Jupiter
-              %li{:class => ('active' if request.path_info == '/docs/planets/saturn')}
-                %a{:href => '/docs/planets/saturn'} Saturn
-              %li{:class => ('active' if request.path_info == '/docs/planets/uranus')}
-                %a{:href => '/docs/planets/uranus'} Uranus
-              %li{:class => ('active' if request.path_info == '/docs/planets/neptune')}
-                %a{:href => '/docs/planets/neptune'} Neptune
-              %li{:class => ('active' if request.path_info == '/docs/planets/pluto')}
-                %a{:href => '/docs/planets/pluto'} Pluto (not a planet but available)
+              / %li{:class => ('active' if request.path_info == '/docs/planets/mars')}
+              /   %a{:href => '/docs/planets/mars'} Mars
+              / %li{:class => ('active' if request.path_info == '/docs/planets/jupiter')}
+              /   %a{:href => '/docs/planets/jupiter'} Jupiter
+              / %li{:class => ('active' if request.path_info == '/docs/planets/saturn')}
+              /   %a{:href => '/docs/planets/saturn'} Saturn
+              / %li{:class => ('active' if request.path_info == '/docs/planets/uranus')}
+              /   %a{:href => '/docs/planets/uranus'} Uranus
+              / %li{:class => ('active' if request.path_info == '/docs/planets/neptune')}
+              /   %a{:href => '/docs/planets/neptune'} Neptune
+              / %li{:class => ('active' if request.path_info == '/docs/planets/pluto')}
+              /   %a{:href => '/docs/planets/pluto'} Pluto (not a planet but available)
+          %li{:class => ('active' if request.path_info == '/docs/about')}
+            %a{:href => '/docs/about'} About
   .container
     = yield
   %footer
