@@ -1,6 +1,7 @@
 $stdout.sync = true
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/cross_origin'
 
 require 'haml'
 require 'json'
@@ -8,6 +9,7 @@ require 'json'
 configure do
   set :api_name, 'Space API'
   set :repo_url, 'https://github.com/rhannequin/space-api'
+  enable :cross_origin
 end
 configure :development do
   set :logging, true
@@ -27,6 +29,7 @@ class SpaceApi < Sinatra::Application
 
   helpers do
     def json_response(code, response)
+      cross_origin
       content_type :json
       status code
       response[:code] = code
