@@ -1,0 +1,35 @@
+%p
+  You can add several parameters to the request in order to customize the results as following:
+  %br
+  %a{:href => resource_api_url + '?lat=48&lng=2&alt=34&tz=CET'}
+    = resource_api_url + '?lat=48&lng=2&alt=34&tz=CET'
+
+%h4
+  %span.label.label-success lat
+
+%p
+  %strong Latitude:
+  in decimal degrees, positive north of equator, e.g. 34.984 and NOT 34°59'2" or 34.984N.
+
+%h4
+  %span.label.label-success lng
+
+%p
+  %strong Longitude:
+  in decimal degrees, positive east of Greenwich, e.g. -110.392 and NOT -110°23'31" or 110.392W.
+
+%h4
+  %span.label.label-success alt
+
+%p
+  %strong Altitude:
+  in meters, elevation above sea level.
+
+%h4
+  %span.label.label-success tz
+
+%p
+  %strong Timezone:
+  region on Earth that has a uniform standard time.
+
+= haml :'docs/_timezones'

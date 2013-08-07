@@ -95,7 +95,7 @@ class SpaceApi < Sinatra::Application
     haml :'docs/planets/mercury', :layout => :'docs/layout', :locals => {
       :title => 'Mercury',
       :name => 'docs-mercury',
-      :mercury_api_url => "#{settings.api_url}/mercury"
+      :mercury_api_url => "#{settings.api_url}/planets/mercury"
     }
   end
 
@@ -103,7 +103,7 @@ class SpaceApi < Sinatra::Application
     haml :'docs/planets/venus', :layout => :'docs/layout', :locals => {
       :title => 'Venus',
       :name => 'docs-venus',
-      :venus_api_url => "#{settings.api_url}/venus"
+      :venus_api_url => "#{settings.api_url}/planets/venus"
     }
   end
 
@@ -111,7 +111,7 @@ class SpaceApi < Sinatra::Application
     haml :'docs/planets/earth', :layout => :'docs/layout', :locals => {
       :title => 'Earth',
       :name => 'docs-earth',
-      :earth_api_url => "#{settings.api_url}/earth"
+      :earth_api_url => "#{settings.api_url}/planets/earth"
     }
   end
 
