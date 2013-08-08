@@ -1,0 +1,13 @@
+.main
+  %h1= title
+
+  %h2 Methods
+
+  %p
+    %span.label.label-info
+      GET
+    %a{:href => pluto_api_url}= pluto_api_url
+
+  %h3 Optional parameters
+
+  = haml :'docs/_location_parameters', :locals => { :resource_api_url => pluto_api_url }

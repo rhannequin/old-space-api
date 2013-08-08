@@ -81,6 +81,42 @@ class SpaceApi < Sinatra::Application
     json_response 200, { :data => earth.parse }
   end
 
+  get '/api/planets/mars' do
+    require './models/Mars'
+    mars = Mars.new
+    json_response 200, { :data => mars.parse }
+  end
+
+  get '/api/planets/jupiter' do
+    require './models/Jupiter'
+    jupiter = Jupiter.new
+    json_response 200, { :data => jupiter.parse }
+  end
+
+  get '/api/planets/saturn' do
+    require './models/Saturn'
+    saturn = Saturn.new
+    json_response 200, { :data => saturn.parse }
+  end
+
+  get '/api/planets/uranus' do
+    require './models/Uranus'
+    uranus = Uranus.new
+    json_response 200, { :data => uranus.parse }
+  end
+
+  get '/api/planets/neptune' do
+    require './models/Neptune'
+    neptune = Neptune.new
+    json_response 200, { :data => neptune.parse }
+  end
+
+  get '/api/planets/pluto' do
+    require './models/Pluto'
+    pluto = Pluto.new
+    json_response 200, { :data => pluto.parse }
+  end
+
   # Docs
   get '/docs' do
     haml :'docs/index', :locals => {:title => 'Home', :name => 'docs'}, :layout => :'docs/layout'
@@ -115,6 +151,54 @@ class SpaceApi < Sinatra::Application
       :title => 'Earth',
       :name => 'docs-earth',
       :earth_api_url => "#{settings.api_url}/planets/earth"
+    }
+  end
+
+  get '/docs/planets/mars' do
+    haml :'docs/planets/mars', :layout => :'docs/layout', :locals => {
+      :title => 'Mars',
+      :name => 'docs-mars',
+      :mars_api_url => "#{settings.api_url}/planets/mars"
+    }
+  end
+
+  get '/docs/planets/jupiter' do
+    haml :'docs/planets/jupiter', :layout => :'docs/layout', :locals => {
+      :title => 'Jupiter',
+      :name => 'docs-jupiter',
+      :jupiter_api_url => "#{settings.api_url}/planets/jupiter"
+    }
+  end
+
+  get '/docs/planets/saturn' do
+    haml :'docs/planets/saturn', :layout => :'docs/layout', :locals => {
+      :title => 'Saturn',
+      :name => 'docs-saturn',
+      :saturn_api_url => "#{settings.api_url}/planets/saturn"
+    }
+  end
+
+  get '/docs/planets/uranus' do
+    haml :'docs/planets/uranus', :layout => :'docs/layout', :locals => {
+      :title => 'Uranus',
+      :name => 'docs-uranus',
+      :uranus_api_url => "#{settings.api_url}/planets/uranus"
+    }
+  end
+
+  get '/docs/planets/neptune' do
+    haml :'docs/planets/neptune', :layout => :'docs/layout', :locals => {
+      :title => 'Neptune',
+      :name => 'docs-neptune',
+      :neptune_api_url => "#{settings.api_url}/planets/neptune"
+    }
+  end
+
+  get '/docs/planets/pluto' do
+    haml :'docs/planets/pluto', :layout => :'docs/layout', :locals => {
+      :title => 'Pluto',
+      :name => 'docs-pluto',
+      :pluto_api_url => "#{settings.api_url}/planets/pluto"
     }
   end
 
