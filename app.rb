@@ -65,55 +65,73 @@ class SpaceApi < Sinatra::Application
 
   get '/api/planets/mercury' do
     require './models/Mercury'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     mercury = Mercury.new
+    mercury.add_params(new_params) if new_params.any?
     json_response 200, { :data => mercury.parse }
   end
 
   get '/api/planets/venus' do
     require './models/Venus'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     venus = Venus.new
+    venus.add_params(new_params) if new_params.any?
     json_response 200, { :data => venus.parse }
   end
 
   get '/api/planets/earth' do
     require './models/Earth'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     earth = Earth.new
+    earth.add_params(new_params) if new_params.any?
     json_response 200, { :data => earth.parse }
   end
 
   get '/api/planets/mars' do
     require './models/Mars'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     mars = Mars.new
+    mars.add_params(new_params) if new_params.any?
     json_response 200, { :data => mars.parse }
   end
 
   get '/api/planets/jupiter' do
     require './models/Jupiter'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     jupiter = Jupiter.new
+    jupiter.add_params(new_params) if new_params.any?
     json_response 200, { :data => jupiter.parse }
   end
 
   get '/api/planets/saturn' do
     require './models/Saturn'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     saturn = Saturn.new
+    saturn.add_params(new_params) if new_params.any?
     json_response 200, { :data => saturn.parse }
   end
 
   get '/api/planets/uranus' do
     require './models/Uranus'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     uranus = Uranus.new
+    uranus.add_params(new_params) if new_params.any?
     json_response 200, { :data => uranus.parse }
   end
 
   get '/api/planets/neptune' do
     require './models/Neptune'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     neptune = Neptune.new
+    neptune.add_params(new_params) if new_params.any?
     json_response 200, { :data => neptune.parse }
   end
 
   get '/api/planets/pluto' do
     require './models/Pluto'
+    new_params = accept_params params, :lat, :lng, :alt, :tz
     pluto = Pluto.new
+    pluto.add_params(new_params) if new_params.any?
     json_response 200, { :data => pluto.parse }
   end
 
