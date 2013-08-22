@@ -9,7 +9,7 @@ class Uranus < Planet
     ]
     @planet_name = 'uranus'
     @static_values = {
-      :semimajor_axis              => 2872.46 * (10 ** 6),
+      :semimajor_axis_km           => 2872.46 * (10 ** 6),
       :perihelion                  => 2741.30 * (10 ** 6),
       :aphelion                    => 3003.62 * (10 ** 6),
       :mean_orbital_speed          => 6.81,
@@ -19,7 +19,7 @@ class Uranus < Planet
       :length_of_day               => 17.24,
       :sidereal_rotation_period    => 17.24,
       :obliquity_to_orbit          => 97.77,
-      :semimajor_axis              => 19.19126393,
+      :semimajor_axis_au           => 19.19126393,
       :eccentricity                => 0.04716771,
       :inclination                 => 0.76986,
       :longitude_of_ascending_node => 74.22988,

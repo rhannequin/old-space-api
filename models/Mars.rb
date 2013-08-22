@@ -9,7 +9,7 @@ class Mars < Planet
     ]
     @planet_name = 'mars'
     @static_values = {
-      :semimajor_axis              => 227.92 * (10 ** 6),
+      :semimajor_axis_km           => 227.92 * (10 ** 6),
       :perihelion                  => 206.62 * (10 ** 6),
       :aphelion                    => 249.23 * (10 ** 6),
       :mean_orbital_speed          => 24.13,
@@ -19,7 +19,7 @@ class Mars < Planet
       :length_of_day               => 24.6597,
       :sidereal_rotation_period    => 24.6229,
       :obliquity_to_orbit          => 25.19,
-      :semimajor_axis              => 1.52366231,
+      :semimajor_axis_au           => 1.52366231,
       :eccentricity                => 0.09341233,
       :inclination                 => 1.85061,
       :longitude_of_ascending_node => 49.57854,

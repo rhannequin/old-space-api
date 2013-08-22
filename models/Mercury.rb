@@ -9,7 +9,7 @@ class Mercury < Planet
     ]
     @planet_name = 'mercury'
     @static_values = {
-      :semimajor_axis              => 57.91 * (10 ** 6),
+      :semimajor_axis_km           => 57.91 * (10 ** 6),
       :perihelion                  => 46.00 * (10 ** 6),
       :aphelion                    => 69.82 * (10 ** 6),
       :mean_orbital_speed          => 47.87,
@@ -19,7 +19,7 @@ class Mercury < Planet
       :length_of_day               => 4222.6,
       :sidereal_rotation_period    => 1407.6,
       :obliquity_to_orbit          => 0.01,
-      :semimajor_axis              => 0.38709893,
+      :semimajor_axis_au           => 0.38709893,
       :eccentricity                => 0.20563069,
       :inclination                 => 7.00487,
       :longitude_of_ascending_node => 48.33167,

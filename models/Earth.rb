@@ -8,7 +8,7 @@ class Earth < Planet
     ]
     @planet_name = 'earth'
     @static_values = {
-      :semimajor_axis              => 149.60 * (10 ** 6),
+      :semimajor_axis_km           => 149.60 * (10 ** 6),
       :perihelion                  => 147.09 * (10 ** 6),
       :aphelion                    => 152.10 * (10 ** 6),
       :mean_orbital_speed          => 29.78,
@@ -17,7 +17,7 @@ class Earth < Planet
       :length_of_day               => 24.0000,
       :sidereal_rotation_period    => 23.9345,
       :obliquity_to_orbit          => 23.45,
-      :semimajor_axis              => 1.00000011,
+      :semimajor_axis_au           => 1.00000011,
       :eccentricity                => 0.01671022,
       :inclination                 => 0.00005,
       :longitude_of_ascending_node => -11.26064,

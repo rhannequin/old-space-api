@@ -9,7 +9,7 @@ class Jupiter < Planet
     ]
     @planet_name = 'jupiter'
     @static_values = {
-      :semimajor_axis              => 778.57 * (10 ** 6),
+      :semimajor_axis_km           => 778.57 * (10 ** 6),
       :perihelion                  => 740.52 * (10 ** 6),
       :aphelion                    => 816.62 * (10 ** 6),
       :mean_orbital_speed          => 13.07,
@@ -19,7 +19,7 @@ class Jupiter < Planet
       :length_of_day               => 9.9259,
       :sidereal_rotation_period    => 24.6229,
       :obliquity_to_orbit          => 3.13,
-      :semimajor_axis              => 5.20336301,
+      :semimajor_axis_au           => 5.20336301,
       :eccentricity                => 0.04839266,
       :inclination                 => 1.30530,
       :longitude_of_ascending_node => 100.55615,

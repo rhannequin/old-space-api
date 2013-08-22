@@ -9,7 +9,7 @@ class Pluto < Planet
     ]
     @planet_name = 'pluto'
     @static_values = {
-      :semimajor_axis              => 5906.38 * (10 ** 6),
+      :semimajor_axis_km           => 5906.38 * (10 ** 6),
       :perihelion                  => 4436.82 * (10 ** 6),
       :aphelion                    => 7375.93 * (10 ** 6),
       :mean_orbital_speed          => 4.72,
@@ -19,7 +19,7 @@ class Pluto < Planet
       :length_of_day               => 153.2820,
       :sidereal_rotation_period    => -153.2928,
       :obliquity_to_orbit          => 122.53,
-      :semimajor_axis              => 39.48168677,
+      :semimajor_axis_au           => 39.48168677,
       :eccentricity                => 0.24880766,
       :inclination                 => 17.14175,
       :longitude_of_ascending_node => 110.30347,

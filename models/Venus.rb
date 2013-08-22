@@ -9,7 +9,7 @@ class Venus < Planet
     ]
     @planet_name = 'venus'
     @static_values = {
-      :semimajor_axis              => 108.21 * (10 ** 6),
+      :semimajor_axis_km           => 108.21 * (10 ** 6),
       :perihelion                  => 107.48 * (10 ** 6),
       :aphelion                    => 108.94 * (10 ** 6),
       :mean_orbital_speed          => 35.02,
@@ -19,7 +19,7 @@ class Venus < Planet
       :length_of_day               => 2802,
       :sidereal_rotation_period    => -5832.5,
       :obliquity_to_orbit          => 177.36,
-      :semimajor_axis              => 0.72333199,
+      :semimajor_axis_au           => 0.72333199,
       :eccentricity                => 0.00677323,
       :inclination                 => 3.39471,
       :longitude_of_ascending_node => 76.68069,

@@ -49,6 +49,9 @@ class SpaceApi < Sinatra::Application
     def prettify?
       not(!params[:pretty].nil? && params[:pretty] == 'false')
     end
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
   end
 
   get '/' do

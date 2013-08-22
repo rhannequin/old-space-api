@@ -11,3 +11,64 @@
   %h3 Optional parameters
 
   = haml :'docs/_location_parameters', :locals => { :resource_api_url => jupiter_api_url }
+
+  %h3 Attributes
+
+  = haml :'docs/planets/_planets_attributes', :locals => { :name => 'jupiter' }
+
+  %h3 JSON result
+
+  %pre.code.prettyprint
+    %code
+      = preserve do
+        :escaped
+          # $ curl #{jupiter_api_url}
+          {
+            "data": {
+              "semimajor_axis_km": 778570000.0,
+              "perihelion": 740520000.0,
+              "aphelion": 816620000.0,
+              "mean_orbital_speed": 13.07,
+              "sidereal_orbit_period": 4332.589,
+              "tropical_orbit_period": 4330.595,
+              "synodic_period": 398.88,
+              "length_of_day": 9.9259,
+              "sidereal_rotation_period": 24.6229,
+              "obliquity_to_orbit": 3.13,
+              "semimajor_axis_au": 5.20336301,
+              "eccentricity": 0.04839266,
+              "inclination": 1.3053,
+              "longitude_of_ascending_node": 100.55615,
+              "longitude_of_perihelion": 14.75385,
+              "mean_longitude": 34.40438,
+              "discoverer": "Unknown",
+              "Date_of_discovery": "Classical",
+              "mass": 1.8986000000000002e+27,
+              "equatorial_radius": 71492,
+              "polar_radius": 66854,
+              "mean_density": 1326,
+              "equatorial_surface_gravity": 24.79,
+              "escape_velocity": 59.5,
+              "blackbody_temp": 110.0,
+              "solar_intensity": 50.5,
+              "natural_satellites": 63,
+              "distance_from_sun": 5.14,
+              "distance_from_earth": 5.77,
+              "velocity": 13.21,
+              "right_ascension": "6h 53m 44.3s",
+              "declination": "22° 43' 37\"",
+              "range": 5.771,
+              "brightness": -1.8,
+              "constellation": "Gemini",
+              "meridian_transit": "08:49",
+              "rises": "02:50",
+              "sets": "14:48",
+              "altitude": -44.4,
+              "azimuth": 57.3,
+              "opposition": "2012-12-03 / 2014-01-05",
+              "superior_conjunction": "2013-06-19 / 2014-07-24",
+              "perihelion_date": "2011-03-17 / 2023-01-20",
+              "aphelion_date": "2005-04-14 / 2017-02-17"
+            },
+            "code": 200
+          }

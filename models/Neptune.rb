@@ -9,7 +9,7 @@ class Neptune < Planet
     ]
     @planet_name = 'neptune'
     @static_values = {
-      :semimajor_axis              => 4495.06 * (10 ** 6),
+      :semimajor_axis_km           => 4495.06 * (10 ** 6),
       :perihelion                  => 4444.45 * (10 ** 6),
       :aphelion                    => 4545.67 * (10 ** 6),
       :mean_orbital_speed          => 5.43,
@@ -19,7 +19,7 @@ class Neptune < Planet
       :length_of_day               => 16.11,
       :sidereal_rotation_period    => 16.11,
       :obliquity_to_orbit          => 28.32,
-      :semimajor_axis              => 30.06896348,
+      :semimajor_axis_au           => 30.06896348,
       :eccentricity                => 0.00858587,
       :inclination                 => 1.76917,
       :longitude_of_ascending_node => 131.72169,

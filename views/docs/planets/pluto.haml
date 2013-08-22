@@ -11,3 +11,64 @@
   %h3 Optional parameters
 
   = haml :'docs/_location_parameters', :locals => { :resource_api_url => pluto_api_url }
+
+  %h3 Attributes
+
+  = haml :'docs/planets/_planets_attributes', :locals => { :name => 'pluto' }
+
+  %h3 JSON result
+
+  %pre.code.prettyprint
+    %code
+      = preserve do
+        :escaped
+          # $ curl #{pluto_api_url}
+          {
+            "data": {
+              "semimajor_axis_km": 5906380000.0,
+              "perihelion": 4436820000.0,
+              "aphelion": 7375930000.0,
+              "mean_orbital_speed": 4.72,
+              "sidereal_orbit_period": 90465,
+              "tropical_orbit_period": 90588,
+              "synodic_period": 366.73,
+              "length_of_day": 153.282,
+              "sidereal_rotation_period": -153.2928,
+              "obliquity_to_orbit": 122.53,
+              "semimajor_axis_au": 39.48168677,
+              "eccentricity": 0.24880766,
+              "inclination": 17.14175,
+              "longitude_of_ascending_node": 110.30347,
+              "longitude_of_perihelion": 224.06676,
+              "mean_longitude": 238.92881,
+              "discoverer": "Clyde Tombaugh",
+              "Date_of_discovery": "1930-02-18",
+              "mass": 1.25e+22,
+              "equatorial_radius": 1195,
+              "polar_radius": 1195,
+              "mean_density": 1750,
+              "equatorial_surface_gravity": 0.58,
+              "escape_velocity": 1.2,
+              "blackbody_temp": 37.5,
+              "solar_intensity": 0.89,
+              "natural_satellites": 3,
+              "distance_from_sun": 32.5,
+              "distance_from_earth": 31.85,
+              "velocity": 5.67,
+              "right_ascension": "18h 39m 5.4s",
+              "declination": "-20° 1' 16\"",
+              "range": 31.848,
+              "brightness": 14.1,
+              "constellation": "Sagittarius",
+              "meridian_transit": "20:33",
+              "rises": "14:34",
+              "sets": "02:36",
+              "altitude": 41.5,
+              "azimuth": 242.8,
+              "opposition": "2013-07-01 / 2014-07-04",
+              "superior_conjunction": "2012-12-30 / 2014-01-01",
+              "perihelion_date": "1989-09-05 / 2237-09-15",
+              "aphelion_date": "1866-06-04 / 2114-02-19"
+            },
+            "code": 200
+          }
