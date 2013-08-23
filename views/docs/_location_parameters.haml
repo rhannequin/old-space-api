@@ -1,7 +1,7 @@
 %p
   You can add several parameters to the request in order to customize the results as following:
   %br
-  %a{:href => resource_api_url + '?lat=48&lng=2&alt=34&tz=CET'}
+  %a{ href: resource_api_url + '?lat=48&lng=2&alt=34&tz=CET' }
     = resource_api_url + '?lat=48&lng=2&alt=34&tz=CET'
 
 %h4
@@ -32,4 +32,4 @@
   %strong Timezone:
   region on Earth that has a uniform standard time.
 
-= haml :'docs/_timezones'
+= haml 'docs/_timezones'.to_sym

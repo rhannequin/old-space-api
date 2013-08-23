@@ -1,0 +1,17 @@
+.main
+  %h1= title
+
+  %h2 Methods
+
+  %p
+    %span.label.label-info
+      GET
+    %a{ href: planet_api_url }= planet_api_url
+
+  %h3 Optional parameters
+
+  = haml 'docs/_location_parameters'.to_sym, locals: { resource_api_url: planet_api_url }
+
+  %h3 Attributes
+
+  = haml 'docs/planets/_planets_attributes'.to_sym, locals: { name: planet_name }

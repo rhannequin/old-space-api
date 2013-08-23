@@ -1,65 +1,65 @@
 - attributes = [{
--      :title => 'Semimajor axis km', :type  => 'Int', :unit => 'kilometer'
+-      title: 'Semimajor axis km',           type: 'Int',   unit: 'kilometer'
 -   }, {
--      :title => 'Perihelion', :type  => 'Int', :unit => 'kilometer'
+-      title: 'Perihelion',                  type: 'Int',   unit: 'kilometer'
 -   }, {
--      :title => 'Aphelion', :type  => 'Int', :unit => 'kilometer'
+-      title: 'Aphelion',                    type: 'Int',   unit: 'kilometer'
 -   }, {
--      :title => 'Mean orbital speed', :type  => 'Float', :unit => 'km . s<sup>-1</sup>'
+-      title: 'Mean orbital speed',          type: 'Float', unit: 'km . s<sup>-1</sup>'
 -   }, {
--      :title => 'Sidereal orbit period', :type  => 'Float', :unit => 'day'
+-      title: 'Sidereal orbit period',       type: 'Float', unit: 'day'
 -   }, {
--      :title => 'Tropical orbit period', :type  => 'Float', :unit => 'day'
+-      title: 'Tropical orbit period',       type: 'Float', unit: 'day'
 -   }, {
--      :title => 'Synodic period', :type  => 'Float', :unit => 'day'
+-      title: 'Synodic period',              type: 'Float', unit: 'day'
 -   }, {
--      :title => 'Length of day', :type  => 'Float', :unit => 'hour'
+-      title: 'Length of day',               type: 'Float', unit: 'hour'
 -   }, {
--      :title => 'Sidereal rotation period', :type  => 'Float', :unit => 'hour'
+-      title: 'Sidereal rotation period',    type: 'Float', unit: 'hour'
 -   }, {
--      :title => 'Obliquity to orbit', :type  => 'Float', :unit => 'degree'
+-      title: 'Obliquity to orbit',          type: 'Float', unit: 'degree'
 -   }, {
--      :title => 'Semimajor axis AU', :type  => 'Float', :unit => 'Astronomical Unit'
+-      title: 'Semimajor axis AU',           type: 'Float', unit: 'Astronomical Unit'
 -   }, {
--      :title => 'Eccentricity', :type  => 'Float'
+-      title: 'Eccentricity',                type: 'Float'
 -   }, {
--      :title => 'Inclination', :type  => 'Float', :unit => 'degree'
+-      title: 'Inclination',                 type: 'Float', unit: 'degree'
 -   }, {
--      :title => 'Longitude of ascending node', :type  => 'Float', :unit => 'degree'
+-      title: 'Longitude of ascending node', type: 'Float', unit: 'degree'
 -   }, {
--      :title => 'Longitude of perihelion', :type  => 'Float', :unit => 'degree'
+-      title: 'Longitude of perihelion',     type: 'Float', unit: 'degree'
 -   }, {
--      :title => 'Mean longitude', :type  => 'Float', :unit => 'degree'
+-      title: 'Mean longitude',              type: 'Float', unit: 'degree'
 -   }]
 
 -   concat = [{
--     :title => 'Discoverer', :type  => 'String'
+-     title: 'Discoverer',                   type: 'String'
 -   }, {
--     :title => 'Date of Discovery', :type  => 'String'
+-     title: 'Date of Discovery',            type: 'String'
 -   }]
 
 -   unless name == 'earth' then attributes.concat(concat) end
 
 -   concat = [{
--      :title => 'Mass', :type  => 'Int', :unit => 'kilogram'
+-      title: 'Mass',                        type: 'Int', unit: 'kilogram'
 -   }, {
--      :title => 'Equatorial radius', :type  => 'Float', :unit => 'kilometer'
+-      title: 'Equatorial radius',           type: 'Float', unit: 'kilometer'
 -   }, {
--      :title => 'Polar radius', :type  => 'Float', :unit => 'kilometer'
+-      title: 'Polar radius',                type: 'Float', unit: 'kilometer'
 -   }, {
--      :title => 'Mean density', :type  => 'Int', :unit => 'km . m<sup>-3</sup>'
+-      title: 'Mean density',                type: 'Int', unit: 'km . m<sup>-3</sup>'
 -   }, {
--      :title => name == 'earth' ? 'Surface gravity' : 'Equatorial surface gravity', :type  => 'Float', :unit => 'm . s<sup>-2</sup>'
+-      title: name == 'earth' ? 'Surface gravity' : 'Equatorial surface gravity', type: 'Float', unit: 'm . s<sup>-2</sup>'
 -   }, {
--      :title => 'Escape Velocity', :type  => 'Float', :unit => 'km . s<sup>-1</sup>'
+-      title: 'Escape Velocity',             type: 'Float', unit: 'km . s<sup>-1</sup>'
 -   }, {
--      :title => 'Black-body temp', :type  => 'Float', :unit => 'kelvin'
+-      title: 'Black-body temp',             type: 'Float', unit: 'kelvin'
 -   }, {
--      :title => 'Solar intensity', :type  => 'Float', :unit => 'W . m<sup>2</sup>'
+-      title: 'Solar intensity',             type: 'Float', unit: 'W . m<sup>2</sup>'
 -   }, {
--      :title => 'Natural satellites', :type  => 'Int'
+-      title: 'Natural satellites',          type: 'Int'
 -   }
 - ]
 - attributes.concat(concat)
 
-= haml :'docs/_attributes', :locals => { :attributes => attributes }
+= haml :'docs/_attributes', locals: { attributes: attributes }
