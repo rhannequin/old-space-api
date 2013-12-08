@@ -19,9 +19,9 @@ class Sun < Parent
       content = tr.css('td').to_a
       label = to_label content[0].content
       hash[label] = {
-        :time     => content[1].content.strip,
-        :altitude => content[2].content.strip.to_f,
-        :azimuth  => content[3].content.strip.to_f
+        time:     content[1].content.strip,
+        altitude: content[2].content.strip.to_f,
+        azimuth:  content[3].content.strip.to_f
       }
     end
 
@@ -41,7 +41,7 @@ class Sun < Parent
     hash[:azimuth]         = current_position_tr[1].css('td')[1].text.strip.to_f
     hash[:right_ascension] = current_position_tr[2].css('td')[1].text.strip
     hash[:declination]     = current_position_tr[3].css('td')[1].text.strip
-    hash[:range]        = current_position_tr[4].css('td')[1].text.strip.to_f
+    hash[:range]           = current_position_tr[4].css('td')[1].text.strip.to_f
     hash[:constellation]   = current_position_tr[5].css('td')[1].text.strip
 
     return hash

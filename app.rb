@@ -88,8 +88,8 @@ class SpaceApi < Sinatra::Application
 
   # Docs
   get '/docs' do
-    haml 'docs/index'.to_sym, {
-      layout: 'docs/layout'.to_sym,
+    haml :'docs/index', {
+      layout: :'docs/layout',
       locals: {
         title: 'Home',
         name: 'docs'
@@ -98,8 +98,8 @@ class SpaceApi < Sinatra::Application
   end
 
   get '/docs/sun' do
-    haml 'docs/sun'.to_sym, {
-      layout: 'docs/layout'.to_sym,
+    haml :'docs/sun', {
+      layout: :'docs/layout',
       locals: {
         title:       'Sun',
         name:        'docs-sun',
@@ -111,8 +111,8 @@ class SpaceApi < Sinatra::Application
   get '/docs/planets/:planet_name' do
     planet_name = params[:planet_name]
     if File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
-      haml 'docs/planets/planet'.to_sym, {
-        layout: 'docs/layout'.to_sym,
+      haml :'docs/planets/planet', {
+        layout: :'docs/layout',
         locals: {
           planet_name:    planet_name,
           title:          planet_name.capitalize,
@@ -131,7 +131,7 @@ class SpaceApi < Sinatra::Application
         title: 'About',
         name:  'docs-about'
       },
-      layout: 'docs/layout'.to_sym
+      layout: :'docs/layout'
     }
   end
 
