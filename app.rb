@@ -1,116 +1,105 @@
 $stdout.sync = true
-require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/base'
 require 'sinatra/cross_origin'
+require 'sinatra/config_file'
+require 'sinatra/namespace'
+require 'sinatra/reloader'
 
+require 'logger'
 require 'haml'
 require 'json'
 
-configure do
-  set :api_name, 'Space API'
-  set :repo_url, 'https://github.com/rhannequin/space-api'
-  enable :cross_origin
-end
-configure :development do
-  set :logging, true
-  set :api_url, 'http://localhost:5000/api'
-  register Sinatra::Reloader
-end
-configure :production do
-  set :api_url, 'https://space-api.herokuapp.com/api'
-end
+require_relative 'space_api_helpers'
 
-# Logger
-def log(arg, method = 'info')
-  logger.send(method, arg)
-end
+module SpaceApi
 
-class SpaceApi < Sinatra::Application
+  class App < Sinatra::Base
+    register Sinatra::ConfigFile
+    register Sinatra::CrossOrigin
+    register Sinatra::Namespace
 
-  helpers do
-    def json_response(code, response)
-      cross_origin
-      content_type :json
-      status code
-      response[:code] = code
-      if prettify?
-        return JSON.pretty_generate response
-      else
-        return response.to_json
-      end
-    end
-    def accept_params(params, *fields)
-      h = {}
-      fields.each do |name|
-        h[name] = params[name] if params[name]
-      end
-      h
-    end
-    def prettify?
-      not(!params[:pretty].nil? && params[:pretty] == 'false')
-    end
-    def h(text)
-      Rack::Utils.escape_html(text)
-    end
-  end
+    set :environments, %w(production development test)
+    set :environment, (ENV['RACK_ENV']||ENV['SPACEAPI_APPLICATION_ENV']||:development).to_sym
 
-  get '/' do
-    haml :index, {
-      locals: {
-        title: settings.api_name,
-        name: 'home'
+    set :allow_origin, :any
+    set :allow_methods, %w(:get)
+    set :expose_headers, %w(Content-Type)
+
+    config_file 'config_file.yml'
+
+    configure do
+      enable :logging
+      enable :cross_origin
+    end
+
+    configure %w(development test) do
+      set :logging, Logger::DEBUG
+      register Sinatra::Reloader
+    end
+
+    configure :production do
+      set :logging, Logger::INFO
+    end
+
+    helpers do
+      include SpaceApi::Helpers
+    end
+
+    get '/' do
+      log settings.development?
+      haml :index, {
+        locals: {
+          title: settings.api_name,
+          name: 'home'
+        }
       }
-    }
-  end
+    end
 
-  get '/api/sun' do
-    require './models/Sun'
-    new_params = accept_params params, :lat, :lng, :alt, :tz
-    sun = Sun.new
-    sun.add_params(new_params) if new_params.any?
-    json_response 200, { data: sun.parse }
-  end
+    get '/api/sun' do
+      require './models/Sun'
+      new_params = accept_params params, :lat, :lng, :alt, :tz
+      sun = Sun.new
+      sun.add_params(new_params) if new_params.any?
+      json_response 200, { data: sun.parse }
+    end
 
-  get '/api/planets/:planet_name' do
-    planet_name = params[:planet_name]
-    class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
-    if File.file? "#{class_path}.rb"
+    get '/api/planets/:planet_name' do
+      planet_name = params[:planet_name]
+      class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
+      return app_error_message(:not_found_error) unless File.file? "#{class_path}.rb"
       require class_path
       planet_class = Object.const_get(planet_name.capitalize)
       new_params = accept_params params, :lat, :lng, :alt, :tz
       planet = planet_class.new
       planet.add_params(new_params) if new_params.any?
       json_response 200, { data: planet.parse }
-    else
-      redirect not_found
     end
-  end
 
-  # Docs
-  get '/docs' do
-    haml :'docs/index', {
-      layout: :'docs/layout',
-      locals: {
-        title: 'Home',
-        name: 'docs'
+    # Docs
+    get '/docs' do
+      haml :'docs/index', {
+        layout: :'docs/layout',
+        locals: {
+          title: 'Home',
+          name: 'docs'
+        }
       }
-    }
-  end
+    end
 
-  get '/docs/sun' do
-    haml :'docs/sun', {
-      layout: :'docs/layout',
-      locals: {
-        title:       'Sun',
-        name:        'docs-sun',
-        sun_api_url: "#{settings.api_url}/sun"
+    get '/docs/sun' do
+      haml :'docs/sun', {
+        layout: :'docs/layout',
+        locals: {
+          title:       'Sun',
+          name:        'docs-sun',
+          sun_api_url: "#{settings.api_url}/sun"
+        }
       }
-    }
-  end
+    end
 
-  get '/docs/planets/:planet_name' do
-    planet_name = params[:planet_name]
-    if File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
+    get '/docs/planets/:planet_name' do
+      planet_name = params[:planet_name]
+      return redirect not_found unless  File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
       haml :'docs/planets/planet', {
         layout: :'docs/layout',
         locals: {
@@ -120,28 +109,26 @@ class SpaceApi < Sinatra::Application
           planet_api_url: "#{settings.api_url}/planets/#{planet_name}"
         }
       }
-    else
-      redirect not_found
     end
-  end
 
-  get '/docs/about' do
-    haml :'docs/about', {
-      locals: {
-        title: 'About',
-        name:  'docs-about'
-      },
-      layout: :'docs/layout'
-    }
-  end
-
-  not_found do
-    haml :not_found, {
-      locals: {
-        title: "You're lost in outer space...",
-        name: 'not-found'
+    get '/docs/about' do
+      haml :'docs/about', {
+        locals: {
+          title: 'About',
+          name:  'docs-about'
+        },
+        layout: :'docs/layout'
       }
-    }
+    end
+
+    not_found do
+      haml :not_found, {
+        locals: {
+          title: "You're lost in outer space...",
+          name: 'not-found'
+        }
+      }
+    end
   end
 
 end

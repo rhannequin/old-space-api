@@ -1,0 +1,12 @@
+production:
+  api_name: "Space API"
+  repo_url: "https://github.com/rhannequin/space-api"
+  api_url:  "https://space-api.herokuapp.com/api"
+development:
+  api_name: 'Space API'
+  repo_url: 'https://github.com/rhannequin/space-api'
+  api_url: "http://localhost:5000/api"
+test:
+  api_name: 'Space API'
+  repo_url: 'https://github.com/rhannequin/space-api'
+  api_url: "http://localhost:5000/api"
