@@ -32,13 +32,16 @@ module SpaceApi
       enable :cross_origin
     end
 
-    configure %w(development test) do
-      set :logging, Logger::DEBUG
+    configure :production do
+      set :logging, Logger::INFO
+    end
+
+    configure :development do
       register Sinatra::Reloader
     end
 
-    configure :production do
-      set :logging, Logger::INFO
+    configure %w(development test) do
+      set :logging, Logger::DEBUG
     end
 
     helpers do
@@ -46,7 +49,6 @@ module SpaceApi
     end
 
     get '/' do
-      log settings.development?
       haml :index, {
         locals: {
           title: settings.api_name,
