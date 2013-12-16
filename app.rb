@@ -65,6 +65,14 @@ module SpaceApi
       json_response 200, { data: sun.parse }
     end
 
+    get '/api/moon' do
+      require './models/Moon'
+      new_params = accept_params params, :lat, :lng, :alt, :tz
+      moon = Moon.new
+      moon.add_params(new_params) if new_params.any?
+      json_response 200, { data: moon.parse }
+    end
+
     get '/api/planets/:planet_name' do
       planet_name = params[:planet_name]
       class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"

@@ -16,6 +16,11 @@ class RoutesTest < Test::Unit::TestCase
     assert last_response.ok?
   end
 
+  def test_it_moon
+    get '/api/moon'
+    assert last_response.ok?
+  end
+
   def test_it_planets
     planets.each do |planet|
       get "/api/planets/#{planet}"
