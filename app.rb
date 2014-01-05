@@ -4,12 +4,16 @@ require 'sinatra/cross_origin'
 require 'sinatra/config_file'
 require 'sinatra/namespace'
 require 'sinatra/reloader'
+require 'mongoid'
 
 require 'logger'
 require 'haml'
 require 'json'
 
 require_relative 'space_api_helpers'
+
+# Models
+require_relative 'models-temp/sun'
 
 module SpaceApi
 
@@ -19,10 +23,10 @@ module SpaceApi
     register Sinatra::Namespace
 
     set :environments, %w(production development test)
-    set :environment, (ENV['RACK_ENV']||ENV['SPACEAPI_APPLICATION_ENV']||:development).to_sym
+    set :environment, (ENV['RACK_ENV'] || ENV['SPACEAPI_APPLICATION_ENV'] || :development).to_sym
 
-    set :allow_origin, :any
-    set :allow_methods, %w(:get)
+    set :allow_origin,   :any
+    set :allow_methods,  %w(:get)
     set :expose_headers, %w(Content-Type)
 
     config_file 'config_file.yml'
@@ -30,6 +34,7 @@ module SpaceApi
     configure do
       enable :logging
       enable :cross_origin
+      Mongoid.load!('mongoid.yml')
     end
 
     configure :production do

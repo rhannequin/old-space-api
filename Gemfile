@@ -5,6 +5,8 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-cross_origin'
 
+gem 'mongoid'
+
 gem 'rack-cache'
 
 gem 'foreman'
