@@ -13,7 +13,7 @@ require 'json'
 require_relative 'space_api_helpers'
 
 # Models
-require_relative 'models-temp/sun'
+require_relative 'models/sun'
 
 module SpaceApi
 
@@ -63,11 +63,10 @@ module SpaceApi
     end
 
     get '/api/sun' do
-      require './models/Sun'
-      new_params = accept_params params, :lat, :lng, :alt, :tz
-      sun = Sun.new
-      sun.add_params(new_params) if new_params.any?
-      json_response 200, { data: sun.parse }
+      sun = Sun.first
+      # new_params = accept_params params, :lat, :lng, :alt, :tz
+      # sun.add_params(new_params) if new_params.any?
+      json_response 200, { data: Hash[sun.attributes.sort] }
     end
 
     get '/api/moon' do
