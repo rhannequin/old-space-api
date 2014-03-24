@@ -44,7 +44,37 @@ class Sun < Parent
     hash[:range]           = current_position_tr[4].css('td')[1].text.strip.to_f
     hash[:constellation]   = current_position_tr[5].css('td')[1].text.strip
 
-    return hash
+    return hash.merge(self.class.initial_values)
+  end
+
+  def self.initial_values
+    {
+      url:                             'http://solarsystem.nasa.gov/planets/profile.cfm?Object=Sun&Display=Facts&System=Metric',
+      discovered_by:                   'Known by the Ancients',
+      date_of_discovery:               'Unknown',
+      equatorial_inclination_to_orbit: 7.25,                            # °
+      mean_radius:                     6.95508 * (10 ** 5),             # km
+      equatorial_circumference:        4.3700056 * (10 ** 5),           # km
+      volume:                          1.40927256905986 * (10 ** 18),   # km^3
+      mass:                            1.9891 * (10 ** 30),             # kg
+      density:                         1.409,                           # g/cm^3 # /!\
+      surface_area:                    6.078747774547 * (10 ** 12),     # km^2
+      surface_gravity:                 274,                             # m/s^2
+      escape_velocity:                 6.177 * (10 ** 5),               # m/s /!\
+      sidereal_rotation_period:        609.12,                          # hour
+      minimum_surface_temperature:     5500,                            # °C
+      maximum_surface_temperature:     5500,                            # °C
+      effective_temperature:           5777,                            # K
+      spectral_type:                   3.83 * (10 ** 33),               # ergs/sec
+      age:                             4.6 * (10 ** 9),                 # year
+      hydrogen:                        92.1,                            # %
+      hydrogen:                        7.8,                             # %
+      synodic_period:                  27.2753,                         # day
+      rotation_period_at_equator:      26.8,                            # day
+      rotation_period_at_poles:        36,                              # days
+      velocity_relative_to_near_stars: 19.7,                            # km/s
+      mean_distance_to_earth:          1.496 * (10 ** 8)                # km
+    }
   end
 
 end
