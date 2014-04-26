@@ -3,6 +3,8 @@ require_relative 'models/sun_now'
 
 require_relative 'models/mercury'
 require_relative 'models/mercury_now'
+require_relative 'models/venus'
+require_relative 'models/venus_now'
 # require_relative 'models/Venus'
 # require_relative 'models/Earth'
 # require_relative 'models/Mars'

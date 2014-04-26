@@ -1,13 +1,13 @@
 Kernel::require_relative 'Planet'
 
-class MercuryNow < Planet
+class VenusNow < Planet
 
   def initialize
     @urls = [
       'http://www.heavens-above.com/planets.aspx',
       'http://heavens-above.com/planetsummary.aspx'
     ]
-    @planet_name = 'mercury'
+    @planet_name = 'venus'
   end
 
   def parse

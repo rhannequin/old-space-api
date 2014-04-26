@@ -1,12 +1,6 @@
 require_relative 'test_helper'
 
 class RoutesTest < Test::Unit::TestCase
-
-  def planets
-    # %w(mercury venus earth mars jupiter saturn uranus neptune pluto)
-    %w(mercury)
-  end
-
   def test_it_home
     get '/'
     assert last_response.ok?
@@ -67,4 +61,9 @@ class RoutesTest < Test::Unit::TestCase
     get '/docs/about'
     assert last_response.ok?
   end
+
+  private
+    def planets
+      %w(mercury venus)
+    end
 end

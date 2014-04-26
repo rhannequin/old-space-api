@@ -20,5 +20,6 @@ namespace :db do
     Sun.prepare
     Moon.prepare
     Mercury.prepare
+    Venus.prepare
   end
 end
