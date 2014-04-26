@@ -4,3 +4,10 @@ development:
       database: spaceapi
       hosts:
         - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: spaceapi-test
+      hosts:
+        - localhost:27017

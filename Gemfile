@@ -1,5 +1,5 @@
-source "https://rubygems.org"
-ruby "2.0.0"
+source 'https://rubygems.org'
+ruby '2.1.1'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
@@ -9,8 +9,16 @@ gem 'mongoid'
 
 gem 'rack-cache'
 
-gem 'foreman'
+gem 'rake'
 gem 'unicorn'
 gem 'shotgun'
 gem 'nokogiri'
 gem 'haml'
+
+group :development do
+  gem 'foreman'
+end
+
+group :test do
+  gem 'rack-test'
+end
