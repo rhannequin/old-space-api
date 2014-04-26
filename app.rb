@@ -75,19 +75,24 @@ module SpaceApi
         end
       end
 
-      get '/moon' do
-        require './models/Moon'
-        new_params = accept_params params, :lat, :lng, :alt, :tz
-        moon = Moon.new
-        moon.add_params(new_params) if new_params.any?
-        json_response 200, { data: moon.parse }
+      namespace '/moon' do
+        get do
+          moon = Moon.first
+          json_response 200, { data: moon.render }
+        end
+
+        get '/now' do
+          moon = MoonNow.new
+          new_params = accept_params params, :lat, :lng, :alt, :tz
+          moon.add_params(new_params) if new_params.any?
+          json_response 200, { data: moon.parse }
+        end
       end
 
       get '/planets/:planet_name' do
         planet_name = params[:planet_name]
         class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
         return app_error_message(:not_found_error) unless File.file? "#{class_path}.rb"
-        require class_path
         planet_class = Object.const_get(planet_name.capitalize)
         new_params = accept_params params, :lat, :lng, :alt, :tz
         planet = planet_class.new
@@ -145,12 +150,7 @@ module SpaceApi
     end
 
     not_found do
-      haml :not_found, {
-        locals: {
-          title: "You're lost in outer space...",
-          name: 'not-found'
-        }
-      }
+      json_response 404, { error: 'Not found' }
     end
   end
 

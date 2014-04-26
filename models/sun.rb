@@ -5,14 +5,14 @@ class Sun
   field :discovered_by                   , type: String
   field :date_of_discovery               , type: String
   field :equatorial_inclination_to_orbit , type: Float
-  field :mean_radius                     , type: Float
+  field :mean_radius                     , type: Integer
   field :equatorial_circumference        , type: Float
   field :volume                          , type: Float
   field :mass                            , type: Float
   field :density                         , type: Float
   field :surface_area                    , type: Float
-  field :surface_gravity                 , type: Float
-  field :escape_velocity                 , type: Float
+  field :surface_gravity                 , type: Integer
+  field :escape_velocity                 , type: Integer
   field :sidereal_rotation_period        , type: Float
   field :minimum_surface_temperature     , type: Integer
   field :maximum_surface_temperature     , type: Integer
@@ -23,7 +23,7 @@ class Sun
   field :helium                          , type: Float
   field :synodic_period                  , type: Float
   field :rotation_period_at_equator      , type: Float
-  field :rotation_period_at_poles        , type: Float
+  field :rotation_period_at_poles        , type: Integer
   field :velocity_relative_to_near_stars , type: Float
   field :mean_distance_to_earth          , type: Float
 

@@ -13,10 +13,11 @@ end
 desc 'Create all models with default fixed values'
 namespace :db do
 
-  require_relative 'models/sun'
+  require_relative 'require_models'
 
   task :prepare do
     Mongoid.load!('mongoid.yml')
     Sun.prepare
+    Moon.prepare
   end
 end

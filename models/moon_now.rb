@@ -1,7 +1,7 @@
 Kernel::require_relative 'Parent'
 require 'date'
 
-class Moon < Parent
+class MoonNow < Parent
 
   def initialize
     @urls = %w(http://www.heavens-above.com/moon.aspx)

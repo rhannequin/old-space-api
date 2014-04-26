@@ -16,8 +16,18 @@ class RoutesTest < Test::Unit::TestCase
     assert last_response.ok?
   end
 
+  def test_it_sun_now
+    get '/api/sun/now'
+    assert last_response.ok?
+  end
+
   def test_it_moon
     get '/api/moon'
+    assert last_response.ok?
+  end
+
+  def test_it_moon_now
+    get '/api/moon/now'
     assert last_response.ok?
   end
 
