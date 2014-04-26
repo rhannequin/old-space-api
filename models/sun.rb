@@ -1,10 +1,5 @@
-require 'open-uri'
-require 'nokogiri'
-
 class Sun
   include Mongoid::Document
-
-  # Default values
 
   field :url                             , type: String
   field :discovered_by                   , type: String
@@ -32,32 +27,9 @@ class Sun
   field :velocity_relative_to_near_stars , type: Float
   field :mean_distance_to_earth          , type: Float
 
-  # Dynamic values
-
-  field :astronomical_twilight_begins    , type: Hash
-  field :nautical_twilight_begins        , type: Hash
-  field :civil_twilight_begins           , type: Hash
-  field :sunrise                         , type: Hash
-  field :maximum_altitude                , type: Hash
-  field :sunset                          , type: Hash
-  field :civil_twilight_ends             , type: Hash
-  field :nautical_twilight_ends          , type: Hash
-  field :astronomical_twilight_ends      , type: Hash
-  field :minimum_altitude                , type: Hash
-  field :spring_equinox                  , type: DateTime
-  field :summer_solstice                 , type: DateTime
-  field :autumn_equinox                  , type: DateTime
-  field :winter_solstice                 , type: DateTime
-  field :altitude                        , type: Float
-  field :azimuth                         , type: Float
-  field :right_ascension                 , type: String
-  field :declination                     , type: String
-  field :range                           , type: Float
-  field :constellation                   , type: String
-
   def self.prepare
     self.delete_all
-    self.create initial_values.merge(parse)
+    self.create initial_values
   end
 
   def self.initial_values
@@ -90,47 +62,7 @@ class Sun
     }
   end
 
-  def self.parse
-    document = Nokogiri::HTML(open('http://www.heavens-above.com/sun.aspx').read.gsub("&nbsp;", ' '))
-    hash = Hash.new
-    tables = document.css('table.standardTable')
-
-    stop = false
-    tables.first.css('tr').each do |tr|
-      if !stop then stop = true; next end
-      # Get <td>s as array
-      content = tr.css('td').to_a
-      label = to_label content[0].content
-      hash[label] = {
-        time:     content[1].content.strip,
-        altitude: content[2].content.strip.to_f,
-        azimuth:  content[3].content.strip.to_f
-      }
-    end
-
-    yearly = tables[1]
-    yearly_tr = yearly.css('tr')
-    strptime = lambda do |datetime|
-      DateTime.strptime(datetime.text.strip, '%b %d, %H:%M').to_datetime
-    end
-    hash[:spring_equinox]  = strptime.call(yearly_tr[1].css('td')[1])
-    hash[:summer_solstice] = strptime.call(yearly_tr[2].css('td')[1])
-    hash[:autumn_equinox]  = strptime.call(yearly_tr[3].css('td')[1])
-    hash[:winter_solstice] = strptime.call(yearly_tr[4].css('td')[1])
-
-    current_position = tables[2]
-    current_position_tr = current_position.css('tr')
-    hash[:altitude]        = current_position_tr[0].css('td')[1].text.strip.to_f
-    hash[:azimuth]         = current_position_tr[1].css('td')[1].text.strip.to_f
-    hash[:right_ascension] = current_position_tr[2].css('td')[1].text.strip
-    hash[:declination]     = current_position_tr[3].css('td')[1].text.strip
-    hash[:range]           = current_position_tr[4].css('td')[1].text.strip.to_f
-    hash[:constellation]   = current_position_tr[5].css('td')[1].text.strip
-
-    return hash
-  end
-
-  def self.to_label(str)
-    str.strip.downcase.gsub(':', '').gsub(' ', '_').gsub('(', '').gsub(')', '').to_sym
+  def render
+    Hash[self.attributes.sort].reject{ |k| k == '_id' }
   end
 end

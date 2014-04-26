@@ -11,9 +11,7 @@ require 'haml'
 require 'json'
 
 require_relative 'space_api_helpers'
-
-# Models
-require_relative 'models/sun'
+require_relative 'require_models'
 
 module SpaceApi
 
@@ -62,77 +60,88 @@ module SpaceApi
       }
     end
 
-    get '/api/sun' do
-      sun = Sun.first
-      # new_params = accept_params params, :lat, :lng, :alt, :tz
-      # sun.add_params(new_params) if new_params.any?
-      json_response 200, { data: Hash[sun.attributes.sort] }
-    end
+    namespace '/api' do
+      namespace '/sun' do
+        get do
+          sun = Sun.first
+          json_response 200, { data: sun.render }
+        end
 
-    get '/api/moon' do
-      require './models/Moon'
-      new_params = accept_params params, :lat, :lng, :alt, :tz
-      moon = Moon.new
-      moon.add_params(new_params) if new_params.any?
-      json_response 200, { data: moon.parse }
-    end
+        get '/now' do
+          sun = SunNow.new
+          new_params = accept_params params, :lat, :lng, :alt, :tz
+          sun.add_params(new_params) if new_params.any?
+          json_response 200, { data: sun.parse }
+        end
+      end
 
-    get '/api/planets/:planet_name' do
-      planet_name = params[:planet_name]
-      class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
-      return app_error_message(:not_found_error) unless File.file? "#{class_path}.rb"
-      require class_path
-      planet_class = Object.const_get(planet_name.capitalize)
-      new_params = accept_params params, :lat, :lng, :alt, :tz
-      planet = planet_class.new
-      planet.add_params(new_params) if new_params.any?
-      json_response 200, { data: planet.parse }
+      get '/moon' do
+        require './models/Moon'
+        new_params = accept_params params, :lat, :lng, :alt, :tz
+        moon = Moon.new
+        moon.add_params(new_params) if new_params.any?
+        json_response 200, { data: moon.parse }
+      end
+
+      get '/planets/:planet_name' do
+        planet_name = params[:planet_name]
+        class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
+        return app_error_message(:not_found_error) unless File.file? "#{class_path}.rb"
+        require class_path
+        planet_class = Object.const_get(planet_name.capitalize)
+        new_params = accept_params params, :lat, :lng, :alt, :tz
+        planet = planet_class.new
+        planet.add_params(new_params) if new_params.any?
+        json_response 200, { data: planet.parse }
+      end
     end
 
     # Docs
-    get '/docs' do
-      haml :'docs/index', {
-        layout: :'docs/layout',
-        locals: {
-          title: 'Home',
-          name: 'docs'
+    namespace '/docs' do
+      get do
+        haml :'docs/index', {
+          layout: :'docs/layout',
+          locals: {
+            title: 'Home',
+            name: 'docs'
+          }
         }
-      }
-    end
+      end
 
-    get '/docs/sun' do
-      haml :'docs/sun', {
-        layout: :'docs/layout',
-        locals: {
-          title:       'Sun',
-          name:        'docs-sun',
-          sun_api_url: "#{settings.api_url}/sun"
+      get '/sun' do
+        haml :'docs/sun', {
+          layout: :'docs/layout',
+          locals: {
+            title:       'Sun',
+            name:        'docs-sun',
+            sun_api_url: "#{settings.api_url}/sun"
+          }
         }
-      }
-    end
+      end
 
-    get '/docs/planets/:planet_name' do
-      planet_name = params[:planet_name]
-      return redirect not_found unless  File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
-      haml :'docs/planets/planet', {
-        layout: :'docs/layout',
-        locals: {
-          planet_name:    planet_name,
-          title:          planet_name.capitalize,
-          name:           "docs-#{planet_name}",
-          planet_api_url: "#{settings.api_url}/planets/#{planet_name}"
+      get '/planets/:planet_name' do
+        planet_name = params[:planet_name]
+        return redirect not_found unless  File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
+        haml :'docs/planets/planet', {
+          layout: :'docs/layout',
+          locals: {
+            planet_name:    planet_name,
+            title:          planet_name.capitalize,
+            name:           "docs-#{planet_name}",
+            planet_api_url: "#{settings.api_url}/planets/#{planet_name}"
+          }
         }
-      }
-    end
+      end
 
-    get '/docs/about' do
-      haml :'docs/about', {
-        locals: {
-          title: 'About',
-          name:  'docs-about'
-        },
-        layout: :'docs/layout'
-      }
+      get '/about' do
+        haml :'docs/about', {
+          locals: {
+            title: 'About',
+            name:  'docs-about'
+          },
+          layout: :'docs/layout'
+        }
+      end
     end
 
     not_found do
