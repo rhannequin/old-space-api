@@ -1,6 +1,6 @@
 Kernel::require_relative 'Planet'
 
-class Mercury < Planet
+class MercuryNow < Planet
 
   def initialize
     @urls = [
@@ -41,8 +41,7 @@ class Mercury < Planet
 
   def parse
     documents = load
-    return @static_values.merge(parse_planets(documents.first))
-                         .merge(parse_planet(load.last))
+    return parse_planets(documents.first).merge(parse_planet(load.last))
   end
 
 end

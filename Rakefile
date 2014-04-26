@@ -19,5 +19,6 @@ namespace :db do
     Mongoid.load!('mongoid.yml')
     Sun.prepare
     Moon.prepare
+    Mercury.prepare
   end
 end

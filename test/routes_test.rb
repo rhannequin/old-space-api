@@ -3,7 +3,8 @@ require_relative 'test_helper'
 class RoutesTest < Test::Unit::TestCase
 
   def planets
-    %w(mercury venus earth mars jupiter saturn uranus neptune pluto)
+    # %w(mercury venus earth mars jupiter saturn uranus neptune pluto)
+    %w(mercury)
   end
 
   def test_it_home
@@ -34,6 +35,13 @@ class RoutesTest < Test::Unit::TestCase
   def test_it_planets
     planets.each do |planet|
       get "/api/planets/#{planet}"
+      assert last_response.ok?
+    end
+  end
+
+  def test_it_planets_now
+    planets.each do |planet|
+      get "/api/planets/#{planet}/now"
       assert last_response.ok?
     end
   end

@@ -91,9 +91,17 @@ module SpaceApi
 
       get '/planets/:planet_name' do
         planet_name = params[:planet_name]
-        class_path = "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}"
-        return app_error_message(:not_found_error) unless File.file? "#{class_path}.rb"
+        return redirect not_found unless Object.const_defined?(planet_name.capitalize)
         planet_class = Object.const_get(planet_name.capitalize)
+        planet = planet_class.first
+        json_response 200, { data: planet.render }
+      end
+
+      get '/planets/:planet_name/now' do
+        planet_name = params[:planet_name]
+        className = "#{planet_name.capitalize}Now"
+        return redirect not_found unless Object.const_defined?(className)
+        planet_class = Object.const_get(className)
         new_params = accept_params params, :lat, :lng, :alt, :tz
         planet = planet_class.new
         planet.add_params(new_params) if new_params.any?
@@ -126,7 +134,7 @@ module SpaceApi
 
       get '/planets/:planet_name' do
         planet_name = params[:planet_name]
-        return redirect not_found unless  File.file? "#{File.dirname(__FILE__)}/models/#{planet_name.capitalize}.rb"
+        return redirect not_found unless Object.const_defined?(planet_name.capitalize)
         haml :'docs/planets/planet', {
           layout: :'docs/layout',
           locals: {
