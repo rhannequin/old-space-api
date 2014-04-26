@@ -43,7 +43,7 @@ class Venus
 
   def self.initial_values
     {
-      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Venus&Display=Facts&System=Metric',
+      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Venus&Display=Facts',
                                         'http://www.heavens-above.com/venus.aspx'],
       discovered_by:                   'Known by the Ancients',
       date_of_discovery:               'Unknown',
@@ -72,7 +72,6 @@ class Venus
       surface_area:                    460230000,             # km^2
       surface_gravity:                 8.87,                  # m/s^2
       escape_velocity:                 10360,                 # m/s
-      length_of_day:                   2802,                  # hours
       sidereal_rotation_period:        -5832.4 ,              # hours
       minimum_surface_temperature:     462,                   # °C
       maximum_surface_temperature:     462,                   # °C

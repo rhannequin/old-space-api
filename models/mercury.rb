@@ -41,7 +41,7 @@ class Mercury
 
   def self.initial_values
     {
-      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Mercury&Display=Facts&System=Metric',
+      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Mercury&Display=Facts',
                                         'http://www.heavens-above.com/mercury.aspx'],
       discovered_by:                   'Known by the Ancients',
       date_of_discovery:               'Unknown',
