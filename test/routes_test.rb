@@ -64,6 +64,6 @@ class RoutesTest < Test::Unit::TestCase
 
   private
     def planets
-      %w(mercury venus)
+      %w(mercury venus mars jupiter saturn)
     end
 end
