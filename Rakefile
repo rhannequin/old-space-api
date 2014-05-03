@@ -24,5 +24,6 @@ namespace :db do
     Mars.prepare
     Jupiter.prepare
     Saturn.prepare
+    Uranus.prepare
   end
 end
