@@ -77,7 +77,8 @@ class Jupiter
       maximum_surface_temperature:     -148,                  # °C # => 'Effective Temperature'
       solar_intensity:                 50.5,                  # W/m^2
       natural_satellites:              63,
-      atmospheric_constituents:        ['H₂', 'He']
+      atmospheric_constituents:        [{name: 'Hydrogen', notation: 'H₂'},
+                                        {name: 'Helium', notation: 'He'}]
     }
   end
 

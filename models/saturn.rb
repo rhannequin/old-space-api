@@ -75,9 +75,10 @@ class Saturn
       sidereal_rotation_period:        10.656,                # hours
       minimum_surface_temperature:     -178,                  # °C # => 'Effective Temperature'
       maximum_surface_temperature:     -178,                  # °C # => 'Effective Temperature'
-      solar_intensity:                 14.90,                  # W/m^2
+      solar_intensity:                 14.90,                 # W/m^2
       natural_satellites:              47,
-      atmospheric_constituents:        ['H₂', 'He']
+      atmospheric_constituents:        [{name: 'Hydrogen', notation: 'H₂'},
+                                        {name: 'Helium', notation: 'He'}]
     }
   end
 

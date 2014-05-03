@@ -43,8 +43,8 @@ class Uranus
 
   def self.initial_values
     {
-      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Saturn&Display=Facts',
-                                        'http://www.heavens-above.com/saturn.aspx'],
+      urls:                            ['http://solarsystem.nasa.gov/planets/profile.cfm?Object=Uranus&Display=Facts',
+                                        'http://www.heavens-above.com/uranus.aspx'],
       discovered_by:                   'William Herschel',
       date_of_discovery:               '1781-03-13',
       semi_major_axis:                 2870658200,            # km
@@ -77,7 +77,9 @@ class Uranus
       maximum_surface_temperature:     -216,                  # °C # => 'Effective Temperature'
       solar_intensity:                 3.71,                  # W/m^2
       natural_satellites:              27,
-      atmospheric_constituents:        %w(H₂ He CH₄)
+      atmospheric_constituents:        [{name: 'Hydrogen', notation: 'H₂'},
+                                        {name: 'Helium', notation: 'He'},
+                                        {name: 'Methane', notation: 'CH₄'}]
     }
   end
 

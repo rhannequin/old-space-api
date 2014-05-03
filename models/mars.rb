@@ -77,7 +77,9 @@ class Mars
       maximum_surface_temperature:     427,                   # °C
       solar_intensity:                 589.2,                 # W/m^2
       natural_satellites:              2,
-      atmospheric_constituents:        []
+      atmospheric_constituents:        [{name: 'Carbon Dioxide', notation: 'CO₂'},
+                                        {name: 'Nitrogen', notation: 'N₂'},
+                                        {name: 'Argon', notation: 'Ar'}]
     }
   end
 

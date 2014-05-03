@@ -77,7 +77,8 @@ class Venus
       maximum_surface_temperature:     462,                   # °C
       solar_intensity:                 2613.9,                # W/m^2
       natural_satellites:              0,
-      atmospheric_constituents:        ['CO₂', 'N₂']
+      atmospheric_constituents:        [{name: 'Carbon Dioxide', notation: 'CO₂'},
+                                        {name: 'Nitrogen', notation: 'N₂'}]
     }
   end
 
