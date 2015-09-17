@@ -43,11 +43,11 @@ class MoonNow < Parent
 
     yearly = document.css('table')[3].css('tr td')
     monthly_phases = {
-      previous_new_moon: strptime.call(yearly[1]),
-      first_quarter:     strptime.call(yearly[3]),
-      full_moon:         strptime.call(yearly[5]),
-      last_quarter:      strptime.call(yearly[7]),
-      next_new_moon:     strptime.call(yearly[9])
+      previous_new_moon: strptime.call(yearly[2]),
+      first_quarter:     strptime.call(yearly[4]),
+      full_moon:         strptime.call(yearly[6]),
+      last_quarter:      strptime.call(yearly[8]),
+      next_new_moon:     strptime.call(yearly[10])
     }
     hash = hash.merge monthly_phases
 

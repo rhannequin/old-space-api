@@ -53,7 +53,7 @@ class Sun
       spectral_type:                   3.83 * (10 ** 33),               # ergs/sec
       age:                             4600000000,                      # year
       hydrogen:                        92.1,                            # %
-      hydrogen:                        7.8,                             # %
+      helium:                          7.8,                             # %
       synodic_period:                  27.2753,                         # day
       rotation_period_at_equator:      26.8,                            # day
       rotation_period_at_poles:        36,                              # days

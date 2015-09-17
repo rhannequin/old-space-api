@@ -1,12 +1,12 @@
 development:
-  sessions:
+  clients:
     default:
       database: spaceapi
       hosts:
         - localhost:27017
 
 test:
-  sessions:
+  clients:
     default:
       database: spaceapi-test
       hosts:
