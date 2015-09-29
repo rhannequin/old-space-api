@@ -1,12 +1,29 @@
 # Space-API
 
+## Prepare database
+
+First, you need to fill your database with some data.
+
+    bundle exec rake db:prepare
+
+## Launch
+
+    bundle exec foreman start
+
 ## Test
 
-    RACK_ENV=test bundle exec rake db:prepare && bundle exec rake test
+If you start testing for the first time, remember to fill your database first:
+
+    RACK_ENV=test bundle exec rake db:prepare
+
+Then you can launch the tests:
+
+    RACK_ENV=test bundle exec rake test
 
 ## Roadmap
 
 - [ ] Split all resources into static/dynamic files (`_now` classes)
+- [ ] Use better collections (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
 - [ ] Create script to init values from scrap and not from hard coded values
 - [ ] Write a proper documentation
 - [ ] Use cache for static values
