@@ -21,9 +21,12 @@ namespace :db do
     Moon.prepare
     Mercury.prepare
     Venus.prepare
+    Earth.prepare
     Mars.prepare
     Jupiter.prepare
     Saturn.prepare
     Uranus.prepare
+    Neptune.prepare
+    Pluto.prepare
   end
 end

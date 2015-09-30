@@ -22,14 +22,15 @@ Then you can launch the tests:
 
 ## Roadmap
 
-- [ ] Split all resources into static/dynamic files (`_now` classes)
-- [ ] Use better collections (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
-- [ ] Create script to init values from scrap and not from hard coded values
+- [x] Split all resources into static/dynamic files (`_now` classes)
+- [ ] Use better MongoDB collections (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
+- [ ] Create script to init values from scraping and not from hard coded values
+- [ ] Use modules to share behaviour and not (only) inheritance
 - [ ] Write a proper documentation
 - [ ] Use cache for static values
 - [ ] Create simple client app
 - [ ] Look for other links to parse for information
-- [ ] Implement new resources like constellations, artificial satellites, comets, asteroids
+- [ ] Implement new resources like stars, artificial satellites, comets, asteroids
 - [ ] Make it hypermedia
 
 ## Links
@@ -43,3 +44,16 @@ Then you can launch the tests:
 * [Table of Meteorite Landings](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh)
   * [API Endoint](https://data.nasa.gov/resource/gh4g-9sfh.json)
 * [Heliocentric Trajectories for Selected Spacecraft, Planets, and Comets](http://omniweb.gsfc.nasa.gov/coho/helios/heli.html)
+* [Planets and Pluto: Physical Characteristics](http://ssd.jpl.nasa.gov/?planet_phys_par)
+* [Planetary Satellite Physical Parameters](http://ssd.jpl.nasa.gov/?sat_phys_par)
+* [Astrodynamic Constants](http://ssd.jpl.nasa.gov/?constants)
+* JSON files for planets from solarsystem.nasa.gov
+  * [Mercury](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts)
+  * [Venus](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/venus/facts)
+  * [Earth](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/earth/facts)
+  * [Mars](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mars/facts)
+  * [Jupiter](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/jupiter/facts)
+  * [Saturn](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/saturn/facts)
+  * [Uranus](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/uranus/facts)
+  * [Neptune](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/neptune/facts)
+  * [Pluto](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/pluto/facts)
