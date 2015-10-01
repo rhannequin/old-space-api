@@ -3,8 +3,9 @@ require 'date'
 
 class MoonNow < Parent
 
-  def initialize
+  def initialize(config)
     @urls = %w(http://www.heavens-above.com/moon.aspx)
+    super config
   end
 
   def parse

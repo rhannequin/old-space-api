@@ -68,7 +68,7 @@ module SpaceApi
         end
 
         get '/now' do
-          sun = SunNow.new
+          sun = SunNow.new settings
           new_params = accept_params params, :lat, :lng, :alt, :tz
           sun.add_params(new_params) if new_params.any?
           json_response 200, { data: sun.parse }
@@ -82,7 +82,7 @@ module SpaceApi
         end
 
         get '/now' do
-          moon = MoonNow.new
+          moon = MoonNow.new settings
           new_params = accept_params params, :lat, :lng, :alt, :tz
           moon.add_params(new_params) if new_params.any?
           json_response 200, { data: moon.parse }
@@ -103,7 +103,7 @@ module SpaceApi
         return redirect not_found unless Object.const_defined?(className)
         planet_class = Object.const_get(className)
         new_params = accept_params params, :lat, :lng, :alt, :tz
-        planet = planet_class.new
+        planet = planet_class.new settings
         planet.add_params(new_params) if new_params.any?
         json_response 200, { data: planet.parse }
       end

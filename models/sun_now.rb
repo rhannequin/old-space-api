@@ -1,10 +1,12 @@
-require 'open-uri'
-require 'nokogiri'
+Kernel::require_relative 'Planet'
 
-class SunNow
+class SunNow < Parent
+  def initialize(config)
+    super config
+  end
 
   def parse
-    document = Nokogiri::HTML(open('http://www.heavens-above.com/sun.aspx').read.gsub("&nbsp;", ' '))
+    document = Nokogiri::HTML(get_content('http://www.heavens-above.com/sun.aspx').read.gsub("&nbsp;", ' '))
     hash = Hash.new
     tables = document.css('table.standardTable')
 
