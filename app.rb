@@ -61,6 +61,20 @@ module SpaceApi
     end
 
     namespace '/api' do
+
+      namespace '/v2' do
+        get '/planets/:planet_name' do
+          planet_name = params[:planet_name]
+          planet = PlanetTmp.where(name: planet_name.capitalize).first
+          return redirect not_found if planet.nil?
+          json_response 200, { data: planet.as_json(except: :_id) }
+        end
+
+        not_found do
+          json_response 404, { error: 'Not found' }
+        end
+      end
+
       namespace '/sun' do
         get do
           sun = Sun.first
