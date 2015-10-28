@@ -65,7 +65,7 @@ module SpaceApi
       namespace '/v2' do
         get '/planets/:planet_name' do
           planet_name = params[:planet_name]
-          planet = PlanetTmp.where(name: planet_name.capitalize).first
+          planet = PlanetTmp.where(slug: planet_name).first
           return redirect not_found if planet.nil?
           json_response 200, { data: planet.as_json(except: :_id) }
         end
