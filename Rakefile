@@ -1,32 +1,8 @@
-require 'rake/clean'
-require 'rake/testtask'
-require 'mongoid'
+Dir[File.expand_path('tasks/**/*.rake', File.dirname(__FILE__))].each { |file| load file }
 
 task default: :test
 
 Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
   t.warning = false
-end
-
-
-desc 'Create all models with default fixed values'
-namespace :db do
-
-  require_relative 'require_models'
-
-  task :prepare do
-    Mongoid.load!('mongoid.yml')
-    Sun.prepare
-    Moon.prepare
-    Mercury.prepare
-    Venus.prepare
-    Earth.prepare
-    Mars.prepare
-    Jupiter.prepare
-    Saturn.prepare
-    Uranus.prepare
-    Neptune.prepare
-    Pluto.prepare
-  end
 end

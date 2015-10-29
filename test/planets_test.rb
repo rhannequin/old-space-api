@@ -18,14 +18,14 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('orbit_circumference')
   end
 
-  def test_it_has_correct_values
+  def test_it_has_correct_types
     get '/api/v2/planets/mercury'
     json = JSON.parse(last_response.body)['data']
-    assert_equal 'mercury',               json['slug']
-    assert_equal 'Mercury',               json['name']
-    assert_equal 'Unknown',               json['date_of_discovery']
-    assert_equal 'Known by the Ancients', json['discovered_by']
-    assert_equal 57909227.to_f,           json['orbit_circumference']
+    assert_equal true, json['slug'].kind_of?(String)
+    assert_equal true, json['name'].kind_of?(String)
+    assert_equal true, json['date_of_discovery'].kind_of?(String)
+    assert_equal true, json['discovered_by'].kind_of?(String)
+    assert_equal true, json['orbit_circumference'].kind_of?(Float)
   end
 
   def test_it_planets_doesnt_exist
@@ -39,8 +39,8 @@ class PlanetsTest < Test::Unit::TestCase
       slug: 'mercury',
       name: 'Mercury',
       date_of_discovery: 'Unknown',
-      discovered_by: 'Known by the Ancients',
-      orbit_circumference: 57909227.to_f
+      discovered_by: 'The Doctor',
+      orbit_circumference: 1.to_f
     })
   end
 end
