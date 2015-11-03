@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'mongoid'
+require 'bigdecimal'
 require_relative 'require_models'
 
 class DbPrepare
@@ -33,7 +34,8 @@ class DbPrepare
     tmp = paragraphs[2].inner_html
     planet.date_of_discovery = planet_discover_date_and_people tmp, :date_of_discovery
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
-    planet.orbit_circumference = planet_orbit_circumference paragraphs[4].inner_html
+    planet.orbit_circumference = scientific_notation paragraphs[4].inner_html
+    planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
     puts planet.inspect
     planet
   end
@@ -49,11 +51,11 @@ class DbPrepare
     str.split('</b>').last.strip
   end
 
-  def planet_orbit_circumference(paragraph)
+  def scientific_notation(paragraph)
     str = paragraph.split('<br>')[2].split('</b>').last.split('x')
-    significand = str.first.to_f
+    significand = BigDecimal(str.first)
     exposant = str.last.scan(/<sup>([^<>]*)<\/sup>/).flatten.first.to_i
-    significand * (10 ** exposant)
+    (significand * (10 ** exposant)).to_f
   end
 
   def setup(config)

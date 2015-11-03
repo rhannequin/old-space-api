@@ -21,7 +21,7 @@ class DbPrepareTest < Test::Unit::TestCase
     paragraphs = nokogiri.css('p')
     private_parse_planet 'mercury', nokogiri
     private_planet_discover_date_and_people paragraphs
-    private_planet_orbit_circumference paragraphs
+    private_scientific_notation
   end
 
   def setup
@@ -35,6 +35,8 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal true, planet.kind_of?(PlanetTmp)
     assert_equal name, planet.slug
     assert_equal name.capitalize, planet.name
+    assert_equal true, planet.orbit_circumference.kind_of?(Float) && planet.orbit_circumference.between?(10**7, 10**8)
+    assert_equal true, planet.mean_orbit_velocity.kind_of?(Float) && planet.mean_orbit_velocity.between?(10**4, 10**5)
   end
 
   def private_planet_discover_date_and_people(paragraphs)
@@ -47,10 +49,13 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal false, people.empty?
   end
 
-  def private_planet_orbit_circumference(paragraphs)
-    paragraph = paragraphs[4].inner_html
-    orbit = @task.planet_orbit_circumference paragraph
-    assert_equal true, orbit.kind_of?(Float)
-    assert_equal true, orbit.between?(10**7, 10**8)
+  def private_scientific_notation
+    value1 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.2345 x 10<sup>4</sup> m/s<br><b></b><br> "
+    value2 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.23456 x 10<sup>3</sup> m/s<br><b></b><br> "
+    value3 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 0.1234 x 10<sup>8</sup> m/s<br><b></b><br> "
+    assert_equal(true, value1.kind_of?(Float))
+    assert_equal(true, value1 == 12345.0)
+    assert_equal(true, value2 == 1234.56)
+    assert_equal(true, value3 == 12340000.0)
   end
 end
