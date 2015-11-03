@@ -25,8 +25,9 @@ Then you can launch the tests:
 - [x] Split all resources into static/dynamic files (`_now` classes)
 - [ ] Use better MongoDB collections (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
 - [ ] Create script to init values from scraping and not from hard coded values
+- [ ] Use Github wiki for documentation
 - [ ] Use modules to share behaviour and not (only) inheritance
-- [ ] Write a proper documentation
+- [ ] Write a proper documentation to project's Github wiki
 - [ ] Use cache for static values
 - [ ] Create simple client app
 - [ ] Look for other links to parse for information
