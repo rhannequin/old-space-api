@@ -35,7 +35,7 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal true, planet.kind_of?(PlanetTmp)
     assert_equal name, planet.slug
     assert_equal name.capitalize, planet.name
-    assert_equal true, planet.orbit_circumference.kind_of?(Float) && planet.orbit_circumference.between?(10**7, 10**8)
+    assert_equal true, planet.orbit_size.kind_of?(Float) && planet.orbit_size.between?(10**7, 10**8)
     assert_equal true, planet.mean_orbit_velocity.kind_of?(Float) && planet.mean_orbit_velocity.between?(10**4, 10**5)
   end
 

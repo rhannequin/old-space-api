@@ -15,7 +15,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('name')
     assert_equal true, data.has_key?('date_of_discovery')
     assert_equal true, data.has_key?('discovered_by')
-    assert_equal true, data.has_key?('orbit_circumference')
+    assert_equal true, data.has_key?('orbit_size')
     assert_equal true, data.has_key?('mean_orbit_velocity')
   end
 
@@ -26,7 +26,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['name'].kind_of?(String)
     assert_equal true, json['date_of_discovery'].kind_of?(String)
     assert_equal true, json['discovered_by'].kind_of?(String)
-    assert_equal true, json['orbit_circumference'].kind_of?(Float)
+    assert_equal true, json['orbit_size'].kind_of?(Float)
     assert_equal true, json['mean_orbit_velocity'].kind_of?(Float)
   end
 
@@ -42,7 +42,7 @@ class PlanetsTest < Test::Unit::TestCase
       name: 'Mercury',
       date_of_discovery: 'Unknown',
       discovered_by: 'The Doctor',
-      orbit_circumference: 1.to_f,
+      orbit_size: 1.to_f,
       mean_orbit_velocity: 1.to_f
     })
   end

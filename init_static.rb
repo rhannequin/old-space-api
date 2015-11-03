@@ -34,7 +34,7 @@ class DbPrepare
     tmp = paragraphs[2].inner_html
     planet.date_of_discovery = planet_discover_date_and_people tmp, :date_of_discovery
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
-    planet.orbit_circumference = scientific_notation paragraphs[4].inner_html
+    planet.orbit_size = scientific_notation paragraphs[4].inner_html
     planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
     puts planet.inspect
     planet
