@@ -4,9 +4,11 @@ require 'mongoid'
 require_relative 'require_models'
 
 class DbPrepare
+  attr_accessor :proxy
   attr_accessor :planets_uris
-  def initialize
-    setup
+
+  def initialize(config)
+    setup config
   end
 
   def start
@@ -19,7 +21,7 @@ class DbPrepare
     @planets_uris.each do |planet, uris|
       uris.each do |uri|
         puts "  [Planet][#{planet}] Parsing #{uri}"
-        parse_planet planet, Nokogiri::HTML(open(uri).read)
+        parse_planet planet, Nokogiri::HTML(open(uri, @proxy).read)
       end
     end
     puts '[Planet] End of planet parsing'
@@ -54,9 +56,16 @@ class DbPrepare
     significand * (10 ** exposant)
   end
 
-  def setup
+  def setup(config)
     @planets_uris = {
       mercury: %w( http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts )
     }
+    @proxy = config['proxy_use'] ? {
+      proxy_http_basic_authentication: [
+        "#{config['proxy_url']}:#{config['proxy_port']}",
+        config['proxy_username'],
+        config['proxy_password']
+      ]
+    } : {}
   end
 end
