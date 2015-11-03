@@ -14,7 +14,7 @@ class DbPrepareTest < Test::Unit::TestCase
     uri = 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts'
     body = ''
     assert_nothing_raised do
-      body = open(uri).read
+      body = open(uri, @task.proxy).read
     end
     assert_equal false, body.empty?
     nokogiri = Nokogiri::HTML(body)
@@ -25,7 +25,7 @@ class DbPrepareTest < Test::Unit::TestCase
   end
 
   def setup
-    @task = DbPrepare.new
+    @task = DbPrepare.new(get_config)
   end
 
   private

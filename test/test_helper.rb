@@ -2,6 +2,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'test/unit'
 require 'rack/test'
+require 'yaml'
 require_relative '../app'
 require_relative '../space_api_helpers'
 

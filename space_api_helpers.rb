@@ -52,5 +52,10 @@ module SpaceApi
       Rack::Utils.escape_html(text)
     end
 
+    def get_config
+      config = YAML.load_file File.expand_path('config_file.yml', File.dirname(__FILE__))
+      config[ENV['RACK_ENV']]
+    end
+
   end
 end
