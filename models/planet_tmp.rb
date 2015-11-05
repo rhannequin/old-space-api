@@ -16,4 +16,5 @@ class PlanetTmp
   field :density,                  type: Float
   field :surface_area,             type: Integer
   field :surface_gravity,          type: Float
+  field :escape_velocity,          type: Float
 end

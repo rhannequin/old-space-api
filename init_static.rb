@@ -45,6 +45,7 @@ class DbPrepare
     planet.density = metric_value_to_f paragraphs[20].inner_html
     planet.surface_area = scientific_notation paragraphs[22].inner_html, 2, :integer
     planet.surface_gravity = metric_value_to_f paragraphs[24].inner_html
+    planet.escape_velocity = scientific_notation paragraphs[26].inner_html, 2, :integer
     puts planet.inspect
     planet
   end

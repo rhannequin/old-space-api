@@ -26,6 +26,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('density')
     assert_equal true, data.has_key?('surface_area')
     assert_equal true, data.has_key?('surface_gravity')
+    assert_equal true, data.has_key?('escape_velocity')
   end
 
   def test_it_has_correct_types
@@ -46,6 +47,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['density'].kind_of?(Float)
     assert_equal true, json['surface_area'].kind_of?(Integer)
     assert_equal true, json['surface_gravity'].kind_of?(Float)
+    assert_equal true, json['escape_velocity'].kind_of?(Float)
   end
 
   def test_it_planets_doesnt_exist
@@ -70,7 +72,8 @@ class PlanetsTest < Test::Unit::TestCase
       mass: 1,
       density: 1.0,
       surface_area: 1,
-      surface_gravity: 1.0
+      surface_gravity: 1.0,
+      escape_velocity: 1.0
     })
   end
 end
