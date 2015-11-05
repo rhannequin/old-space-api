@@ -42,8 +42,9 @@ class DbPrepare
     planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html, 2, :float
     planet.volume = scientific_notation paragraphs[16].inner_html, 2, :integer
     planet.mass = scientific_notation paragraphs[18].inner_html, 1, :integer
-    planet.density = planet_density paragraphs[20].inner_html
+    planet.density = metric_value_to_f paragraphs[20].inner_html
     planet.surface_area = scientific_notation paragraphs[22].inner_html, 2, :integer
+    planet.surface_gravity = metric_value_to_f paragraphs[24].inner_html
     puts planet.inspect
     planet
   end
@@ -57,10 +58,6 @@ class DbPrepare
       paragraph[1]
     end
     str.split('</b>').last.strip
-  end
-
-  def planet_density(paragraph)
-    paragraph.split('<br>').first.split('</b>').last.to_f
   end
 
   def scientific_notation(paragraph, emplacement, type)
@@ -81,6 +78,10 @@ class DbPrepare
 
   def first_value_to_f(paragraph)
     paragraph.split('<br>').first.to_f
+  end
+
+  def metric_value_to_f(paragraph)
+    paragraph.split('<br>').first.split('</b>').last.to_f
   end
 
   def setup(config)

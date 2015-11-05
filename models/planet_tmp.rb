@@ -15,4 +15,5 @@ class PlanetTmp
   field :mass,                     type: Integer
   field :density,                  type: Float
   field :surface_area,             type: Integer
+  field :surface_gravity,          type: Float
 end
