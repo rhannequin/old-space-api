@@ -18,6 +18,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('orbit_size')
     assert_equal true, data.has_key?('mean_orbit_velocity')
     assert_equal true, data.has_key?('orbit_eccentricity')
+    assert_equal true, data.has_key?('equatorial_inclination')
   end
 
   def test_it_has_correct_types
@@ -30,6 +31,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['orbit_size'].kind_of?(Float)
     assert_equal true, json['mean_orbit_velocity'].kind_of?(Float)
     assert_equal true, json['orbit_eccentricity'].kind_of?(Float)
+    assert_equal true, json['equatorial_inclination'].kind_of?(Float)
   end
 
   def test_it_planets_doesnt_exist
@@ -46,7 +48,8 @@ class PlanetsTest < Test::Unit::TestCase
       discovered_by: 'The Doctor',
       orbit_size: 1.to_f,
       mean_orbit_velocity: 1.to_f,
-      orbit_eccentricity: 1.to_f
+      orbit_eccentricity: 1.to_f,
+      equatorial_inclination: 1.to_f
     })
   end
 end

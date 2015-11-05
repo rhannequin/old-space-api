@@ -36,7 +36,8 @@ class DbPrepare
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
     planet.orbit_size = scientific_notation paragraphs[4].inner_html
     planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
-    planet.orbit_eccentricity = planet_orbi_eccentricity paragraphs[8].inner_html
+    planet.orbit_eccentricity = first_value_to_f paragraphs[8].inner_html
+    planet.equatorial_inclination = first_value_to_f paragraphs[10].inner_html
     puts planet.inspect
     planet
   end
@@ -52,7 +53,7 @@ class DbPrepare
     str.split('</b>').last.strip
   end
 
-  def planet_orbi_eccentricity(paragraph)
+  def planet_orbit_eccentricity(paragraph)
     paragraph.split('<br>').first.to_f
   end
 
@@ -61,6 +62,10 @@ class DbPrepare
     significand = BigDecimal(str.first)
     exposant = str.last.scan(/<sup>([^<>]*)<\/sup>/).flatten.first.to_i
     (significand * (10 ** exposant)).to_f
+  end
+
+  def first_value_to_f(paragraph)
+    paragraph.split('<br>').first.to_f
   end
 
   def setup(config)
