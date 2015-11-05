@@ -22,7 +22,7 @@ class DbPrepareTest < Test::Unit::TestCase
     paragraphs = nokogiri.css('p')
     private_parse_planet 'mercury', nokogiri
     private_planet_discover_date_and_people paragraphs
-    private_first_value_to_f
+    private_precise_value_to_f
     private_scientific_notation
     private_bigdecimal_to_type
     private_metric_value_to_f
@@ -76,14 +76,16 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal(true, value2.eql?(10.0))
   end
 
-  def private_first_value_to_f
-    value1 = @task.first_value_to_f " 0.123456<br><b></b><br> "
-    value2 = @task.first_value_to_f " 1.2 degrees<br><b></b><br> "
-    value3 = @task.first_value_to_f " 0<br><b></b><br> "
+  def private_precise_value_to_f
+    value1 = @task.precise_value_to_f " 0.123456<br><b></b><br> ", 0
+    value2 = @task.precise_value_to_f " 1.2 degrees<br><b></b><br> ", 0
+    value3 = @task.precise_value_to_f " 0<br><b></b><br> ", 0
+    value4 = @task.precise_value_to_f " <br> 1234.5 Hours<br><b></b><br> ", 1
     assert_equal(true, value1.kind_of?(Float))
     assert_equal(true, value1.eql?(0.123456))
     assert_equal(true, value2.eql?(1.2))
     assert_equal(true, value3.eql?(0.0))
+    assert_equal(true, value4.eql?(1234.5))
   end
 
   def private_metric_value_to_f

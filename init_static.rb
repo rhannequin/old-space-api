@@ -36,8 +36,8 @@ class DbPrepare
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
     planet.orbit_size = scientific_notation paragraphs[4].inner_html, 2, :float
     planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html, 2, :float
-    planet.orbit_eccentricity = first_value_to_f paragraphs[8].inner_html
-    planet.equatorial_inclination = first_value_to_f paragraphs[10].inner_html
+    planet.orbit_eccentricity = precise_value_to_f paragraphs[8].inner_html, 0
+    planet.equatorial_inclination = precise_value_to_f paragraphs[10].inner_html, 0
     planet.equatorial_radius = scientific_notation paragraphs[12].inner_html, 2, :float
     planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html, 2, :float
     planet.volume = scientific_notation paragraphs[16].inner_html, 2, :integer
@@ -46,6 +46,7 @@ class DbPrepare
     planet.surface_area = scientific_notation paragraphs[22].inner_html, 2, :integer
     planet.surface_gravity = metric_value_to_f paragraphs[24].inner_html
     planet.escape_velocity = scientific_notation paragraphs[26].inner_html, 2, :integer
+    planet.sidereal_rotation_period = precise_value_to_f paragraphs[28].inner_html, 1
     puts planet.inspect
     planet
   end
@@ -61,8 +62,8 @@ class DbPrepare
     str.split('</b>').last.strip
   end
 
-  def scientific_notation(paragraph, emplacement, type)
-    str = paragraph.split('<br>')[emplacement].split('</b>').last.split('x')
+  def scientific_notation(paragraph, position, type)
+    str = paragraph.split('<br>')[position].split('</b>').last.split('x')
     significand = BigDecimal(str.first)
     exposant = str.last.scan(/<sup>([^<>]*)<\/sup>/).flatten.first.to_i
     bigdecimal_to_type(significand * (10 ** exposant), type)
@@ -77,8 +78,8 @@ class DbPrepare
     number.send :"to_#{method}"
   end
 
-  def first_value_to_f(paragraph)
-    paragraph.split('<br>').first.to_f
+  def precise_value_to_f(paragraph, position)
+    paragraph.split('<br>')[position].to_f
   end
 
   def metric_value_to_f(paragraph)

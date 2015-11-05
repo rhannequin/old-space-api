@@ -17,4 +17,5 @@ class PlanetTmp
   field :surface_area,             type: Integer
   field :surface_gravity,          type: Float
   field :escape_velocity,          type: Float
+  field :sidereal_rotation_period, type: Float
 end
