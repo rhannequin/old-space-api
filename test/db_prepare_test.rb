@@ -49,6 +49,13 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal false, people.empty?
   end
 
+  def private_planet_orbit_eccentricity(paragraphs)
+    paragraph = paragraphs[8].inner_html
+    eccentricity = @task.planet_orbit_eccentricity paragraph
+    assert_equal true, eccentricity.kind_of?(Float)
+    assert_equal true, eccentricity.between?(0, 1)
+  end
+
   def private_scientific_notation
     value1 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.2345 x 10<sup>4</sup> m/s<br><b></b><br> "
     value2 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.23456 x 10<sup>3</sup> m/s<br><b></b><br> "

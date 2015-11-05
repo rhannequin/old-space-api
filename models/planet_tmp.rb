@@ -7,4 +7,5 @@ class PlanetTmp
   field :discovered_by,       type: String
   field :orbit_size,          type: Float
   field :mean_orbit_velocity, type: Float
+  field :orbit_eccentricity,  type: Float
 end

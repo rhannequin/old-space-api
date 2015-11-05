@@ -36,6 +36,7 @@ class DbPrepare
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
     planet.orbit_size = scientific_notation paragraphs[4].inner_html
     planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
+    planet.orbit_eccentricity = planet_orbi_eccentricity paragraphs[8].inner_html
     puts planet.inspect
     planet
   end
@@ -49,6 +50,10 @@ class DbPrepare
       paragraph[1]
     end
     str.split('</b>').last.strip
+  end
+
+  def planet_orbi_eccentricity(paragraph)
+    paragraph.split('<br>').first.to_f
   end
 
   def scientific_notation(paragraph)
