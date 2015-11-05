@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'bigdecimal'
 
 require_relative 'test_helper'
 require_relative '../init_static'
@@ -23,6 +24,7 @@ class DbPrepareTest < Test::Unit::TestCase
     private_planet_discover_date_and_people paragraphs
     private_first_value_to_f
     private_scientific_notation
+    private_bigdecimal_to_type
   end
 
   def setup
@@ -51,13 +53,26 @@ class DbPrepareTest < Test::Unit::TestCase
   end
 
   def private_scientific_notation
-    value1 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.2345 x 10<sup>4</sup> m/s<br><b></b><br> "
-    value2 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.23456 x 10<sup>3</sup> m/s<br><b></b><br> "
-    value3 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 0.1234 x 10<sup>8</sup> m/s<br><b></b><br> "
+    value1 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.2345 x 10<sup>4</sup> m/s<br><b></b><br> ", 2, :float
+    value2 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 1.23456 x 10<sup>3</sup> m/s<br><b></b><br> ", 2, :float
+    value3 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 0.1234 x 10<sup>8</sup> m/s<br><b></b><br> ", 2, :float
+    value4 = @task.scientific_notation " <b></b><br><b></b><br><b></b> 0.1234 x 10<sup>8</sup> m/s<br><b></b><br> ", 2, :integer
+    value5 = @task.scientific_notation " <b></b><br><b></b> 1.2345 x 10<sup>5</sup> kg<br><b></b><br> ", 1, :float
     assert_equal(true, value1.kind_of?(Float))
-    assert_equal(true, value1 == 12345.0)
-    assert_equal(true, value2 == 1234.56)
-    assert_equal(true, value3 == 12340000.0)
+    assert_equal(true, value1.eql?(12345.0))
+    assert_equal(true, value2.eql?(1234.56))
+    assert_equal(true, value3.eql?(12340000.0))
+    assert_equal(true, value4.eql?(12340000))
+    assert_equal(true, value5.eql?(123450.0))
+  end
+
+  def private_bigdecimal_to_type
+    value1 = @task.bigdecimal_to_type BigDecimal('10'), :integer
+    value2 = @task.bigdecimal_to_type BigDecimal('10'), :float
+    assert_equal(true, value1.kind_of?(Integer))
+    assert_equal(true, value2.kind_of?(Float))
+    assert_equal(true, value1.eql?(10))
+    assert_equal(true, value2.eql?(10.0))
   end
 
   def private_first_value_to_f
@@ -65,8 +80,8 @@ class DbPrepareTest < Test::Unit::TestCase
     value2 = @task.first_value_to_f " 1.2 degrees<br><b></b><br> "
     value3 = @task.first_value_to_f " 0<br><b></b><br> "
     assert_equal(true, value1.kind_of?(Float))
-    assert_equal(true, value1 == 0.123456)
-    assert_equal(true, value2 == 1.2)
-    assert_equal(true, value3 == 0.0)
+    assert_equal(true, value1.eql?(0.123456))
+    assert_equal(true, value2.eql?(1.2))
+    assert_equal(true, value3.eql?(0.0))
   end
 end

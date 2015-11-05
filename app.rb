@@ -39,12 +39,16 @@ module SpaceApi
       set :logging, Logger::INFO
     end
 
+    configure %w(development test) do
+      set :logging, Logger::DEBUG
+    end
+
     configure :development do
       register Sinatra::Reloader
     end
 
-    configure %w(development test) do
-      set :logging, Logger::DEBUG
+    configure :test do
+      Mongo::Logger.logger.level = ::Logger::FATAL
     end
 
     helpers do

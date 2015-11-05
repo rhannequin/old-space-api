@@ -22,6 +22,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('equatorial_radius')
     assert_equal true, data.has_key?('equatorial_circumference')
     assert_equal true, data.has_key?('volume')
+    assert_equal true, data.has_key?('mass')
   end
 
   def test_it_has_correct_types
@@ -38,6 +39,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['equatorial_radius'].kind_of?(Float)
     assert_equal true, json['equatorial_circumference'].kind_of?(Float)
     assert_equal true, json['volume'].kind_of?(Integer)
+    assert_equal true, json['mass'].kind_of?(Integer)
   end
 
   def test_it_planets_doesnt_exist
@@ -58,7 +60,8 @@ class PlanetsTest < Test::Unit::TestCase
       equatorial_inclination: 1.to_f,
       equatorial_radius: 1.to_f,
       equatorial_circumference: 1.to_f,
-      volume: 1
+      volume: 1,
+      mass: 1
     })
   end
 end

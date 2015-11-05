@@ -12,4 +12,5 @@ class PlanetTmp
   field :equatorial_radius,        type: Float
   field :equatorial_circumference, type: Float
   field :volume,                   type: Integer
+  field :mass,                     type: Integer
 end

@@ -34,13 +34,14 @@ class DbPrepare
     tmp = paragraphs[2].inner_html
     planet.date_of_discovery = planet_discover_date_and_people tmp, :date_of_discovery
     planet.discovered_by = planet_discover_date_and_people tmp, :discovered_by
-    planet.orbit_size = scientific_notation paragraphs[4].inner_html
-    planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
+    planet.orbit_size = scientific_notation paragraphs[4].inner_html, 2, :float
+    planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html, 2, :float
     planet.orbit_eccentricity = first_value_to_f paragraphs[8].inner_html
     planet.equatorial_inclination = first_value_to_f paragraphs[10].inner_html
-    planet.equatorial_radius = scientific_notation paragraphs[12].inner_html
-    planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html
-    planet.volume = scientific_notation(paragraphs[16].inner_html).to_i
+    planet.equatorial_radius = scientific_notation paragraphs[12].inner_html, 2, :float
+    planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html, 2, :float
+    planet.volume = scientific_notation paragraphs[16].inner_html, 2, :integer
+    planet.mass = scientific_notation paragraphs[18].inner_html, 1, :integer
     puts planet.inspect
     planet
   end
@@ -60,11 +61,20 @@ class DbPrepare
     paragraph.split('<br>').first.to_f
   end
 
-  def scientific_notation(paragraph)
-    str = paragraph.split('<br>')[2].split('</b>').last.split('x')
+  def scientific_notation(paragraph, emplacement, type)
+    str = paragraph.split('<br>')[emplacement].split('</b>').last.split('x')
     significand = BigDecimal(str.first)
     exposant = str.last.scan(/<sup>([^<>]*)<\/sup>/).flatten.first.to_i
-    (significand * (10 ** exposant)).to_f
+    bigdecimal_to_type(significand * (10 ** exposant), type)
+  end
+
+  def bigdecimal_to_type(number, type)
+    method = case type
+    when :integer then :i
+    when :float then :f
+    else :f
+    end
+    number.send :"to_#{method}"
   end
 
   def first_value_to_f(paragraph)
