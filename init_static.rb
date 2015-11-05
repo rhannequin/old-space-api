@@ -40,6 +40,7 @@ class DbPrepare
     planet.equatorial_inclination = first_value_to_f paragraphs[10].inner_html
     planet.equatorial_radius = scientific_notation paragraphs[12].inner_html
     planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html
+    planet.volume = scientific_notation(paragraphs[16].inner_html).to_i
     puts planet.inspect
     planet
   end
