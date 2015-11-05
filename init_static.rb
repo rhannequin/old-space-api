@@ -43,6 +43,7 @@ class DbPrepare
     planet.volume = scientific_notation paragraphs[16].inner_html, 2, :integer
     planet.mass = scientific_notation paragraphs[18].inner_html, 1, :integer
     planet.density = planet_density paragraphs[20].inner_html
+    planet.surface_area = scientific_notation paragraphs[22].inner_html, 2, :integer
     puts planet.inspect
     planet
   end

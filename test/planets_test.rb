@@ -24,6 +24,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('volume')
     assert_equal true, data.has_key?('mass')
     assert_equal true, data.has_key?('density')
+    assert_equal true, data.has_key?('surface_area')
   end
 
   def test_it_has_correct_types
@@ -42,6 +43,7 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['volume'].kind_of?(Integer)
     assert_equal true, json['mass'].kind_of?(Integer)
     assert_equal true, json['density'].kind_of?(Float)
+    assert_equal true, json['surface_area'].kind_of?(Integer)
   end
 
   def test_it_planets_doesnt_exist
@@ -64,7 +66,8 @@ class PlanetsTest < Test::Unit::TestCase
       equatorial_circumference: 1.to_f,
       volume: 1,
       mass: 1,
-      density: 1.0
+      density: 1.0,
+      surface_area: 1
     })
   end
 end
