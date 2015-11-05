@@ -21,6 +21,7 @@ class DbPrepareTest < Test::Unit::TestCase
     paragraphs = nokogiri.css('p')
     private_parse_planet 'mercury', nokogiri
     private_planet_discover_date_and_people paragraphs
+    private_first_value_to_f
     private_scientific_notation
   end
 

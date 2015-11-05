@@ -9,4 +9,5 @@ class PlanetTmp
   field :mean_orbit_velocity,    type: Float
   field :orbit_eccentricity,     type: Float
   field :equatorial_inclination, type: Float
+  field :equatorial_radius,      type: Float
 end

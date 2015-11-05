@@ -38,6 +38,7 @@ class DbPrepare
     planet.mean_orbit_velocity = scientific_notation paragraphs[6].inner_html
     planet.orbit_eccentricity = first_value_to_f paragraphs[8].inner_html
     planet.equatorial_inclination = first_value_to_f paragraphs[10].inner_html
+    planet.equatorial_radius = scientific_notation paragraphs[12].inner_html
     puts planet.inspect
     planet
   end
