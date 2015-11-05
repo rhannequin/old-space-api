@@ -22,6 +22,7 @@ class DbPrepareTest < Test::Unit::TestCase
     paragraphs = nokogiri.css('p')
     private_parse_planet 'mercury', nokogiri
     private_planet_discover_date_and_people paragraphs
+    private_planet_density paragraphs
     private_first_value_to_f
     private_scientific_notation
     private_bigdecimal_to_type
@@ -50,6 +51,13 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal false, date.empty?
     assert_equal true, people.kind_of?(String)
     assert_equal false, people.empty?
+  end
+
+  def private_planet_density(paragraphs)
+    paragraph = paragraphs[20].inner_html
+    density = @task.planet_density paragraph
+    assert_equal true, density.kind_of?(Float)
+    assert_equal true, density.between?(5, 6)
   end
 
   def private_scientific_notation

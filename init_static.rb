@@ -42,6 +42,7 @@ class DbPrepare
     planet.equatorial_circumference = scientific_notation paragraphs[14].inner_html, 2, :float
     planet.volume = scientific_notation paragraphs[16].inner_html, 2, :integer
     planet.mass = scientific_notation paragraphs[18].inner_html, 1, :integer
+    planet.density = planet_density paragraphs[20].inner_html
     puts planet.inspect
     planet
   end
@@ -57,8 +58,8 @@ class DbPrepare
     str.split('</b>').last.strip
   end
 
-  def planet_orbit_eccentricity(paragraph)
-    paragraph.split('<br>').first.to_f
+  def planet_density(paragraph)
+    paragraph.split('<br>').first.split('</b>').last.to_f
   end
 
   def scientific_notation(paragraph, emplacement, type)
