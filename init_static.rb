@@ -50,7 +50,6 @@ class DbPrepare
     tmp = paragraphs[30].inner_html
     planet.minimum_surface_temperature = min_max_value tmp, :min
     planet.maximum_surface_temperature = min_max_value tmp, :max
-    puts planet.inspect
     planet
   end
 
@@ -100,7 +99,15 @@ class DbPrepare
 
   def setup(config)
     @planets_uris = {
-      mercury: %w( http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts )
+      mercury: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts',
+      venus: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/venus/facts',
+      earth: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/earth/facts',
+      mars: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mars/facts',
+      jupiter: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/jupiter/facts',
+      saturn: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/saturn/facts',
+      uranus: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/uranus/facts',
+      neptune: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/neptune/facts',
+      pluto: 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/pluto/facts'
     }
     @proxy = config['proxy_use'] ? {
       proxy_http_basic_authentication: [

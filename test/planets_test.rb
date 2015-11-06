@@ -1,13 +1,48 @@
 require_relative 'test_helper'
 
 class PlanetsTest < Test::Unit::TestCase
+  attr_accessor :planets
+
   def test_it_responses_ok
-    get '/api/v2/planets/mercury'
-    assert last_response.ok?
+    @planets.each do |planet|
+      private_test_it_responses_ok planet
+    end
   end
 
   def test_it_has_correct_keys
-    get '/api/v2/planets/mercury'
+    @planets.each do |planet|
+      private_test_it_has_correct_keys planet
+    end
+  end
+
+  def test_it_has_correct_types
+    @planets.each do |planet|
+      private_test_it_has_correct_types planet
+    end
+  end
+
+  def test_it_planets_doesnt_exist
+    get '/api/v2/planets/zuzu'
+    assert_equal 404, last_response.status
+  end
+
+  def setup
+    @planets = %w( mercury )
+    PlanetTmp.delete_all
+    @planets.each do |planet|
+      create_planet 'mercury'
+    end
+  end
+
+  private
+
+  def private_test_it_responses_ok(planet)
+    get "/api/v2/planets/#{planet}"
+    assert last_response.ok?
+  end
+
+  def private_test_it_has_correct_keys(planet)
+    get "/api/v2/planets/#{planet}"
     json = JSON.parse(last_response.body)
     data = json['data']
     assert_equal true, json.has_key?('data')
@@ -31,8 +66,8 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('maximum_surface_temperature')
   end
 
-  def test_it_has_correct_types
-    get '/api/v2/planets/mercury'
+  def private_test_it_has_correct_types(planet)
+    get "/api/v2/planets/#{planet}"
     json = JSON.parse(last_response.body)['data']
     assert_equal true, json['slug'].kind_of?(String)
     assert_equal true, json['name'].kind_of?(String)
@@ -55,16 +90,10 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['maximum_surface_temperature'].kind_of?(Integer)
   end
 
-  def test_it_planets_doesnt_exist
-    get '/api/v2/planets/zuzu'
-    assert_equal 404, last_response.status
-  end
-
-  def setup
-    PlanetTmp.delete_all
+  def create_planet(planet)
     PlanetTmp.create({
-      slug: 'mercury',
-      name: 'Mercury',
+      slug: planet,
+      name: planet.capitalize,
       date_of_discovery: 'Unknown',
       discovered_by: 'The Doctor',
       orbit_size: 1.to_f,

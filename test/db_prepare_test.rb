@@ -7,26 +7,35 @@ require_relative '../init_static'
 
 class DbPrepareTest < Test::Unit::TestCase
   def test_setup
-    assert_equal true, @task.planets_uris.has_key?(:mercury)
-    assert_equal true, @task.planets_uris[:mercury].kind_of?(Array)
+    uris = @task.planets_uris
+    assert_equal true, (uris.has_key?(:mercury) && uris[:mercury].kind_of?(String))
+    assert_equal true, (uris.has_key?(:venus) && uris[:venus].kind_of?(String))
+    assert_equal true, (uris.has_key?(:earth) && uris[:earth].kind_of?(String))
+    assert_equal true, (uris.has_key?(:mars) && uris[:mars].kind_of?(String))
+    assert_equal true, (uris.has_key?(:jupiter) && uris[:jupiter].kind_of?(String))
+    assert_equal true, (uris.has_key?(:saturn) && uris[:saturn].kind_of?(String))
+    assert_equal true, (uris.has_key?(:uranus) && uris[:uranus].kind_of?(String))
+    assert_equal true, (uris.has_key?(:neptune) && uris[:neptune].kind_of?(String))
+    assert_equal true, (uris.has_key?(:pluto) && uris[:pluto].kind_of?(String))
   end
 
-  def test_planet_mercury
-    uri = 'http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts'
-    body = ''
-    assert_nothing_raised do
-      body = open(uri, @task.proxy).read
+  def test_planet
+    @task.planets_uris.each do |planet, uri|
+      body = ''
+      assert_nothing_raised do
+        body = open(uri, @task.proxy).read
+      end
+      assert_equal false, body.empty?
+      nokogiri = Nokogiri::HTML(body)
+      paragraphs = nokogiri.css('p')
+      private_parse_planet planet.to_s, nokogiri
+      private_planet_discover_date_and_people paragraphs
+      private_precise_value_to_f
+      private_scientific_notation
+      private_bigdecimal_to_type
+      private_metric_value_to_f
+      private_min_max_value
     end
-    assert_equal false, body.empty?
-    nokogiri = Nokogiri::HTML(body)
-    paragraphs = nokogiri.css('p')
-    private_parse_planet 'mercury', nokogiri
-    private_planet_discover_date_and_people paragraphs
-    private_precise_value_to_f
-    private_scientific_notation
-    private_bigdecimal_to_type
-    private_metric_value_to_f
-    private_min_max_value
   end
 
   def setup
@@ -40,8 +49,8 @@ class DbPrepareTest < Test::Unit::TestCase
     assert_equal true, planet.kind_of?(PlanetTmp)
     assert_equal name, planet.slug
     assert_equal name.capitalize, planet.name
-    assert_equal true, planet.orbit_size.kind_of?(Float) && planet.orbit_size.between?(10**7, 10**8)
-    assert_equal true, planet.mean_orbit_velocity.kind_of?(Float) && planet.mean_orbit_velocity.between?(10**4, 10**5)
+    assert_equal true, planet.orbit_size.kind_of?(Float) && planet.orbit_size.between?(10**7, 10**10)
+    assert_equal true, planet.mean_orbit_velocity.kind_of?(Float) && planet.mean_orbit_velocity.between?(10**3, 10**5)
   end
 
   def private_planet_discover_date_and_people(paragraphs)
