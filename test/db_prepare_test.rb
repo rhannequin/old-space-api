@@ -26,6 +26,7 @@ class DbPrepareTest < Test::Unit::TestCase
     private_scientific_notation
     private_bigdecimal_to_type
     private_metric_value_to_f
+    private_min_max_value
   end
 
   def setup
@@ -92,5 +93,15 @@ class DbPrepareTest < Test::Unit::TestCase
     value1 = @task.metric_value_to_f " <b>Metric:</b> 1.2 m/s<sup>2</sup><br><b></b><br><b><br> "
     assert_equal(true, value1.kind_of?(Float))
     assert_equal(true, value1.eql?(1.2))
+  end
+
+  def private_min_max_value
+    str = " <b></b><br><b></b><br><b>Scientific Notation:</b> 123/456 K<br><b></b><br> "
+    value1 = @task.min_max_value str, :min
+    value2 = @task.min_max_value str, :max
+    assert_equal(true, value1.kind_of?(Integer))
+    assert_equal(true, value1.eql?(123))
+    assert_equal(true, value2.kind_of?(Integer))
+    assert_equal(true, value2.eql?(456))
   end
 end

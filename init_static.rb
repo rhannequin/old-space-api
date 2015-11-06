@@ -47,6 +47,9 @@ class DbPrepare
     planet.surface_gravity = metric_value_to_f paragraphs[24].inner_html
     planet.escape_velocity = scientific_notation paragraphs[26].inner_html, 2, :integer
     planet.sidereal_rotation_period = precise_value_to_f paragraphs[28].inner_html, 1
+    tmp = paragraphs[30].inner_html
+    planet.minimum_surface_temperature = min_max_value tmp, :min
+    planet.maximum_surface_temperature = min_max_value tmp, :max
     puts planet.inspect
     planet
   end
@@ -84,6 +87,15 @@ class DbPrepare
 
   def metric_value_to_f(paragraph)
     paragraph.split('<br>').first.split('</b>').last.to_f
+  end
+
+  def min_max_value(paragraph, side)
+    values = paragraph.split('<br>')[2].split('</b>').last.split('/')
+    value = case side
+    when :min then values.first
+    when :max then values.last
+    end
+    value.to_i
   end
 
   def setup(config)

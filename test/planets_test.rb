@@ -27,6 +27,8 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, data.has_key?('surface_area')
     assert_equal true, data.has_key?('surface_gravity')
     assert_equal true, data.has_key?('escape_velocity')
+    assert_equal true, data.has_key?('minimum_surface_temperature')
+    assert_equal true, data.has_key?('maximum_surface_temperature')
   end
 
   def test_it_has_correct_types
@@ -49,6 +51,8 @@ class PlanetsTest < Test::Unit::TestCase
     assert_equal true, json['surface_gravity'].kind_of?(Float)
     assert_equal true, json['escape_velocity'].kind_of?(Float)
     assert_equal true, json['sidereal_rotation_period'].kind_of?(Float)
+    assert_equal true, json['minimum_surface_temperature'].kind_of?(Integer)
+    assert_equal true, json['maximum_surface_temperature'].kind_of?(Integer)
   end
 
   def test_it_planets_doesnt_exist
@@ -75,7 +79,9 @@ class PlanetsTest < Test::Unit::TestCase
       surface_area: 1,
       surface_gravity: 1.0,
       escape_velocity: 1.0,
-      sidereal_rotation_period: 1.0
+      sidereal_rotation_period: 1.0,
+      minimum_surface_temperature: 1,
+      maximum_surface_temperature: 1
     })
   end
 end
