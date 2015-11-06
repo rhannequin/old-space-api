@@ -48,13 +48,3 @@ Then you can launch the tests:
 * [Planets and Pluto: Physical Characteristics](http://ssd.jpl.nasa.gov/?planet_phys_par)
 * [Planetary Satellite Physical Parameters](http://ssd.jpl.nasa.gov/?sat_phys_par)
 * [Astrodynamic Constants](http://ssd.jpl.nasa.gov/?constants)
-* JSON files for planets from solarsystem.nasa.gov
-  * [Mercury](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mercury/facts)
-  * [Venus](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/venus/facts)
-  * [Earth](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/earth/facts)
-  * [Mars](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/mars/facts)
-  * [Jupiter](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/jupiter/facts)
-  * [Saturn](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/saturn/facts)
-  * [Uranus](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/uranus/facts)
-  * [Neptune](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/neptune/facts)
-  * [Pluto](http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/pluto/facts)
