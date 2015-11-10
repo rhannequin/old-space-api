@@ -14,7 +14,11 @@ module Api
       private
 
       def set_planet
-        @planet = Planet.friendly.find name_from_params
+        begin
+          @planet = Planet.friendly.find name_from_params
+        rescue ActiveRecord::RecordNotFound
+          return render_not_found
+        end
       end
 
       def name_from_params

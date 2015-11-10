@@ -23,5 +23,11 @@ describe Api::V1::PlanetsController, type: :controller do
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
+
+    it 'returns an error if the Planet does not exist' do
+      get :show, id: 'i-dont-exist'
+      expect(response).not_to be_success
+      expect(response).to have_http_status(404)
+    end
   end
 end
