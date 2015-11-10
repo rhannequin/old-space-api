@@ -15,4 +15,6 @@ describe Planet, type: :model do
       expect(strange_name.slug).to eq('strange-name')
     end
   end
+
+  it_behaves_like 'cleanable'
 end

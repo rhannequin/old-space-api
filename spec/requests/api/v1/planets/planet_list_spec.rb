@@ -10,16 +10,6 @@ describe 'List of Planets', type: :request do
     expect(json.size).to eq(2)
   end
 
-  it 'excludes technical fields' do
-    get '/api/v1/planets'
-    first_planet = json.first.to_json
-    expect(first_planet).to have_json_path('name')
-    expect(first_planet).not_to have_json_path('id')
-    expect(first_planet).not_to have_json_path('slug')
-    expect(first_planet).not_to have_json_path('created_at')
-    expect(first_planet).not_to have_json_path('updated_at')
-  end
-
   it 'has created values' do
     get '/api/v1/planets'
     first_planet_created = @planets.first
