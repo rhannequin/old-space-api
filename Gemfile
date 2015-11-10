@@ -8,6 +8,7 @@ gem 'sqlite3'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'json_spec'
 end
 
 
