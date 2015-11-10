@@ -1,16 +1,10 @@
-ENV['RACK_ENV'] = 'test'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
 
-require 'test/unit'
-require 'rack/test'
-require 'yaml'
-require_relative '../app'
-require_relative '../space_api_helpers'
+class ActiveSupport::TestCase
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  fixtures :all
 
-class Test::Unit::TestCase
-  include Rack::Test::Methods
-  include SpaceApi::Helpers
-
-  def app
-    SpaceApi::App
-  end
+  # Add more helper methods to be used by all tests here...
 end
