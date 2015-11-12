@@ -6,6 +6,7 @@ gem 'rails-api'
 gem 'spring', group: :development
 gem 'sqlite3'
 gem 'friendly_id'
+gem 'figaro'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

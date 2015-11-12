@@ -1,0 +1,5 @@
+USE_PROXY: 'false'
+PROXY_HOST: xxx
+PROXY_PORT: xxx
+PROXY_USER: xxx
+PROXY_PASSWORD: xxx
