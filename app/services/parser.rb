@@ -1,8 +1,17 @@
+require 'open-uri'
+require 'nokogiri'
+
 class Parser
   attr_accessor :proxy
 
   def initialize(config)
     setup(config)
+  end
+
+  protected
+
+  def get_content(uri)
+    Nokogiri::HTML(open(uri, proxy).read)
   end
 
   private

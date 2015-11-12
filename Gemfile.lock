@@ -142,6 +142,7 @@ DEPENDENCIES
   figaro
   friendly_id
   json_spec
+  nokogiri
   rails (= 4.2.4)
   rails-api
   rspec-rails (~> 3.0)
