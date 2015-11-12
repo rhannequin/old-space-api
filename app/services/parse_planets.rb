@@ -8,8 +8,10 @@ class ParsePlanets < Parser
 
   def all
     # @planets.each do |planet|
+    #   content = get_content planet
+        content = get_content(@planets.first)
     #   mdl = parse_planet(planet[:name, get_content(planets[:uri]))
-        mdl = parse_planet(@planets.first[:name], get_content(@planets.first[:uri]))
+        mdl = parse_planet content[:name], content[:content]
         puts mdl.inspect
     # end
   end

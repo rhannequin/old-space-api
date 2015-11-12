@@ -15,10 +15,7 @@ namespace :parser do
 
   def planets
     %i( mercury venus earth mars jupiter saturn uranus neptune pluto ).map do |planet|
-      {
-        name: planet,
-        :uri => "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
-      }
+      "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
     end
   end
 
