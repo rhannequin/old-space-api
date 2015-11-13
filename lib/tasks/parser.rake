@@ -1,18 +1,4 @@
 namespace :parser do
-  def config
-    { proxy: proxy, planets: planets }
-  end
-
-  def proxy
-    {
-      proxy_use: ENV['PROXY_USE'],
-      proxy_host: ENV['PROXY_HOST'],
-      proxy_port: ENV['PROXY_PORT'],
-      proxy_user: ENV['PROXY_USER'],
-      proxy_password: ENV['PROXY_PASSWORD'],
-    }
-  end
-
   def planets
     %i( mercury venus earth mars jupiter saturn uranus neptune pluto ).map do |planet|
       "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
@@ -26,6 +12,6 @@ namespace :parser do
 
   desc 'Parse all planets from the Solar System'
   task :planets do
-    ParsePlanets.new(config).all
+    ParsePlanets.new.all
   end
 end

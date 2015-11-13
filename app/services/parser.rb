@@ -5,11 +5,10 @@ require 'json'
 class Parser
   attr_accessor :proxy
 
-  def initialize(config)
-    setup(config)
+  def initialize
+    set_proxy
+    setup
   end
-
-  protected
 
   def get_content(uri)
     json = JSON.parse(open(uri, proxy).read)
@@ -21,12 +20,22 @@ class Parser
 
   private
 
-  def setup(config)
-    @proxy = config[:proxy][:proxy_use] ? {
+  def set_proxy
+    @proxy = {
+      proxy_use: ENV['PROXY_USE'],
+      proxy_host: ENV['PROXY_HOST'],
+      proxy_port: ENV['PROXY_PORT'],
+      proxy_user: ENV['PROXY_USER'],
+      proxy_password: ENV['PROXY_PASSWORD']
+    }
+  end
+
+  def setup
+    @proxy = @proxy[:proxy_use] ? {
       proxy_http_basic_authentication: [
-        "#{config[:proxy][:proxy_host]}:#{config[:proxy][:proxy_port]}",
-        config[:proxy][:proxy_user],
-        config[:proxy][:proxy_password]
+        "#{@proxy[:proxy_host]}:#{@proxy[:proxy_port]}",
+        @proxy[:proxy_user],
+        @proxy[:proxy_password]
       ]
     } : {}
   end
