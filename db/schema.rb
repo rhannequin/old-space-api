@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113142839) do
+ActiveRecord::Schema.define(version: 20151115211143) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -29,9 +29,25 @@ ActiveRecord::Schema.define(version: 20151113142839) do
   create_table "planets", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "date_of_discovery"
+    t.string   "discovered_by"
+    t.float    "orbit_size"
+    t.float    "mean_orbit_velocity"
+    t.float    "orbit_eccentricity"
+    t.float    "equatorial_inclination"
+    t.float    "equatorial_radius"
+    t.float    "equatorial_circumference"
+    t.integer  "volume"
+    t.integer  "mass"
+    t.float    "density"
+    t.integer  "surface_area"
+    t.float    "surface_gravity"
+    t.float    "escape_velocity"
+    t.float    "sidereal_rotation_period"
+    t.integer  "minimum_surface_temperature"
+    t.integer  "maximum_surface_temperature"
   end
 
   add_index "planets", ["slug"], name: "index_planets_on_slug", unique: true
