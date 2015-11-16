@@ -25,12 +25,20 @@ class ParsePlanets < Parser
     planet.discovered_by = discover_date_and_people tmp, :discovered_by
     planet.orbit_size = scientific_notation paragraphs[3].inner_html, 2, :float
     planet.mean_orbit_velocity = scientific_notation paragraphs[5].inner_html, 2, :float
+    planet.orbit_eccentricity = precise_value_to_f paragraphs[7].inner_html, 0
+    planet.equatorial_inclination = precise_value_to_f paragraphs[9].inner_html, 0
     planet.equatorial_radius = scientific_notation paragraphs[11].inner_html, 2, :float
     planet.equatorial_circumference = scientific_notation paragraphs[13].inner_html, 2, :float
     planet.volume = scientific_notation paragraphs[15].inner_html, 2, :integer
     planet.mass = scientific_notation paragraphs[17].inner_html, 1, :integer
+    planet.density = metric_value_to_f paragraphs[19].inner_html
     planet.surface_area = scientific_notation paragraphs[21].inner_html, 2, :integer
-    planet.escape_velocity = scientific_notation paragraphs[27].inner_html, 2, :integer
+    planet.surface_gravity = metric_value_to_f paragraphs[23].inner_html
+    planet.escape_velocity = scientific_notation paragraphs[25].inner_html, 2, :integer
+    planet.sidereal_rotation_period = precise_value_to_f paragraphs[27].inner_html, 1
+    tmp = paragraphs[29].inner_html
+    planet.minimum_surface_temperature = temperature tmp, :min
+    planet.maximum_surface_temperature = temperature tmp, :max
     planet
   end
 
@@ -45,11 +53,36 @@ class ParsePlanets < Parser
     str.split('</b>').last.strip
   end
 
+  def temperature(paragraph, field)
+    temperature = paragraph.split('<br>')[2].split('</b>').last.split('/')
+    if temperature.size > 1
+      min_max_value(temperature, field)
+    else
+      temperature.first.to_i
+    end
+  end
+
   def scientific_notation(paragraph, position, type)
     str = paragraph.split('<br>')[position].split('</b>').last.split('x')
     significand = BigDecimal(str.first)
     exposant = str.last.scan(/<sup>([^<>]*)<\/sup>/).flatten.first.to_i
     bigdecimal_to_type(significand * (10 ** exposant), type)
+  end
+
+  def precise_value_to_f(paragraph, position)
+    paragraph.split('<br>')[position].to_f
+  end
+
+  def metric_value_to_f(paragraph)
+    paragraph.split('<br>').first.split('</b>').last.to_f
+  end
+
+  def min_max_value(values, side)
+    value = case side
+    when :min then values.first
+    when :max then values[1]
+    end
+    value.to_i
   end
 
   private
