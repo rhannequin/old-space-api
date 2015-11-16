@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20151115211143) do
     t.float    "equatorial_inclination"
     t.float    "equatorial_radius"
     t.float    "equatorial_circumference"
-    t.integer  "volume",                      limit: 16
-    t.integer  "mass",                        limit: 16
+    t.decimal  "volume"
+    t.decimal  "mass"
     t.float    "density"
     t.integer  "surface_area",                limit: 11
     t.float    "surface_gravity"

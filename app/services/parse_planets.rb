@@ -1,5 +1,3 @@
-require 'bigdecimal'
-
 class ParsePlanets < Parser
   attr_accessor :planets
 

@@ -7,8 +7,8 @@ class AddAttributesToPlanets < ActiveRecord::Migration
     add_column :planets, :equatorial_inclination, :float
     add_column :planets, :equatorial_radius, :float
     add_column :planets, :equatorial_circumference, :float
-    add_column :planets, :volume, :integer, limit: 16
-    add_column :planets, :mass, :integer, limit: 16
+    add_column :planets, :volume, :decimal
+    add_column :planets, :mass, :decimal
     add_column :planets, :density, :float
     add_column :planets, :surface_area, :integer, limit: 11
     add_column :planets, :surface_gravity, :float
