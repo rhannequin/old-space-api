@@ -9,11 +9,13 @@ class ParsePlanets < Parser
   end
 
   def all
-    # @planets.each do |planet|
-    [@planets.first].each do |planet|
-      content = get_content planet
-      mdl = parse_planet content[:name], content[:content]
-      puts mdl.inspect
+    ActiveRecord::Base.transaction do
+      @planets.each do |planet|
+      # [@planets.first].each do |planet|
+        content = get_content planet
+        mdl = parse_planet content[:name], content[:content]
+        mdl.save
+      end
     end
   end
 
@@ -23,7 +25,7 @@ class ParsePlanets < Parser
     tmp = paragraphs[1].inner_html
     planet.date_of_discovery = discover_date_and_people tmp, :date_of_discovery
     planet.discovered_by = discover_date_and_people tmp, :discovered_by
-    planet.orbit_size = scientific_notation paragraphs[3].inner_html, 2, :float
+    planet.orbit_size = scientific_notation paragraphs[3].inner_html, 2, :integer
     planet.mean_orbit_velocity = scientific_notation paragraphs[5].inner_html, 2, :float
     planet.orbit_eccentricity = precise_value_to_f paragraphs[7].inner_html, 0
     planet.equatorial_inclination = precise_value_to_f paragraphs[9].inner_html, 0

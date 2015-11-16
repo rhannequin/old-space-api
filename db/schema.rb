@@ -29,22 +29,22 @@ ActiveRecord::Schema.define(version: 20151115211143) do
   create_table "planets", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "date_of_discovery"
     t.string   "discovered_by"
-    t.float    "orbit_size"
+    t.integer  "orbit_size",                  limit: 10
     t.float    "mean_orbit_velocity"
     t.float    "orbit_eccentricity"
     t.float    "equatorial_inclination"
     t.float    "equatorial_radius"
     t.float    "equatorial_circumference"
-    t.integer  "volume"
-    t.integer  "mass"
+    t.integer  "volume",                      limit: 16
+    t.integer  "mass",                        limit: 16
     t.float    "density"
-    t.integer  "surface_area"
+    t.integer  "surface_area",                limit: 11
     t.float    "surface_gravity"
-    t.float    "escape_velocity"
+    t.integer  "escape_velocity",             limit: 11
     t.float    "sidereal_rotation_period"
     t.integer  "minimum_surface_temperature"
     t.integer  "maximum_surface_temperature"
