@@ -9,7 +9,7 @@ FactoryGirl.define do
     equatorial_circumference { Faker::Number.decimal(2) }
     volume { Faker::Number.number(5) }
     mass { Faker::Number.number(5) }
-    surface_area { Faker::Number.decimal(2) }
+    surface_area { Faker::Number.number(5) }
     escape_velocity { Faker::Number.decimal(2) }
   end
 end
