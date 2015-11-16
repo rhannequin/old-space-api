@@ -1,16 +1,4 @@
-require 'rubygems'
-require 'bundler'
-Bundler.require(:default)
+# This file is used by Rack-based servers to start the application.
 
-require File.expand_path('./app', File.dirname(__FILE__))
-
-# HTTP config
-use Rack::Lint
-use Rack::Chunked
-use Rack::Deflater
-use Rack::Cache,
-    verbose: false,
-    metastore: 'heap:/',
-    entitystore: 'heap:/'
-
-run SpaceApi::App.new
+require ::File.expand_path('../config/environment', __FILE__)
+run Rails.application

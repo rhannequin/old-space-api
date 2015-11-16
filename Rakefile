@@ -1,8 +1,6 @@
-Dir[File.expand_path('tasks/**/*.rake', File.dirname(__FILE__))].each { |file| load file }
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-task default: :test
+require File.expand_path('../config/application', __FILE__)
 
-Rake::TestTask.new(:test) do |t|
-  t.test_files = FileList['test/**/*_test.rb']
-  t.warning = false
-end
+Rails.application.load_tasks
