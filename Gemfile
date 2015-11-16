@@ -1,25 +1,16 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
 
-gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'sinatra-cross_origin'
-
-gem 'mongoid'
-
-gem 'rack-cache'
-
-gem 'rake'
-gem 'unicorn'
-gem 'shotgun'
+gem 'rails', '4.2.4'
+gem 'rails-api'
+gem 'spring', group: :development
+gem 'sqlite3'
+gem 'friendly_id'
+gem 'figaro'
 gem 'nokogiri'
-gem 'haml'
 
-group :development do
-  gem 'foreman'
-end
-
-group :test do
-  gem 'rack-test'
-  gem 'test-unit'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'json_spec'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end

@@ -39,12 +39,16 @@ module SpaceApi
       set :logging, Logger::INFO
     end
 
+    configure %w(development test) do
+      set :logging, Logger::DEBUG
+    end
+
     configure :development do
       register Sinatra::Reloader
     end
 
-    configure %w(development test) do
-      set :logging, Logger::DEBUG
+    configure :test do
+      Mongo::Logger.logger.level = ::Logger::FATAL
     end
 
     helpers do
@@ -61,6 +65,20 @@ module SpaceApi
     end
 
     namespace '/api' do
+
+      namespace '/v2' do
+        get '/planets/:planet_name' do
+          planet_name = params[:planet_name]
+          planet = PlanetTmp.where(slug: planet_name).first
+          return redirect not_found if planet.nil?
+          json_response 200, { data: planet.as_json(except: :_id) }
+        end
+
+        not_found do
+          json_response 404, { error: 'Not found' }
+        end
+      end
+
       namespace '/sun' do
         get do
           sun = Sun.first

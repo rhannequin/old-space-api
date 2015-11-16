@@ -22,3 +22,5 @@ require_relative 'models/pluto_now'
 
 require_relative 'models/moon'
 require_relative 'models/moon_now'
+
+require_relative 'models/planet_tmp'
