@@ -82,6 +82,21 @@ describe 'ParserPlanets' do
         expect(value2).to be_kind_of(Integer)
         expect(value2).to eql(456)
       end
+
+      it 'returns correct value from #atmospheric_constituents' do
+        str1 = " <b>By Comparison:</b> Earth's atmosphere consists mostly of N<sub>2</sub>, O<sub>2</sub><br> "
+        str2 = " Hydrogen, Helium<br> <b>Scientific Notation:</b> H<sub>2</sub>, He<br> "
+        str3 = " Carbon Dioxide, Nitrogen<br> <b>Scientific Notation:</b> CO<sub>2</sub>, N<sub>2</sub><br> "
+        value1 = parser.atmospheric_constituents str1
+        value2 = parser.atmospheric_constituents str2
+        value3 = parser.atmospheric_constituents str3
+        expect(value1).to be_kind_of(Array)
+        expect(value1).to be_empty
+        expect(value2).to be_kind_of(Array)
+        expect(value2.first).to eql({ name: 'Hydrogen', chemical_formula: 'H₂'})
+        expect(value3).to be_kind_of(Array)
+        expect(value3.first).to eql({ name: 'Carbon Dioxide', chemical_formula: 'CO₂'})
+      end
     end
   end
 end

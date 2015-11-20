@@ -1,5 +1,4 @@
 class Planet < ActiveRecord::Base
-  include Cleanable
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :atm_els, as: :atmosphereable

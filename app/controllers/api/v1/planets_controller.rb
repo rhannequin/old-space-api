@@ -4,18 +4,18 @@ module Api
       before_action :set_planet, only: :show
 
       def index
-        render json: Planet.all.to_json
+        render json: Planet.includes(:atm_els).to_json({ except: JSON_EXCLUDE, include: [{ atm_els: { except: JSON_EXCLUDE } }] })
       end
 
       def show
-        render json: @planet.to_json
+        render json: @planet.to_json(except: JSON_EXCLUDE, include: [atm_els: { except: JSON_EXCLUDE }])
       end
 
       private
 
       def set_planet
         begin
-          @planet = Planet.friendly.find name_from_params
+          @planet = Planet.includes(:atm_els).friendly.find name_from_params
         rescue ActiveRecord::RecordNotFound
           return render_not_found
         end
