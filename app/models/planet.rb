@@ -2,6 +2,7 @@ class Planet < ActiveRecord::Base
   include Cleanable
   extend FriendlyId
   friendly_id :name, use: :slugged
+  has_many :atm_els, as: :atmosphereable
 
   validates_numericality_of :orbit_size, greater_than: 0
   validates_numericality_of :mean_orbit_velocity, greater_than: 0

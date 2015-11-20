@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115211143) do
+ActiveRecord::Schema.define(version: 20151120131430) do
+
+  create_table "atm_els", force: :cascade do |t|
+    t.string   "name"
+    t.string   "chemical_formula"
+    t.integer  "atmosphereable_id"
+    t.string   "atmosphereable_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "atm_els", ["atmosphereable_type", "atmosphereable_id"], name: "index_atm_els_on_atmosphereable_type_and_atmosphereable_id"
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
