@@ -18,5 +18,9 @@ FactoryGirl.define do
     sidereal_rotation_period { Faker::Number.decimal(2) }
     minimum_surface_temperature { Faker::Number.number(5) }
     maximum_surface_temperature { Faker::Number.number(5) }
+
+    after(:create) do
+      create_list(:atm_el, 2)
+    end
   end
 end

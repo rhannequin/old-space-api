@@ -4,30 +4,29 @@
 
 First, you need to fill your database with some data.
 
-    bundle exec rake db:prepare
+    bundle exec rake parser:all
 
 ## Launch
 
-    bundle exec foreman start
+    bundle exec rails server
 
 ## Test
 
 If you start testing for the first time, remember to fill your database first:
 
-    RACK_ENV=test bundle exec rake db:prepare
+    RACK_ENV=test bundle exec rake parser:all
 
 Then you can launch the tests:
 
-    RACK_ENV=test bundle exec rake test
+    bundle exec rspec
 
 ## Roadmap
 
-- [x] Split all resources into static/dynamic files (`_now` classes)
-- [ ] Use better MongoDB collections (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
-- [ ] Create script to init values from scraping and not from hard coded values
-- [ ] Use Github wiki for documentation
-- [ ] Use modules to share behaviour and not (only) inheritance
+- [x] Create script to init values from scraping and not from hard coded values
+- [ ] Create entities (Planets, Stars, ArtificialSatellites, Comets, Asteroids, ...)
+- [ ] Split all resources into static/dynamic files (`_now` classes)
 - [ ] Write a proper documentation to project's Github wiki
+- [ ] Use modules to share behaviour and not (only) inheritance
 - [ ] Use cache for static values
 - [ ] Create simple client app
 - [ ] Look for other links to parse for information

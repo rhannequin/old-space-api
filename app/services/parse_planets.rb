@@ -39,6 +39,7 @@ class ParsePlanets < Parser
     tmp = paragraphs[29].inner_html
     planet.minimum_surface_temperature = temperature tmp, :min
     planet.maximum_surface_temperature = temperature tmp, :max
+    planet.atm_els = AtmEl.create(atmospheric_constituents(paragraphs[31].inner_html))
     planet
   end
 
@@ -85,6 +86,16 @@ class ParsePlanets < Parser
     value.to_i
   end
 
+  def atmospheric_constituents(str)
+    return [] unless has_atmospheric_constituents?(str)
+    splitted = str.split('<br>')
+    names = atm_el_names(splitted)
+    formula = atm_el_formula(splitted)
+    names.each_with_index.map do |n, i|
+      { name: n, chemical_formula: formula[i] }
+    end
+  end
+
   private
 
   def set_planets
@@ -100,5 +111,31 @@ class ParsePlanets < Parser
     else :f
     end
     number.send :"to_#{method}"
+  end
+
+  def has_atmospheric_constituents?(str)
+    str.split('<br>').size > 2
+  end
+
+  def atm_el_names(arr)
+    arr.first.split(',').map { |e| e.strip }
+  end
+
+  def atm_el_formula(arr)
+    elements = arr[1].split(':').last.split(',').map { |e| e.strip }
+    elements.map do |e|
+      formulify e.sub('</b>', '').strip
+    end
+  end
+
+  def formulify(str)
+    str.sub('<sub>2</sub>', '₂')
+       .sub('<sub>3</sub>', '₃')
+       .sub('<sub>4</sub>', '₄')
+       .sub('<sub>5</sub>', '₅')
+       .sub('<sub>6</sub>', '₆')
+       .sub('<sub>7</sub>', '₇')
+       .sub('<sub>8</sub>', '₈')
+       .sub('<sub>9</sub>', '₉')
   end
 end
