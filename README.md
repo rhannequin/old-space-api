@@ -47,3 +47,6 @@ Then you can launch the tests:
 * [Planets and Pluto: Physical Characteristics](http://ssd.jpl.nasa.gov/?planet_phys_par)
 * [Planetary Satellite Physical Parameters](http://ssd.jpl.nasa.gov/?sat_phys_par)
 * [Astrodynamic Constants](http://ssd.jpl.nasa.gov/?constants)
+* [Astronomical and phisical Constants](http://www.astronomynotes.com/tables/tablesa.htm)
+* [Planet Properties](http://www.astronomynotes.com/tables/tablesb.htm)
+* [Star Tables](http://www.astronomynotes.com/tables/tablesc.htm)
