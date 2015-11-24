@@ -2,7 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'json'
 
-class Parser
+class Api::V1::Parser::Parser
   attr_accessor :proxy
 
   def initialize

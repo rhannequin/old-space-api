@@ -1,45 +1,31 @@
-class ParsePlanets < Parser
-  attr_accessor :planets
-
-  def initialize
-    set_planets
-    super
+class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
+  def initialize(document)
+    @document = document
   end
 
-  def all
-    ActiveRecord::Base.transaction do
-      @planets.each do |planet|
-      # [@planets.first].each do |planet|
-        content = get_content planet
-        mdl = parse_planet content[:name], content[:content]
-        mdl.save
-      end
-    end
-  end
-
-  def parse_planet(name, document)
-    planet = Planet.new name: name
-    paragraphs = document.css('p')
+  def properties
+    planet = { associations: {} }
+    paragraphs = @document.css('p')
     tmp = paragraphs[1].inner_html
-    planet.date_of_discovery = discover_date_and_people tmp, :date_of_discovery
-    planet.discovered_by = discover_date_and_people tmp, :discovered_by
-    planet.orbit_size = scientific_notation paragraphs[3].inner_html, 2, :integer
-    planet.mean_orbit_velocity = scientific_notation paragraphs[5].inner_html, 2, :float
-    planet.orbit_eccentricity = precise_value_to_f paragraphs[7].inner_html, 0
-    planet.equatorial_inclination = precise_value_to_f paragraphs[9].inner_html, 0
-    planet.equatorial_radius = scientific_notation paragraphs[11].inner_html, 2, :float
-    planet.equatorial_circumference = scientific_notation paragraphs[13].inner_html, 2, :float
-    planet.volume = scientific_notation paragraphs[15].inner_html, 2, :integer
-    planet.mass = scientific_notation paragraphs[17].inner_html, 1, :integer
-    planet.density = metric_value_to_f paragraphs[19].inner_html
-    planet.surface_area = scientific_notation paragraphs[21].inner_html, 2, :integer
-    planet.surface_gravity = metric_value_to_f paragraphs[23].inner_html
-    planet.escape_velocity = scientific_notation paragraphs[25].inner_html, 2, :integer
-    planet.sidereal_rotation_period = precise_value_to_f paragraphs[27].inner_html, 1
+    planet[:date_of_discovery] = discover_date_and_people tmp, :date_of_discovery
+    planet[:discovered_by] = discover_date_and_people tmp, :discovered_by
+    planet[:orbit_size] = scientific_notation paragraphs[3].inner_html, 2, :integer
+    planet[:mean_orbit_velocity] = scientific_notation paragraphs[5].inner_html, 2, :float
+    planet[:orbit_eccentricity] = precise_value_to_f paragraphs[7].inner_html, 0
+    planet[:equatorial_inclination] = precise_value_to_f paragraphs[9].inner_html, 0
+    planet[:equatorial_radius] = scientific_notation paragraphs[11].inner_html, 2, :float
+    planet[:equatorial_circumference] = scientific_notation paragraphs[13].inner_html, 2, :float
+    planet[:volume] = scientific_notation paragraphs[15].inner_html, 2, :integer
+    planet[:mass] = scientific_notation paragraphs[17].inner_html, 1, :integer
+    planet[:density] = metric_value_to_f paragraphs[19].inner_html
+    planet[:surface_area] = scientific_notation paragraphs[21].inner_html, 2, :integer
+    planet[:surface_gravity] = metric_value_to_f paragraphs[23].inner_html
+    planet[:escape_velocity] = scientific_notation paragraphs[25].inner_html, 2, :integer
+    planet[:sidereal_rotation_period] = precise_value_to_f paragraphs[27].inner_html, 1
     tmp = paragraphs[29].inner_html
-    planet.minimum_surface_temperature = temperature tmp, :min
-    planet.maximum_surface_temperature = temperature tmp, :max
-    planet.atm_els = AtmEl.create(atmospheric_constituents(paragraphs[31].inner_html))
+    planet[:minimum_surface_temperature] = temperature tmp, :min
+    planet[:maximum_surface_temperature] = temperature tmp, :max
+    planet[:associations][:atm_els] = atmospheric_constituents(paragraphs[31].inner_html)
     planet
   end
 
@@ -97,12 +83,6 @@ class ParsePlanets < Parser
   end
 
   private
-
-  def set_planets
-    @planets = %i( mercury venus earth mars jupiter saturn uranus neptune pluto ).map do |planet|
-      "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
-    end
-  end
 
   def bigdecimal_to_type(number, type)
     method = case type
