@@ -9,6 +9,19 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
     super
   end
 
+  # TODO
+  # => Get real planet name (data somewhere? Capitalize from loop?)
+  # => Change attributes types when necessary from float to integer
+  # => Check consistency in attrubute names (e.g. "orbit"/"orbital")
+  # => Clean method `all` (split it?)
+  # => Clean parsing globally: comments, simplest methods possible
+  # => Check parsing efficienty
+  # => Handle JSON prettify parameter and use it by default
+  # => Handle XML responses
+  # => Check if any other attribute can be added to the Planet model
+  # => Handle atm_els proportions
+  # => Documentation on wiki for the new attributes
+
   def all
     ActiveRecord::Base.transaction do
       # @planets.each do |planet|
@@ -19,6 +32,7 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
         mdl = Planet.new({ name: planet }.merge(properties))
         associations.each { |k, v| mdl.public_send(k).build(v) }
         mdl.save
+        puts " % Created Planet #{mdl.name} successfully"
       end
     end
   end
