@@ -1,3 +1,6 @@
+SNG = Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
+NGNG = Api::V1::Parser::Planets::ParsePlanetsFromNssdcGsfcNasaGov
+
 class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   attr_accessor :planets
 
@@ -8,23 +11,33 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
 
   def all
     ActiveRecord::Base.transaction do
-      @planets.each do |planet|
-      # [@planets.first].each do |planet|
-        content = get_content planet
-        properties = Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov.new(content[:content]).properties
+      # @planets.each do |planet|
+      [@planets.first].each do |planet|
+        properties = sng_properties(planet)
+                     .deep_merge(ngng_properties(planet))
         associations = properties.extract!(:associations)[:associations]
-        mdl = Planet.new({ name: content[:name] }.merge(properties))
+        mdl = Planet.new({ name: planet }.merge(properties))
         associations.each { |k, v| mdl.public_send(k).build(v) }
         mdl.save
       end
     end
   end
 
+  def sng_properties(planet)
+    content = get_content SNG.uri(planet)
+    parser = SNG.new content
+    parser.properties
+  end
+
+  def ngng_properties(planet)
+    content = get_content NGNG.uri(planet)
+    parser = NGNG.new content
+    parser.properties
+  end
+
   private
 
   def set_planets
-    @planets = %i( mercury venus earth mars jupiter saturn uranus neptune pluto ).map do |planet|
-      "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
-    end
+    @planets = %w( mercury venus earth mars jupiter saturn uranus neptune pluto )
   end
 end

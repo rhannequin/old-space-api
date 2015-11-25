@@ -72,14 +72,6 @@ describe 'ParsePlanetsFromSolarsystemNasaGov' do
         [27].each { |i| expect(parser.precise_value_to_f(paragraphs[i].inner_html, 1)).to be_kind_of(Float) }
       end
 
-      it 'returns correct value from #metric_value_to_f' do
-        value = parser.metric_value_to_f " <b>Metric:</b> 1.2 m/s<sup>2</sup><br><b></b><br><b><br> "
-        expect(value).to be_kind_of(Float)
-        expect(value).to eql(1.2)
-        # Real data
-        [19, 23].each { |i| expect(parser.metric_value_to_f(paragraphs[i].inner_html)).to be_kind_of(Float) }
-      end
-
       it 'returns correct value from #min_max_value' do
         arr = [" 123", "456 K"]
         value1 = parser.min_max_value arr, :min

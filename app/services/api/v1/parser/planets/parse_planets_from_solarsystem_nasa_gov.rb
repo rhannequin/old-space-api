@@ -1,6 +1,14 @@
+require 'nokogiri'
+require 'json'
+
 class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
+  def self.uri(planet)
+    "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
+  end
+
   def initialize(document)
-    @document = document
+    json = JSON.parse(document)
+    @document = Nokogiri::HTML(json['main']['content'])
   end
 
   def properties
@@ -9,18 +17,12 @@ class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
     tmp = paragraphs[1].inner_html
     planet[:date_of_discovery] = discover_date_and_people tmp, :date_of_discovery
     planet[:discovered_by] = discover_date_and_people tmp, :discovered_by
-    planet[:orbit_size] = scientific_notation paragraphs[3].inner_html, 2, :integer
+    planet[:mean_orbit_size] = scientific_notation paragraphs[3].inner_html, 2, :integer
     planet[:mean_orbit_velocity] = scientific_notation paragraphs[5].inner_html, 2, :float
     planet[:orbit_eccentricity] = precise_value_to_f paragraphs[7].inner_html, 0
     planet[:equatorial_inclination] = precise_value_to_f paragraphs[9].inner_html, 0
-    planet[:equatorial_radius] = scientific_notation paragraphs[11].inner_html, 2, :float
     planet[:equatorial_circumference] = scientific_notation paragraphs[13].inner_html, 2, :float
-    planet[:volume] = scientific_notation paragraphs[15].inner_html, 2, :integer
-    planet[:mass] = scientific_notation paragraphs[17].inner_html, 1, :integer
-    planet[:density] = metric_value_to_f paragraphs[19].inner_html
     planet[:surface_area] = scientific_notation paragraphs[21].inner_html, 2, :integer
-    planet[:surface_gravity] = metric_value_to_f paragraphs[23].inner_html
-    planet[:escape_velocity] = scientific_notation paragraphs[25].inner_html, 2, :integer
     planet[:sidereal_rotation_period] = precise_value_to_f paragraphs[27].inner_html, 1
     tmp = paragraphs[29].inner_html
     planet[:minimum_surface_temperature] = temperature tmp, :min
@@ -58,10 +60,6 @@ class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
 
   def precise_value_to_f(paragraph, position)
     paragraph.split('<br>')[position].to_f
-  end
-
-  def metric_value_to_f(paragraph)
-    paragraph.split('<br>').first.split('</b>').last.to_f
   end
 
   def min_max_value(values, side)
