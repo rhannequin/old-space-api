@@ -10,7 +10,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   end
 
   # TODO
-  # => Get real planet name (data somewhere? Capitalize from loop?)
   # => Change attributes types when necessary from float to integer
   # => Check consistency in attrubute names (e.g. "orbit"/"orbital")
   # => Clean method `all` (split it?)
@@ -29,7 +28,7 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
         properties = sng_properties(planet)
                      .deep_merge(ngng_properties(planet))
         associations = properties.extract!(:associations)[:associations]
-        mdl = Planet.new({ name: planet }.merge(properties))
+        mdl = Planet.new({ name: planet.capitalize }.merge(properties))
         associations.each { |k, v| mdl.public_send(k).build(v) }
         mdl.save
         puts " % Created Planet #{mdl.name} successfully"
