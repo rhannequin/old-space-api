@@ -18,8 +18,8 @@ class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
     planet[:date_of_discovery] = discover_date_and_people tmp, :date_of_discovery
     planet[:discovered_by] = discover_date_and_people tmp, :discovered_by
     planet[:mean_orbit_size] = scientific_notation paragraphs[3].inner_html, 2, :integer
-    planet[:mean_orbit_velocity] = scientific_notation paragraphs[5].inner_html, 2, :float
-    planet[:orbit_eccentricity] = precise_value_to_f paragraphs[7].inner_html, 0
+    planet[:mean_orbital_velocity] = scientific_notation paragraphs[5].inner_html, 2, :float
+    planet[:orbital_eccentricity] = precise_value_to_f paragraphs[7].inner_html, 0
     planet[:equatorial_inclination] = precise_value_to_f paragraphs[9].inner_html, 0
     planet[:equatorial_circumference] = scientific_notation paragraphs[13].inner_html, 2, :float
     planet[:surface_area] = scientific_notation paragraphs[21].inner_html, 2, :integer

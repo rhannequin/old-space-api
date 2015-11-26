@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20151125220048) do
     t.string   "date_of_discovery"
     t.string   "discovered_by"
     t.integer  "mean_orbit_size",                  limit: 10
-    t.float    "mean_orbit_velocity"
-    t.float    "orbit_eccentricity"
+    t.float    "mean_orbital_velocity"
+    t.float    "orbital_eccentricity"
     t.float    "equatorial_inclination"
     t.float    "equatorial_radius"
     t.float    "equatorial_circumference"
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(version: 20151125220048) do
     t.float    "solar_irradiance"
     t.float    "black_body_temperature"
     t.integer  "semimajor_axis",                   limit: 11
-    t.float    "sidereal_orbit_period"
-    t.float    "tropical_orbit_period"
+    t.float    "sidereal_orbital_period"
+    t.float    "tropical_orbital_period"
     t.integer  "perihelion",                       limit: 11
     t.integer  "aphelion",                         limit: 11
     t.float    "maximum_orbital_velocity"
     t.float    "minimum_orbital_velocity"
-    t.float    "orbit_inclination"
+    t.float    "orbital_inclination"
     t.float    "length_of_day"
     t.float    "obliquity_to_orbit"
   end

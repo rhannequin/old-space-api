@@ -4,8 +4,8 @@ class Planet < ActiveRecord::Base
   has_many :atm_els, as: :atmosphereable
 
   validates_numericality_of :mean_orbit_size, greater_than: 0
-  validates_numericality_of :mean_orbit_velocity, greater_than: 0
-  validates_numericality_of :orbit_eccentricity, greater_than: 0
+  validates_numericality_of :mean_orbital_velocity, greater_than: 0
+  validates_numericality_of :orbital_eccentricity, greater_than: 0
   validates_numericality_of :equatorial_radius, greater_than: 0
   validates_numericality_of :equatorial_circumference, greater_than: 0
   validates_numericality_of :volume, greater_than: 0

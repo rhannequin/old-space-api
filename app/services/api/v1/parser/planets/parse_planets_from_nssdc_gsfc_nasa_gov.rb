@@ -66,13 +66,13 @@ class Api::V1::Parser::Planets::ParsePlanetsFromNssdcGsfcNasaGov
       { pattern: 'Solar irradiance', key: :solar_irradiance, type: :to_f },
       { pattern: 'Black-body', key: :black_body_temperature, type: :to_f },
       { pattern: 'Semimajor', key: :semimajor_axis, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
-      { pattern: 'Sidereal orbit', key: :sidereal_orbit_period, type: :to_f },
-      { pattern: 'Tropical orbit', key: :tropical_orbit_period, type: :to_f },
+      { pattern: 'Sidereal orbit', key: :sidereal_orbital_period, type: :to_f },
+      { pattern: 'Tropical orbit', key: :tropical_orbital_period, type: :to_f },
       { pattern: 'Perihelion', key: :perihelion, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
       { pattern: 'Aphelion', key: :aphelion, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
       { pattern: 'Max. orbital velocity', key: :maximum_orbital_velocity, type: :to_f },
       { pattern: 'Min. orbital velocity', key: :minimum_orbital_velocity, type: :to_f },
-      { pattern: 'Orbit inclination', key: :orbit_inclination, type: :to_f },
+      { pattern: 'Orbit inclination', key: :orbital_inclination, type: :to_f },
       { pattern: 'Length of day', key: :length_of_day, type: :to_f },
       { pattern: 'Obliquity', key: :obliquity_to_orbit, type: :to_f }
     ]

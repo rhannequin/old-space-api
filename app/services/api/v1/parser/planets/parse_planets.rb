@@ -10,7 +10,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   end
 
   # TODO
-  # => Check consistency in attrubute names (e.g. "orbit"/"orbital")
   # => Clean method `all` (split it?)
   # => Clean parsing globally: comments, simplest methods possible
   # => Check parsing efficienty

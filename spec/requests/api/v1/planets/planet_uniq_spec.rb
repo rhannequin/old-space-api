@@ -5,7 +5,7 @@ describe 'One Planet', type: :request do
     planet = create :planet
     get "/api/v1/planets/#{planet.id}"
     expect(json['name']).to eq(planet.as_json['name'])
-    expect(json['mean_orbit_velocity']).to eq(planet.as_json['mean_orbit_velocity'])
+    expect(json['mean_orbital_velocity']).to eq(planet.as_json['mean_orbital_velocity'])
     expect(json['surface_area']).to eq(planet.as_json['surface_area'])
   end
 
