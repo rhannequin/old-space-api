@@ -12,7 +12,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   # TODO
   # => Clean parsing globally: comments, simplest methods possible
   # => Check parsing efficienty
-  # => Handle JSON prettify parameter and use it by default
   # => Handle XML responses
   # => Check if any other attribute can be added to the Planet model
   # => Handle atm_els proportions

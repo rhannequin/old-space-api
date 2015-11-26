@@ -4,11 +4,11 @@ module Api
       before_action :set_planet, only: :show
 
       def index
-        render json: Planet.includes(:atm_els).to_json({ except: JSON_EXCLUDE, include: [{ atm_els: { except: JSON_EXCLUDE } }] })
+        render json_reponse Planet.includes(:atm_els).to_json(json_parameters)
       end
 
       def show
-        render json: @planet.to_json(except: JSON_EXCLUDE, include: [atm_els: { except: JSON_EXCLUDE }])
+        render json_reponse @planet.to_json(json_parameters)
       end
 
       private
@@ -23,6 +23,10 @@ module Api
 
       def name_from_params
         params.permit(:id).require(:id)
+      end
+
+      def json_parameters
+        { except: JSON_EXCLUDE, include: [atm_els: { except: JSON_EXCLUDE }] }
       end
     end
   end
