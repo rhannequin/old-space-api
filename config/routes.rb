@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :planets, only: %i( index show )
       get '404', to: 'errors#not_found', as: :not_found
