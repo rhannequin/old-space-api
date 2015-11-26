@@ -10,7 +10,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   end
 
   # TODO
-  # => Clean method `all` (split it?)
   # => Clean parsing globally: comments, simplest methods possible
   # => Check parsing efficienty
   # => Handle JSON prettify parameter and use it by default
@@ -20,18 +19,42 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   # => Documentation on wiki for the new attributes
 
   def all
+    properties = get_properties
+    create_models(properties)
+  end
+
+  def get_properties
+    puts ' % Start loading remote data ...'
+    properties = []
+    # @planets.each do |planet|
+    [@planets.first].each do |planet|
+      properties << planet_properties(planet)
+    end
+    puts ' % ... Remote data loaded'
+    properties
+  end
+
+  def planet_properties(planet)
+    { name: planet.capitalize }
+      .merge(sng_properties(planet))
+      .deep_merge(ngng_properties(planet))
+  end
+
+  def create_models(models)
     ActiveRecord::Base.transaction do
-      # @planets.each do |planet|
-      [@planets.first].each do |planet|
-        properties = sng_properties(planet)
-                     .deep_merge(ngng_properties(planet))
-        associations = properties.extract!(:associations)[:associations]
-        mdl = Planet.new({ name: planet.capitalize }.merge(properties))
-        associations.each { |k, v| mdl.public_send(k).build(v) }
+      models.each do |properties|
+        mdl = create_model(properties)
         mdl.save
         puts " % Created Planet #{mdl.name} successfully"
       end
     end
+  end
+
+  def create_model(properties)
+    associations = properties.extract!(:associations)[:associations]
+    mdl = Planet.new(properties)
+    associations.each { |k, v| mdl.public_send(k).build(v) }
+    mdl
   end
 
   def sng_properties(planet)
