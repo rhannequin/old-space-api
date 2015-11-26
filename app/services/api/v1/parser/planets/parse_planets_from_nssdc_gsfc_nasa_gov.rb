@@ -39,41 +39,42 @@ class Api::V1::Parser::Planets::ParsePlanetsFromNssdcGsfcNasaGov
     properties_lines.each_with_index do |line_index, i|
       values = lines[line_index].split('  ').delete_if { |c| c.empty? || c.blank? }
       value = values[values.size - 3].strip.gsub(/,/, '')
-      key = @properties[i][:key]
-      lb = @properties[i][:lb]
+      properties = @properties[i]
+      lb = properties[:lb]
+      tp = properties[:type]
       bd = BigDecimal(value)
-      @obj[key] = lb ? lb.call(bd).to_f : bd.to_f
+      @obj[properties[:key]] = lb ? lb.call(bd).public_send(tp) : bd.public_send(tp)
     end
   end
 
   def set_properties
     @properties = [
-      { pattern: 'Mass', key: :mass, lb: -> (v) { v * (10 ** 24) } },
-      { pattern: 'Volume', key: :volume, lb: -> (v) { v * (10 ** 10) } },
-      { pattern: 'Equatorial', key: :equatorial_radius },
-      { pattern: 'Polar', key: :polar_radius },
-      { pattern: 'Volumetric', key: :volumetric_mean_radius },
-      { pattern: 'Ellipticity', key: :ellipticity },
-      { pattern: 'Mean density', key: :density },
-      { pattern: ['Gravity', 'Surface gravity'], key: :surface_gravity },
-      { pattern: ['Acceleration', 'Surface acceleration'], key: :acceleration },
-      { pattern: 'Escape velocity', key: :escape_velocity },
-      { pattern: 'GM', key: :standard_gravitational_parameter, lb: -> (v) { v * (10 ** 6) } },
-      { pattern: 'Bond albedo', key: :bond_albedo },
-      { pattern: 'Visual geometric albedo', key: :visual_geometric_albedo },
-      { pattern: 'Visual magnitude', key: :visual_magnitude },
-      { pattern: 'Solar irradiance', key: :solar_irradiance },
-      { pattern: 'Black-body', key: :black_body_temperature },
-      { pattern: 'Semimajor', key: :semimajor_axis, lb: -> (v) { v * (10 ** 6) } },
-      { pattern: 'Sidereal orbit', key: :sidereal_orbit_period },
-      { pattern: 'Tropical orbit', key: :tropical_orbit_period },
-      { pattern: 'Perihelion', key: :perihelion, lb: -> (v) { v * (10 ** 6) } },
-      { pattern: 'Aphelion', key: :aphelion, lb: -> (v) { v * (10 ** 6) } },
-      { pattern: 'Max. orbital velocity', key: :maximum_orbital_velocity },
-      { pattern: 'Min. orbital velocity', key: :minimum_orbital_velocity },
-      { pattern: 'Orbit inclination', key: :orbit_inclination },
-      { pattern: 'Length of day', key: :length_of_day },
-      { pattern: 'Obliquity', key: :obliquity_to_orbit }
+      { pattern: 'Mass', key: :mass, lb: -> (v) { v * (10 ** 24) }, type: :to_i },
+      { pattern: 'Volume', key: :volume, lb: -> (v) { v * (10 ** 10) }, type: :to_i },
+      { pattern: 'Equatorial', key: :equatorial_radius, type: :to_f },
+      { pattern: 'Polar', key: :polar_radius, type: :to_f },
+      { pattern: 'Volumetric', key: :volumetric_mean_radius, type: :to_f },
+      { pattern: 'Ellipticity', key: :ellipticity, type: :to_f },
+      { pattern: 'Mean density', key: :density, type: :to_i },
+      { pattern: ['Gravity', 'Surface gravity'], key: :surface_gravity, type: :to_f },
+      { pattern: ['Acceleration', 'Surface acceleration'], key: :acceleration, type: :to_f },
+      { pattern: 'Escape velocity', key: :escape_velocity, type: :to_f },
+      { pattern: 'GM', key: :standard_gravitational_parameter, lb: -> (v) { v * (10 ** 6) }, type: :to_f },
+      { pattern: 'Bond albedo', key: :bond_albedo, type: :to_f },
+      { pattern: 'Visual geometric albedo', key: :visual_geometric_albedo, type: :to_f },
+      { pattern: 'Visual magnitude', key: :visual_magnitude, type: :to_f },
+      { pattern: 'Solar irradiance', key: :solar_irradiance, type: :to_f },
+      { pattern: 'Black-body', key: :black_body_temperature, type: :to_f },
+      { pattern: 'Semimajor', key: :semimajor_axis, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
+      { pattern: 'Sidereal orbit', key: :sidereal_orbit_period, type: :to_f },
+      { pattern: 'Tropical orbit', key: :tropical_orbit_period, type: :to_f },
+      { pattern: 'Perihelion', key: :perihelion, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
+      { pattern: 'Aphelion', key: :aphelion, lb: -> (v) { v * (10 ** 6) }, type: :to_i },
+      { pattern: 'Max. orbital velocity', key: :maximum_orbital_velocity, type: :to_f },
+      { pattern: 'Min. orbital velocity', key: :minimum_orbital_velocity, type: :to_f },
+      { pattern: 'Orbit inclination', key: :orbit_inclination, type: :to_f },
+      { pattern: 'Length of day', key: :length_of_day, type: :to_f },
+      { pattern: 'Obliquity', key: :obliquity_to_orbit, type: :to_f }
     ]
   end
 end

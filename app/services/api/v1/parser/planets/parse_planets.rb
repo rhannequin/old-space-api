@@ -10,7 +10,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   end
 
   # TODO
-  # => Change attributes types when necessary from float to integer
   # => Check consistency in attrubute names (e.g. "orbit"/"orbital")
   # => Clean method `all` (split it?)
   # => Clean parsing globally: comments, simplest methods possible

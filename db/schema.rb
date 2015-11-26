@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20151125220048) do
     t.float    "equatorial_circumference"
     t.decimal  "volume"
     t.decimal  "mass"
-    t.float    "density"
+    t.integer  "density"
     t.integer  "surface_area",                     limit: 11
     t.float    "surface_gravity"
     t.integer  "escape_velocity",                  limit: 11
@@ -69,11 +69,11 @@ ActiveRecord::Schema.define(version: 20151125220048) do
     t.float    "visual_magnitude"
     t.float    "solar_irradiance"
     t.float    "black_body_temperature"
-    t.float    "semimajor_axis"
+    t.integer  "semimajor_axis",                   limit: 11
     t.float    "sidereal_orbit_period"
     t.float    "tropical_orbit_period"
-    t.float    "perihelion"
-    t.float    "aphelion"
+    t.integer  "perihelion",                       limit: 11
+    t.integer  "aphelion",                         limit: 11
     t.float    "maximum_orbital_velocity"
     t.float    "minimum_orbital_velocity"
     t.float    "orbit_inclination"
