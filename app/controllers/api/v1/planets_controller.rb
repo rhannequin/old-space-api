@@ -1,14 +1,22 @@
 module Api
   module V1
     class PlanetsController < ApplicationController
+      include ActionController::MimeResponds
       before_action :set_planet, only: :show
 
       def index
-        render json: Planet.includes(:atm_els).to_json({ except: JSON_EXCLUDE, include: [{ atm_els: { except: JSON_EXCLUDE } }] })
+        planet = Planet.includes(:atm_els)
+        respond_to do |format|
+          format.xml  { render xml: planet.to_xml(data_configuration) }
+          format.json { render json_reponse planet.to_json(data_configuration) }
+        end
       end
 
       def show
-        render json: @planet.to_json(except: JSON_EXCLUDE, include: [atm_els: { except: JSON_EXCLUDE }])
+        respond_to do |format|
+          format.xml  { render xml: @planet.to_xml(data_configuration) }
+          format.json { render json_reponse @planet.to_json(data_configuration) }
+        end
       end
 
       private
@@ -23,6 +31,10 @@ module Api
 
       def name_from_params
         params.permit(:id).require(:id)
+      end
+
+      def data_configuration
+        { except: ATTR_EXCLUDE, include: [atm_els: { except: ATTR_EXCLUDE }] }
       end
     end
   end

@@ -1,8 +1,6 @@
 require 'open-uri'
-require 'nokogiri'
-require 'json'
 
-class Parser
+class Api::V1::Parser::Parser
   attr_accessor :proxy
 
   def initialize
@@ -11,11 +9,7 @@ class Parser
   end
 
   def get_content(uri)
-    json = JSON.parse(open(uri, proxy).read)
-    {
-      name: json['sidebar']['learn'].first['title'],
-      content: Nokogiri::HTML(json['main']['content'])
-    }
+    open(uri, proxy).read
   end
 
   private

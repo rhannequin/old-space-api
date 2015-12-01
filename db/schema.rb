@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120131430) do
+ActiveRecord::Schema.define(version: 20151125220048) do
 
   create_table "atm_els", force: :cascade do |t|
     t.string   "name"
@@ -40,25 +40,44 @@ ActiveRecord::Schema.define(version: 20151120131430) do
   create_table "planets", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "date_of_discovery"
     t.string   "discovered_by"
-    t.integer  "orbit_size",                  limit: 10
-    t.float    "mean_orbit_velocity"
-    t.float    "orbit_eccentricity"
+    t.integer  "mean_orbit_size",                  limit: 10
+    t.float    "mean_orbital_velocity"
+    t.float    "orbital_eccentricity"
     t.float    "equatorial_inclination"
     t.float    "equatorial_radius"
     t.float    "equatorial_circumference"
     t.decimal  "volume"
     t.decimal  "mass"
-    t.float    "density"
-    t.integer  "surface_area",                limit: 11
+    t.integer  "density"
+    t.integer  "surface_area",                     limit: 11
     t.float    "surface_gravity"
-    t.integer  "escape_velocity",             limit: 11
+    t.integer  "escape_velocity",                  limit: 11
     t.float    "sidereal_rotation_period"
     t.integer  "minimum_surface_temperature"
     t.integer  "maximum_surface_temperature"
+    t.float    "polar_radius"
+    t.float    "volumetric_mean_radius"
+    t.float    "ellipticity"
+    t.float    "acceleration"
+    t.float    "standard_gravitational_parameter"
+    t.float    "bond_albedo"
+    t.float    "visual_geometric_albedo"
+    t.float    "visual_magnitude"
+    t.float    "solar_irradiance"
+    t.float    "black_body_temperature"
+    t.integer  "semimajor_axis",                   limit: 11
+    t.float    "sidereal_orbital_period"
+    t.float    "tropical_orbital_period"
+    t.integer  "perihelion",                       limit: 11
+    t.integer  "aphelion",                         limit: 11
+    t.float    "maximum_orbital_velocity"
+    t.float    "minimum_orbital_velocity"
+    t.float    "orbital_inclination"
+    t.float    "length_of_day"
   end
 
   add_index "planets", ["slug"], name: "index_planets_on_slug", unique: true

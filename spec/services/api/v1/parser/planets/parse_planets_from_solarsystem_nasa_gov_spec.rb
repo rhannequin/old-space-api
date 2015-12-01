@@ -1,26 +1,19 @@
-require 'spec_helper'
+require 'rails_helper'
 
-p = ParsePlanets.new
-# uris = p.planets
-uris = [p.planets.first]
-documents = uris.map { |u| p.get_content(u) }
+MO = Api::V1::Parser::Planets
+P = MO::ParsePlanets.new
+N = MO::ParsePlanetsFromSolarsystemNasaGov
 
-describe 'ParserPlanets' do
-  let(:parser) { ParsePlanets.new }
-  let(:contents) { documents.map { |d| d[:content] } }
-  let(:names) { documents.map { |d| d[:name] } }
-  let(:contents_paragraphs) { contents.map { |c| c.css('p') } }
+planets = PP.planets
+documents = planets.map { |planet| P.get_content(N.uri(planet)) }
 
-  uris.each_with_index do |_, i|
+describe 'ParsePlanetsFromSolarsystemNasaGov' do
+  let(:parsers) { documents.map { |d| N.new(d) } }
+
+  planets.each_with_index do |_, i|
     describe '' do
-      let(:name) { names[i] }
-      let(:content) { contents[i] }
-      let(:paragraphs) { contents_paragraphs[i] }
-
-      it 'returns a valid Planet' do
-        planet = parser.parse_planet(name, content)
-        expect(planet).to be_valid
-      end
+      let(:parser) { parsers[i] }
+      let(:paragraphs) { parser.document.css('p') }
 
       it 'returns correct value from #discover_date_and_people' do
         paragraph = paragraphs[1].inner_html
@@ -39,6 +32,8 @@ describe 'ParserPlanets' do
         expect(value1).to eql(456)
         expect(value2).to be_kind_of(Integer)
         expect(value2).to eql(789)
+        # Real data
+        %i( min max ).each { |s| expect(parser.temperature(paragraphs[29].inner_html, s)).to be_kind_of(Integer) }
       end
 
       it 'returns correct value from #scientific_notation' do
@@ -53,6 +48,10 @@ describe 'ParserPlanets' do
         expect(value3).to eql(12340000.0)
         expect(value4).to eql(12340000)
         expect(value5).to eql(123450.0)
+        # Real data
+        [3, 5, 11, 13, 15, 21, 25].each { |i| expect(parser.scientific_notation(paragraphs[i].inner_html, 2, :integer)).to be_kind_of(Integer) }
+        [5, 11, 13].each { |i| expect(parser.scientific_notation(paragraphs[i].inner_html, 2, :float)).to be_kind_of(Float) }
+        [17].each { |i| expect(parser.scientific_notation(paragraphs[i].inner_html, 1, :integer)).to be_kind_of(Integer) }
       end
 
       it 'returns correct value from #precise_value_to_f' do
@@ -65,12 +64,9 @@ describe 'ParserPlanets' do
         expect(value2).to eql(1.2)
         expect(value3).to eql(0.0)
         expect(value4).to eql(1234.5)
-      end
-
-      it 'returns correct value from #metric_value_to_f' do
-        value = parser.metric_value_to_f " <b>Metric:</b> 1.2 m/s<sup>2</sup><br><b></b><br><b><br> "
-        expect(value).to be_kind_of(Float)
-        expect(value).to eql(1.2)
+        # Real data
+        [7, 9].each { |i| expect(parser.precise_value_to_f(paragraphs[i].inner_html, 0)).to be_kind_of(Float) }
+        [27].each { |i| expect(parser.precise_value_to_f(paragraphs[i].inner_html, 1)).to be_kind_of(Float) }
       end
 
       it 'returns correct value from #min_max_value' do
