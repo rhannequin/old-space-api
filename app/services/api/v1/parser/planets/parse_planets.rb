@@ -1,6 +1,8 @@
 SNG = Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
 NGNG = Api::V1::Parser::Planets::ParsePlanetsFromNssdcGsfcNasaGov
 
+# Main class to handle data for Planet model
+
 class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   attr_accessor :planets
 
@@ -12,7 +14,6 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   # TODO
   # => Clean parsing globally: comments, simplest methods possible
   # => Check parsing efficienty
-  # => Handle XML responses
   # => Check if any other attribute can be added to the Planet model
   # => Handle atm_els proportions
   # => Documentation on wiki for the new attributes
@@ -25,8 +26,7 @@ class Api::V1::Parser::Planets::ParsePlanets < Api::V1::Parser::Parser
   def get_properties
     puts ' % Start loading remote data ...'
     properties = []
-    # @planets.each do |planet|
-    [@planets.first].each do |planet|
+    @planets.each do |planet|
       properties << planet_properties(planet)
     end
     puts ' % ... Remote data loaded'

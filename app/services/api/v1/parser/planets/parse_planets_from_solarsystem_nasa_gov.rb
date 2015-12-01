@@ -2,6 +2,8 @@ require 'nokogiri'
 require 'json'
 
 class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
+  attr_accessor :document
+
   def self.uri(planet)
     "http://solarsystem.nasa.gov/json/page-json.cfm?URLPath=planets/#{planet}/facts"
   end

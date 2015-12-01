@@ -3,7 +3,7 @@ FactoryGirl.define do
     name { Faker::App.name }
     date_of_discovery { Faker::Lorem.sentence }
     discovered_by { Faker::Lorem.sentence }
-    orbit_size { Faker::Number.number(5) }
+    mean_orbit_size { Faker::Number.number(5) }
     mean_orbital_velocity { Faker::Number.decimal(2) }
     orbital_eccentricity { Faker::Number.decimal(2) }
     equatorial_inclination { Faker::Number.decimal(2) }

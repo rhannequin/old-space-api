@@ -1,22 +1,19 @@
 require 'rails_helper'
 
-M = Api::V1::Parser::Planets
-p = M::ParsePlanets.new
-# uris = p.planets
-uris = [p.planets.first]
-documents = uris.map { |u| p.get_content(u) }
+MO = Api::V1::Parser::Planets
+P = MO::ParsePlanets.new
+N = MO::ParsePlanetsFromSolarsystemNasaGov
+
+planets = PP.planets
+documents = planets.map { |planet| P.get_content(N.uri(planet)) }
 
 describe 'ParsePlanetsFromSolarsystemNasaGov' do
-  let(:contents) { documents.map { |d| d[:content] } }
-  let(:names) { documents.map { |d| d[:name] } }
-  let(:contents_paragraphs) { contents.map { |c| c.css('p') } }
+  let(:parsers) { documents.map { |d| N.new(d) } }
 
-  uris.each_with_index do |_, i|
+  planets.each_with_index do |_, i|
     describe '' do
-      let(:name) { names[i] }
-      let(:content) { contents[i] }
-      let(:parser) { M::ParsePlanetsFromSolarsystemNasaGov.new(content) }
-      let(:paragraphs) { contents_paragraphs[i] }
+      let(:parser) { parsers[i] }
+      let(:paragraphs) { parser.document.css('p') }
 
       it 'returns correct value from #discover_date_and_people' do
         paragraph = paragraphs[1].inner_html
