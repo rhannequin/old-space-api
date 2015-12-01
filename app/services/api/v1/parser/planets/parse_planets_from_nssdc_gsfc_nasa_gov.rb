@@ -74,7 +74,7 @@ class Api::V1::Parser::Planets::ParsePlanetsFromNssdcGsfcNasaGov
       { pattern: 'Min. orbital velocity', key: :minimum_orbital_velocity, type: :to_f },
       { pattern: 'Orbit inclination', key: :orbital_inclination, type: :to_f },
       { pattern: 'Length of day', key: :length_of_day, type: :to_f },
-      { pattern: 'Obliquity', key: :obliquity_to_orbit, type: :to_f }
+      { pattern: 'Obliquity', key: :equatorial_inclination, type: :to_f }
     ]
   end
 end

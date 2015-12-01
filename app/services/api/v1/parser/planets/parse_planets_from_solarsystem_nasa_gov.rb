@@ -22,7 +22,6 @@ class Api::V1::Parser::Planets::ParsePlanetsFromSolarsystemNasaGov
     planet[:mean_orbit_size] = scientific_notation paragraphs[3].inner_html, 2, :integer
     planet[:mean_orbital_velocity] = scientific_notation paragraphs[5].inner_html, 2, :float
     planet[:orbital_eccentricity] = precise_value_to_f paragraphs[7].inner_html, 0
-    planet[:equatorial_inclination] = precise_value_to_f paragraphs[9].inner_html, 0
     planet[:equatorial_circumference] = scientific_notation paragraphs[13].inner_html, 2, :float
     planet[:surface_area] = scientific_notation paragraphs[21].inner_html, 2, :integer
     planet[:sidereal_rotation_period] = precise_value_to_f paragraphs[27].inner_html, 1

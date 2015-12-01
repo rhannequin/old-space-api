@@ -23,6 +23,5 @@ class UpdatePlanetAttributes < ActiveRecord::Migration
     add_column :planets, :minimum_orbital_velocity, :float
     add_column :planets, :orbital_inclination, :float
     add_column :planets, :length_of_day, :float
-    add_column :planets, :obliquity_to_orbit, :float
   end
 end

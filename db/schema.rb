@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20151125220048) do
     t.float    "minimum_orbital_velocity"
     t.float    "orbital_inclination"
     t.float    "length_of_day"
-    t.float    "obliquity_to_orbit"
   end
 
   add_index "planets", ["slug"], name: "index_planets_on_slug", unique: true

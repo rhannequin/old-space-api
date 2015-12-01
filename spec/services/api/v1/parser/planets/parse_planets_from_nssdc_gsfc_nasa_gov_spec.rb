@@ -49,7 +49,7 @@ describe 'ParsePlanetsFromSolarsystemNasaGov' do
             semimajor_axis sidereal_orbital_period tropical_orbital_period
             perihelion aphelion maximum_orbital_velocity
             minimum_orbital_velocity orbital_inclination length_of_day
-            obliquity_to_orbit
+            equatorial_inclination
         ).each do |k|
           expect(properties[k]).not_to be_nil
         end
