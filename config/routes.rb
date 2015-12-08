@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :planets, only: %i( index show )
+      resources :planets, only: %i( index show ) do
+        get 'now', on: :member
+      end
       get '404', to: 'errors#not_found', as: :not_found
     end
   end
